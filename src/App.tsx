@@ -1,9 +1,12 @@
 // import React from 'react'
+import './App.css'
+
+import ProductMain from "./features/products/ProductMain"
 
 const App = () => {
   return (
     <div>
-      E-commerce v2.0
+      <ProductMain/>
     </div>
   )
 }
