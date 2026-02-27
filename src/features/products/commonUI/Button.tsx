@@ -25,6 +25,8 @@ const Status = styled.div`
   justify-content: space-between;
   gap: 20px;
 
+  cursor: pointer;
+
   &:hover {
     background-color: black;
     color: white;
