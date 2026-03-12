@@ -1,7 +1,7 @@
 // import React from 'react'
 import AuthForm from "./features/auth/AuthForm";
 import CartPage from "./features/cart/CartPage";
-import ProductsShop from "./features/products/pages/ProductsShop";
+import ProductsShop from "./features/products/pages/ShopPage";
 import "./shared/styles/GlobalStyles.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";

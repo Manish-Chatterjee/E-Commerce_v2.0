@@ -2,19 +2,26 @@
 import { IoIosSearch } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import styled from "styled-components";
+import { useState } from "react";
 
+// type SectionName = {
+//   sectionName: string;
+// };
+
+// const Navbar = ({ sectionName }: SectionName) => {
 const Navbar = () => {
+  const [sectionName, setSectionName] = useState("Brands");
   return (
-    <>
+    <NavbarContainer>
       <Container>
         <Section>
           <img src="" alt="logo" />
           <LogoName>ESNTL</LogoName>
         </Section>
         <Section>
-          <Mid>Brands</Mid>
-          <Mid>Shop</Mid>
-          <Mid>Blog</Mid>
+          <Mid onClick={() => setSectionName("Brands")}>Brands</Mid>
+          <Mid onClick={() => setSectionName("Shop")}>Shop</Mid>
+          <Mid onClick={() => setSectionName("Blog")}>Blog</Mid>
         </Section>
         <Section>
           <IoIosSearchStyled />
@@ -28,24 +35,33 @@ const Navbar = () => {
         </Section>
       </Container>
 
-      <Shop><p>Shop</p></Shop>
-      
+      <SectionName>
+        <p>{sectionName}</p>
+      </SectionName>
+
       {/* <div>Give All You Need</div> */}
-    </>
+    </NavbarContainer>
   );
 };
 
 export default Navbar;
 
+const NavbarContainer = styled.div`
+  position: relative;
+  display: block;
+`
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
-  border: 1px solid red;
+  /* border: 3px solid red; */
   background-color: white;
   border-radius: 0 0 10px 10px;
   width: 85%;
-  margin: auto;
+  margin: 0px auto;
+  padding: 0 15px;
+  box-sizing: border-box;
 `;
 
 const Section = styled.div`
@@ -107,12 +123,12 @@ const Img = styled.img`
   border-radius: 100px;
 `;
 
-const Shop = styled.div`
+const SectionName = styled.div`
   color: #ffffff;
   font-size: 200px;
   font-weight: 600;
   margin: 0;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   text-align: center;
 
   background-image: url("https://cdn.home-designing.com/wp-content/uploads/2022/03/modern-sofa.jpg");
@@ -128,12 +144,15 @@ const Shop = styled.div`
   height: 400px;
 
   p {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     margin: 0;
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translate(-50%);
     letter-spacing: 10px;
+
+    backdrop-filter: blur(2px);
+    border-radius: 15px;
   }
 `;

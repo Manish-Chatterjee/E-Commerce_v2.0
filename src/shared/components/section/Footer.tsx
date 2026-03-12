@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import styled from "styled-components";
 import {
   FaFacebookF,
@@ -7,7 +5,7 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
-import Button from "../products/commonUI/Button";
+import Button from "../ui/Button";
 
 const Footer = () => {
   const date = new Date().getFullYear();
@@ -18,7 +16,7 @@ const Footer = () => {
           <p>
             Ready to Get
             <br />
-            Our New Stuff?
+            Our New Stuff ?
           </p>
           <SubscribeBtn>
             <input placeholder="Your Email" />
@@ -194,4 +192,4 @@ const SocialContainer = styled.div`
 
 const HR = styled.hr`
   margin-top: 15px;
-`
+`;
