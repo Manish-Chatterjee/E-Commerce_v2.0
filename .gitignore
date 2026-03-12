@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Docs
+Project-Structure.txt
+Guide.txt
+tools_used.txt

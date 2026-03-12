@@ -1,16 +1,27 @@
 // import React from 'react'
-import './App.css'
-import FooterMain from './features/footer/FooterMain'
-import HomeMain from './features/home/HomeMain'
+import AuthForm from "./features/auth/AuthForm";
+import CartPage from "./features/cart/CartPage";
+import ProductsShop from "./features/products/pages/ProductsShop";
+import "./shared/styles/GlobalStyles.css";
 
-import ProductMain from "./features/products/ProductMain"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
+  // console.log(formatPrice(50000))
   return (
-    <div>
-      <FooterMain/>
-    </div>
-  )
-}
+    <>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<AuthForm mode="login" />} />
+            <Route path="/signup" element={<AuthForm mode="signup" />} />
+            <Route path="/productShop" element={<ProductsShop />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </>
+  );
+};
 
-export default App
+export default App;
