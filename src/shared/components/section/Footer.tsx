@@ -10,7 +10,7 @@ import Button from "../ui/Button";
 const Footer = () => {
   const date = new Date().getFullYear();
   return (
-    <>
+    <Container>
       <SubscribeContainer>
         <Sub>
           <p>
@@ -71,11 +71,15 @@ const Footer = () => {
           <p>Privacy Policy</p>
         </div>
       </FooterBottom>
-    </>
+    </Container>
   );
 };
 
 export default Footer;
+
+const Container = styled.div`
+  margin-inline: 15px;
+`;
 
 const SubscribeContainer = styled.div`
   background: linear-gradient(#2a2a2a, #111111);

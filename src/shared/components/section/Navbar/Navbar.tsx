@@ -1,8 +1,12 @@
 // import React from 'react'
-import { IoIosSearch } from "react-icons/io";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+// import { IoIosSearch } from "react-icons/io";
+import SearchIcon from "@mui/icons-material/Search";
+// import { AiOutlineShoppingCart } from "react-icons/ai";
 import styled from "styled-components";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Cart from "./ui/Cart";
+import SearchBar from "../../ui/SearchBar";
 
 // type SectionName = {
 //   sectionName: string;
@@ -10,48 +14,83 @@ import { useState } from "react";
 
 // const Navbar = ({ sectionName }: SectionName) => {
 const Navbar = () => {
-  const [sectionName, setSectionName] = useState("Brands");
+  // const [sectionName, setSectionName] = useState("Brands");
+  const [searchBarDisplay, setSearchBarDisplay] = useState(false);
+
+  const location = useLocation();
+
+  const sectionMap: Record<string, string> = {
+    brands: "Brands",
+    shop: "Shop",
+    blog: "Blog",
+  };
+
+  // get the last segment of the path
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const sectionNameSpec = pathSegments[pathSegments.length - 1]; // "brands" or "shop" etc.
+  // console.log(sectionNameSpec)
+
+  const displayName = sectionMap[sectionNameSpec] || "";
+
   return (
-    <NavbarContainer>
-      <Container>
+    <Container>
+      <NavbarContainer>
         <Section>
           <img src="" alt="logo" />
           <LogoName>ESNTL</LogoName>
         </Section>
         <Section>
-          <Mid onClick={() => setSectionName("Brands")}>Brands</Mid>
-          <Mid onClick={() => setSectionName("Shop")}>Shop</Mid>
-          <Mid onClick={() => setSectionName("Blog")}>Blog</Mid>
+          <Link to="brands">
+            <Mid>Brands</Mid>
+          </Link>
+          <Link to="shop">
+            <Mid>Shop</Mid>
+          </Link>
+          <Link to="blog">
+            <Mid>Blog</Mid>
+          </Link>
         </Section>
         <Section>
-          <IoIosSearchStyled />
-          <span>
-            <AiOutlineShoppingCartStyled />
-          </span>
+          {/* <IoIosSearchStyled /> */}
+          <SearchBtnContainer
+            onClick={() => setSearchBarDisplay(!searchBarDisplay)}
+          >
+            <SearchIcon />
+          </SearchBtnContainer>
+
+          <Link to="/cart">
+            {/* <span>
+              <AiOutlineShoppingCartStyled />
+            </span> */}
+
+            <Cart />
+          </Link>
           <Img
             src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
             alt="profile-logo"
           />
         </Section>
-      </Container>
+      </NavbarContainer>
 
       <SectionName>
-        <p>{sectionName}</p>
+        <p>{displayName}</p>
       </SectionName>
 
       {/* <div>Give All You Need</div> */}
-    </NavbarContainer>
+      {searchBarDisplay ? <SearchBar isOpen={searchBarDisplay} /> : null}
+    </Container>
   );
 };
 
 export default Navbar;
 
-const NavbarContainer = styled.div`
+const Container = styled.div`
   position: relative;
   display: block;
-`
+  height: fit-content;
+`;
 
-const Container = styled.div`
+const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -59,9 +98,14 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0 0 10px 10px;
   width: 85%;
-  margin: 0px auto;
+  /* margin: 0px auto; */
   padding: 0 15px;
   box-sizing: border-box;
+
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
 `;
 
 const Section = styled.div`
@@ -105,22 +149,11 @@ const LogoName = styled.p`
   font-size: 24px;
 `;
 
-const IoIosSearchStyled = styled(IoIosSearch)`
-  padding: 5px;
-  border: 1px solid gray;
-  font-size: 20px;
-`;
-
-const AiOutlineShoppingCartStyled = styled(AiOutlineShoppingCart)`
-  padding: 5px;
-  border: 1px solid gray;
-  font-size: 20px;
-`;
-
 const Img = styled.img`
   height: 40px;
   /* width: 40px; */
   border-radius: 100px;
+  margin-inline: 5px;
 `;
 
 const SectionName = styled.div`
@@ -136,10 +169,10 @@ const SectionName = styled.div`
   background-position: center;
   /* background-repeat: no-repeat; */
 
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   z-index: -1;
-  top: 0;
+  /* top: 0; */
   /* margin: 0; */
   height: 400px;
 
@@ -155,4 +188,15 @@ const SectionName = styled.div`
     backdrop-filter: blur(2px);
     border-radius: 15px;
   }
+`;
+
+const SearchBtnContainer = styled.button`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 `;
