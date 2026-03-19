@@ -8,22 +8,17 @@ import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
 import "./shared/styles/GlobalStyles.css";
 
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CheckoutPage from "./features/checkout/pages/CheckoutPage";
 import ErrorPage from "./features/error/pages/ErrorPage";
 import { Suspense } from "react";
+import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfirmationPage";
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <MainIndexRoute />,
+      // element: <MainIndexRoute />,
       errorElement: <ErrorPage />,
       children: [
         {
@@ -68,6 +63,10 @@ const App = () => {
           path: "/checkout",
           element: <CheckoutPage />,
         },
+        {
+          path: "/orderConfirmed",
+          element: <OrderConfirmationPage/>
+        }
       ],
     },
   ]);
