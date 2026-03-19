@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import InformationForm from "../components/FormInfo/InformationForm";
 import DeliveryForm from "./FormInfo/DeliveryForm";
 import PaymentForm from "./FormInfo/PaymentForm";
+import Button from "./ui/Button";
 
 const FormInfo = () => {
   return (
@@ -24,6 +25,8 @@ const FormInfo = () => {
             <InformationForm />
             <DeliveryForm />
             <PaymentForm />
+
+            <Button type="submit">pay and place order</Button>
           </form>
         )}
       </Formik>

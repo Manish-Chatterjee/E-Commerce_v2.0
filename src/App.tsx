@@ -8,30 +8,76 @@ import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
 import "./shared/styles/GlobalStyles.css";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import CheckoutPage from "./features/checkout/pages/CheckoutPage";
+import ErrorPage from "./features/error/pages/ErrorPage";
+import { Suspense } from "react";
 
 const App = () => {
-  // console.log(formatPrice(50000))
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainIndexRoute />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <MainIndexRoute />,
+        },
+        {
+          path: "/login",
+          element: <AuthForm mode="login" />,
+        },
+        {
+          path: "/signup",
+          element: <AuthForm mode="signup" />,
+        },
+        {
+          path: "/products",
+          element: <Products />,
+          children: [
+            {
+              path: "brands",
+              element: <BrandsPage />,
+            },
+            {
+              path: "shop",
+              element: <ShopPage />,
+              children: [
+                // future nested route
+                // { path: ":id", element: <ProductDetail /> }
+              ],
+            },
+            {
+              path: "blog",
+              element: <BlogPage />,
+            },
+          ],
+        },
+        {
+          path: "/cart",
+          element: <CartPage />,
+        },
+        {
+          path: "/checkout",
+          element: <CheckoutPage />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
       <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainIndexRoute />} />
-            <Route path="/login" element={<AuthForm mode="login" />} />
-            <Route path="/signup" element={<AuthForm mode="signup" />} />
-            <Route path="/products" element={<Products />}>
-              <Route path="brands" element={<BrandsPage />} />
-              <Route path="shop" element={<ShopPage />}>
-                {/* <Route path=":id" element={} /> */}
-              </Route>
-              <Route path="blog" element={<BlogPage />} />
-            </Route>
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-          </Routes>
-        </BrowserRouter>
+        <Suspense fallback={<h2>Loading page...</h2>}>
+          <RouterProvider router={router} />
+        </Suspense>
       </div>
     </>
   );
