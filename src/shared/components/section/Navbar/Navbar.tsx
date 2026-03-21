@@ -58,7 +58,7 @@ const Navbar = () => {
             <SearchIcon />
           </SearchBtnContainer>
 
-          <Link to="/cart">
+          <Link to="/checkout">
             {/* <span>
               <AiOutlineShoppingCartStyled />
             </span> */}

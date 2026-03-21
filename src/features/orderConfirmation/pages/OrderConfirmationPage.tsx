@@ -1,11 +1,30 @@
-import React from 'react'
+import StatusDisplay from "../components/StatusDisplay";
+import ShopInfo from "../components/ShopInfo";
+import OrderDetails from "../components/OrderDetails";
+import CustomerDetails from "../components/CustomerDetails";
+import styled from "styled-components";
 
 const OrderConfirmationPage = () => {
   return (
-    <div>
-      thank you
-    </div>
-  )
-}
+    <>
+      <Container>
+        <StatusDisplay />
+        <OrderDetails />
+        <CustomerDetails />
+        <ShopInfo />
+      </Container>
+    </>
+  );
+};
 
-export default OrderConfirmationPage
+export default OrderConfirmationPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+
+  width: 70%;
+  max-width: 1200px;
+  margin: auto;
+`;

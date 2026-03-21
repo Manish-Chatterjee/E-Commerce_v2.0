@@ -2,7 +2,7 @@
 import AuthForm from "./features/auth/AuthForm";
 import BlogPage from "./features/blogs/pages/BlogPage";
 import BrandsPage from "./features/brands/pages/BrandsPage";
-import CartPage from "./features/cart/CartPage";
+import CartPage from "./features/orderHistory/OrderHistory";
 import MainIndexRoute from "./features/MainIndexRoute";
 import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
@@ -14,6 +14,8 @@ import ErrorPage from "./features/error/pages/ErrorPage";
 import { Suspense } from "react";
 import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfirmationPage";
 import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
+import OrderHistory from "./features/orderHistory/OrderHistory";
+import Wishlist from "./features/wishlist/pages/Wishlist";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -57,8 +59,8 @@ const App = () => {
           ],
         },
         {
-          path: "/cart",
-          element: <CartPage />,
+          path: "/orderHistory",
+          element: <OrderHistory />,
         },
         {
           path: "/checkout",
@@ -72,6 +74,10 @@ const App = () => {
           path: "/productDetails/:id",
           element: <ProductDetails />,
         },
+        {
+          path: "/wishlist",
+          element: <Wishlist/>
+        }
       ],
     },
   ]);
