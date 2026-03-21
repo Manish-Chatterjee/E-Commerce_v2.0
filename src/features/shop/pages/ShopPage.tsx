@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProductsGrid from "../components/ProductsGrid";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Outlet } from "react-router-dom";
 
 const ShopPage = () => {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,7 @@ const ShopPage = () => {
           </span>
         }
       />
+      <Outlet/>
     </div>
   );
 };

@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-const Button = () => {
-  return <ButtonContainer>pay and place order</ButtonContainer>;
+type ButtonProps = {
+  type?: "submit" | "button";
+  children: React.ReactNode;
+};
+
+const Button = ({ type = "button", children }: ButtonProps) => {
+  return <ButtonContainer type={type}>{children}</ButtonContainer>;
 };
 
 export default Button;
@@ -11,4 +16,6 @@ const ButtonContainer = styled.button`
   color: white;
   background-color: black;
   width: 100%;
+  cursor: pointer;
+  padding: 10px;
 `;

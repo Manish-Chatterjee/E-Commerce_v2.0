@@ -13,6 +13,7 @@ import CheckoutPage from "./features/checkout/pages/CheckoutPage";
 import ErrorPage from "./features/error/pages/ErrorPage";
 import { Suspense } from "react";
 import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfirmationPage";
+import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -46,7 +47,7 @@ const App = () => {
               element: <ShopPage />,
               children: [
                 // future nested route
-                // { path: ":id", element: <ProductDetail /> }
+                // { path: ":id", element: <ProductDetails /> }
               ],
             },
             {
@@ -65,8 +66,12 @@ const App = () => {
         },
         {
           path: "/orderConfirmed",
-          element: <OrderConfirmationPage/>
-        }
+          element: <OrderConfirmationPage />,
+        },
+        {
+          path: "/productDetails/:id",
+          element: <ProductDetails />,
+        },
       ],
     },
   ]);
