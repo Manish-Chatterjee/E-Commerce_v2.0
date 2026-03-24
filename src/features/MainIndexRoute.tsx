@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const MainIndexRoute = () => {
   return (
@@ -15,8 +14,10 @@ const MainIndexRoute = () => {
       <Link to="/products/blog">blog</Link>
       <br />
       <Link to="/cart">cart</Link>
-      <br/>
+      <br />
       <Link to="/checkout">checkout</Link>
+      <hr/>
+      <Outlet/>
     </>
   );
 };
