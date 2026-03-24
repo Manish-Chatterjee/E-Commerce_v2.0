@@ -18,7 +18,7 @@ const StatusDisplay = () => {
       {/* <div><StatusBar/></div> */}
 
       <div>
-        <LinkStyled to="/orderHistory">
+        <LinkStyled to="/orderHistory" replace>
             <Button>View your order</Button>
         </LinkStyled>
         <span>

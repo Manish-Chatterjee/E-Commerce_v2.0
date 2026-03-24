@@ -6,7 +6,6 @@ import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 
 const FormInfo = () => {
-
   const navigate = useNavigate();
   return (
     <>
@@ -21,7 +20,7 @@ const FormInfo = () => {
         }}
         onSubmit={(values) => {
           console.log(values);
-          navigate("/orderConfirmed")
+          navigate("/orderConfirmed", { replace: true }); // replace: true, removes the last history page stored
         }}
       >
         {(formik) => (

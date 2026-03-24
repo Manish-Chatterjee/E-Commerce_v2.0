@@ -3,8 +3,22 @@ import ShopInfo from "../components/ShopInfo";
 import OrderDetails from "../components/OrderDetails";
 import CustomerDetails from "../components/CustomerDetails";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const OrderConfirmationPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleBack = () => {
+      navigate("/products", { replace: true });
+    };
+    window.addEventListener("popstate", handleBack);
+    return () => {
+      window.removeEventListener("popstate", handleBack);
+    };
+  }, [navigate]);
+
   return (
     <>
       <Container>

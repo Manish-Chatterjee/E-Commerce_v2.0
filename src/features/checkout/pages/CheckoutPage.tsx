@@ -4,9 +4,12 @@ import FormInfo from "../components/FormInfo";
 import Footer from "../../../shared/components/section/Footer";
 import OrderReview from "../components/OrderReview";
 import styled from "styled-components";
+import SecondNavbar from "../../../shared/components/section/SecondNavbar";
 
 const CheckoutPage = () => {
   return (
+    <>
+    <SecondNavbar logo={""}/>
     <PageContainer>
       <Header>Checkout</Header>
       <Checkout>
@@ -15,7 +18,7 @@ const CheckoutPage = () => {
       </Checkout>
 
       {/* <Footer/> */}
-    </PageContainer>
+    </PageContainer></>
   );
 };
 
