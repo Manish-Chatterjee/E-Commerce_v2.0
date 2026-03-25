@@ -1,6 +1,7 @@
 import React from "react";
 import ProductsCard from "./ProductsCard";
-import products from "../products.json";
+// import products from "../products.json";
+import products from "../../../shared/sampleData/shopPage.json"
 import styled from "styled-components";
 
 type ProductsGridProps = {

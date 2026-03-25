@@ -1,21 +1,48 @@
 import { Field, Form, Formik } from "formik";
 import styled from "styled-components";
 import { Button } from "./components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 type AuthFormProps = {
   mode: "login" | "signup";
 };
 
 const AuthForm = ({ mode }: AuthFormProps) => {
+  const { login, signup } = useAuth();
+  const navigate = useNavigate();
+
   const isSignup = mode === "signup";
   return (
     <Container>
       {isSignup ? <h2>Sign Up</h2> : <h2>Login</h2>}
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
+        // onSubmit={(values) => {
+        //   console.log(values);
+        // }}
         onSubmit={(values) => {
-          console.log(values);
+          if (isSignup) {
+            const success = signup(values);
+
+            if (!success) {
+              alert("User already exists");
+              return;
+            }
+
+            alert("Signup successful");
+            navigate("/login");
+          } else {
+            const success = login(values);
+
+            if (!success) {
+              alert("Invalid credentials");
+              return;
+            }
+
+            alert("Login successful");
+            navigate("/");
+          }
         }}
       >
         <FormStyle>

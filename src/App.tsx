@@ -16,6 +16,7 @@ import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfi
 import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
 import OrderHistory from "./features/orderHistory/OrderHistory";
 import Wishlist from "./features/wishlist/pages/Wishlist";
+import { AuthProvider } from "./features/auth/AuthContext";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -76,8 +77,8 @@ const App = () => {
         },
         {
           path: "/wishlist",
-          element: <Wishlist/>
-        }
+          element: <Wishlist />,
+        },
       ],
     },
   ]);
@@ -85,9 +86,11 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <Suspense fallback={<h2>Loading page...</h2>}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <AuthProvider>
+          <Suspense fallback={<h2>Loading page...</h2>}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </AuthProvider>
       </div>
     </>
   );

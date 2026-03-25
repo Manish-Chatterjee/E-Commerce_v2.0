@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "productBrand": "Nike",
+    "productBrandLogo": "https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo-1971-now.png",
+    "productID": "JG3525G0100",
+    "productName": "Nike Jordan",
+    "price": 199.00,
+    "colors": ["white", "gray", "brown"],
+    "sizes": [6, 7, 8, 9, 10],
+    "productImages": [{ "img1": "https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533" }]
+  },
+  {
+    "id": 2,
+    "productBrand": "Nike",
+    "productBrandLogo": "https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo-1971-now.png",
+    "productID": "HR1325ROO8",
+    "productName": "Nike Dunks",
+    "price": 299.00,
+    "colors": ["gray", "brown"],
+    "sizes": [6, 7, 9, 10],
+    "productImages": [
+      {
+        "img1": "https://assets.myntassets.com/w_360,q_50,,dpr_2,fl_progressive,f_webp/assets/images/2025/NOVEMBER/21/QpaCiihn_e70e29f55f5f401dbaa4498b1ccabb83.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "productBrand": "Adidas",
+    "productBrandLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/960px-Adidas_Logo.svg.png",
+    "productID": "AK1376HO10",
+    "productName": "Adidas Yeezy 350 Boost",
+    "price": 599.00,
+    "colors": ["white", "gray", "brown"],
+    "sizes": [6, 7, 8, 9, 10],
+    "productImages": [
+      {
+        "img1": "https://crepdogcrew.com/cdn/shop/products/ADIDASYEEZYBOOST350V2BELUGAREFLECTIVE.jpg?v=1755097263&width=1500"
+      }
+    ]
+  }
+]
