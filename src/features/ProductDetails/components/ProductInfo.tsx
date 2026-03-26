@@ -6,11 +6,12 @@ import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import Products from "../../../shared/sampleData/shopPage.json";
 import { formatPrice } from "../../../shared/utils/formatPrice";
-import { addToCart } from "../../../shared/utils/addToCart";
+// import { addToCart } from "../../../shared/utils/addToCart";
+import { useCart } from "../../../shared/context/CartContext";
 
 type ButtonProps = {
   image: string;
@@ -19,7 +20,7 @@ type ButtonProps = {
 
 type Props = {
   productId: number;
-}
+};
 
 // type Product = {
 //   id: number;
@@ -37,18 +38,18 @@ type Props = {
 //   [key: string]: string; // any key like img1, img2
 // };
 
-const ProductInfo = ({productId}:Props) => {
+const ProductInfo = ({ productId }: Props) => {
   // const { id } = useParams();
   // const productId = Number(id);
   const productData = Products.find((item) => item.id === productId);
   // const { productBrand, productBrandLogo, productID, productName, price } =
   //   productData;
+  const { addToCart } = useCart();
 
   //////////////////////////SNACKBAR//////////////////
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-
     addToCart(productId);
 
     if (open) {

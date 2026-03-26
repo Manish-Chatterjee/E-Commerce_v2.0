@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Cart from "./ui/Cart";
 import SearchBar from "../../ui/SearchBar";
+import Profile from "./ui/Profile";
 
 // type SectionName = {
 //   sectionName: string;
@@ -65,10 +66,11 @@ const Navbar = () => {
 
             <Cart />
           </Link>
-          <Img
+          {/* <Img
             src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
             alt="profile-logo"
-          />
+          /> */}
+          <Profile/>
         </Section>
       </NavbarContainer>
 
