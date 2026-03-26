@@ -1,17 +1,36 @@
-import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 import Button from "../../../shared/components/ui/Button";
 import { truncateText } from "../../../shared/utils/truncateText";
 import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
+import { Link } from "react-router-dom";
+
+// import product from '../../../shared/sampleData/products.json'
+
+// type Product = {
+//   productImage: string;
+//   productImageHover: string;
+//   productName: string;
+//   productPrice: number;
+//   ratings: number[];
+//   productBrand: string;
+// };
+
+type ProductImage = {
+  [key: string]: string; // any key like img1, img2
+};
 
 type Product = {
-  productImage: string;
-  productImageHover: string;
-  productName: string;
-  productPrice: number;
-  ratings: number[];
+  id: number;
   productBrand: string;
+  productBrandLogo: string;
+  productID: string;
+  productName: string;
+  price: number;
+  colors: string[];
+  sizes: number[];
+  // productImages: ProductImage[];
+  productImages: string[];
 };
 
 type CardProps = {
@@ -20,30 +39,37 @@ type CardProps = {
 };
 
 const ProductsCard = ({ items, onAddToCart }: CardProps) => {
+  const { productImages, productName, productBrandLogo, price, productBrand, id } = items;
+  // const firstImageUrl = productImages.length
+  //   ? Object.values(productImages[0])[0]
+  //   : "";
+
   return (
     <CardContainer>
       <>
         <BrandContainer
-          src={items?.productBrand}
+          src={productBrandLogo}
           about="brand"
           width={50}
           height={50}
         />
         <ProductImg
-          src={items?.productImage}
+          src={productImages[0]}
           alt="image"
           width={100}
           height={100}
-          brand={items?.productBrand}
+          brand={productBrand}
         />
       </>
       <Info>
-        <h4>{truncateText(items?.productName, 30)}</h4>
-        <p>{formatPrice(items?.productPrice)}</p>
+        <h4>{truncateText(productName, 30)}</h4>
+        <p>{formatPrice(price)}</p>
       </Info>
       <BtnContainer>
         {/* <Button onClick={onAddToCart}>Add to Cart</Button> */}
-        <Button>Customise</Button>
+        <Link to={`/productDetails/${id}`}>
+          <Button>Customise</Button>
+        </Link>
 
         {/* <Button>Buy Now</Button> */}
         <WishlistBtn />
@@ -76,11 +102,11 @@ const BrandContainer = styled.img`
   right: 0px;
   background-color: white;
   border-radius: 0 0 0 20px;
-  padding: 10px;
+  padding: 15px;
 `;
 
 const ProductImg = styled.img<{ brand: string }>`
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   background-color: #d8d8d8;
   height: 60%;
@@ -109,4 +135,5 @@ const Info = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;

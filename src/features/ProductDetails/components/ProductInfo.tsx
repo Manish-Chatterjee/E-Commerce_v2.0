@@ -6,17 +6,51 @@ import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useParams } from "react-router-dom";
+
+import Products from "../../../shared/sampleData/shopPage.json";
+import { formatPrice } from "../../../shared/utils/formatPrice";
+import { addToCart } from "../../../shared/utils/addToCart";
 
 type ButtonProps = {
   image: string;
   selected: boolean;
 };
 
-const ProductInfo = () => {
+type Props = {
+  productId: number;
+}
+
+// type Product = {
+//   id: number;
+//   productBrand: string;
+//   productBrandLogo: string;
+//   productID: string;
+//   productName: string;
+//   price?: number;
+//   colors?: string[];
+//   sizes?: number[];
+//   productImages?: ProductImage[];
+// };
+
+// type ProductImage = {
+//   [key: string]: string; // any key like img1, img2
+// };
+
+const ProductInfo = ({productId}:Props) => {
+  // const { id } = useParams();
+  // const productId = Number(id);
+  const productData = Products.find((item) => item.id === productId);
+  // const { productBrand, productBrandLogo, productID, productName, price } =
+  //   productData;
+
   //////////////////////////SNACKBAR//////////////////
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
+
+    addToCart(productId);
+
     if (open) {
       setOpen(false); // close first
       setTimeout(() => setOpen(true), 50); // reopen
@@ -28,85 +62,85 @@ const ProductInfo = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   /////////////////////////////////////////////
+
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
   const sizes = [6, 7, 8, 9, 10, 11];
   return (
-    <Container>
-      <BrandingContainer>
-        <Brand>
-          <img
-            src="https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo-1971-now.png"
-            alt="logo"
-            width={30}
-          />
-          <span>Nike</span>
-        </Brand>
-        <p>HR1325ROO8</p>
-      </BrandingContainer>
-      <h4>Nike Jordan</h4>
-      <H3>$199.00</H3>
-      <div>
-        <span>
-          <span>color</span>
-          <span>white</span>
-        </span>
-        <ProductSelection>
-          {products.map((item) => (
-            <>
-              <Button
-                image="https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
-                key={item.id}
-                selected={selectedId === item.id}
-                onClick={() => setSelectedId(item.id)}
-              ></Button>
-            </>
-          ))}
-        </ProductSelection>
-      </div>
-      <div>
-        <span>
-          <span>Size</span>
-          <span>EU Men</span>
-        </span>
-
-        <SizeContainer>
-          {sizes.map((size) => (
-            <button>{size}</button>
-          ))}
-        </SizeContainer>
-
-        <p>Size guide</p>
-      </div>
-      <BtnContainer>
-        <AddToCartBtn onAddToCart={handleAddToCart}/>
-        <WishlistBtn />
-      </BtnContainer>
-
-      <DeliveryMsg>
-        <LocalShippingIcon />
-        <p>Free delivery on orders over $30.0</p>
-      </DeliveryMsg>
-
-      {/* Alert */}
-      <SnackBarAlert
-        open={open}
-        handleClose={handleClose}
-        message={
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-            }}
-          >
-            Item added to cart
-            <CheckCircleIcon fontSize="small" sx={{ color: "green" }} />
+    <>
+      <Container>
+        <BrandingContainer>
+          <Brand>
+            <img src={productData?.productBrandLogo} alt="logo" width={30} />
+            <span>{productData?.productBrand}</span>
+          </Brand>
+          <p>{productData?.productID}</p>
+        </BrandingContainer>
+        <h4>{productData?.productName}</h4>
+        <H3>{formatPrice(productData?.price)}</H3>
+        <div>
+          <span>
+            <span>color</span>
+            <span>white</span>
           </span>
-        }
-      />
-    </Container>
+          <ProductSelection>
+            {products.map((item) => (
+              <>
+                <Button
+                  image="https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
+                  key={item.id}
+                  selected={selectedId === item.id}
+                  onClick={() => setSelectedId(item.id)}
+                ></Button>
+              </>
+            ))}
+          </ProductSelection>
+        </div>
+        <div>
+          <span>
+            <span>Size</span>
+            <span>EU Men</span>
+          </span>
+
+          <SizeContainer>
+            {sizes.map((size) => (
+              <button>{size}</button>
+            ))}
+          </SizeContainer>
+
+          <p>Size guide</p>
+        </div>
+        <BtnContainer>
+          <AddToCartBtn onAddToCart={handleAddToCart} />
+          <WishlistBtn />
+        </BtnContainer>
+
+        <DeliveryMsg>
+          <LocalShippingIcon />
+          <p>Free delivery on orders over $30.0</p>
+        </DeliveryMsg>
+
+        {/* Alert */}
+        <SnackBarAlert
+          open={open}
+          handleClose={handleClose}
+          message={
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              Item added to cart
+              <CheckCircleIcon fontSize="small" sx={{ color: "green" }} />
+            </span>
+          }
+        />
+      </Container>
+    </>
   );
 };
 
@@ -139,10 +173,10 @@ const H3 = styled.h3`
   font-weight: 700;
 `;
 
-const Image = styled.img`
-  height: 50px;
-  /* width: 30px; */
-`;
+// const Image = styled.img`
+//   height: 50px;
+//   /* width: 30px; */
+// `;
 
 const ProductSelection = styled.div`
   display: flex;
