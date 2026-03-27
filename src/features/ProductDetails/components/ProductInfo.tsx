@@ -8,7 +8,7 @@ import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 // import { useParams } from "react-router-dom";
 
-import Products from "../../../shared/sampleData/shopPage.json";
+// import Products from "../../../shared/sampleData/shopPage.json";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 // import { addToCart } from "../../../shared/utils/addToCart";
 import { useCart } from "../../../shared/context/CartContext";
@@ -18,39 +18,46 @@ type ButtonProps = {
   selected: boolean;
 };
 
-type Props = {
-  productId: number;
-};
-
-// type Product = {
-//   id: number;
-//   productBrand: string;
-//   productBrandLogo: string;
-//   productID: string;
-//   productName: string;
-//   price?: number;
-//   colors?: string[];
-//   sizes?: number[];
-//   productImages?: ProductImage[];
+// type Props = {
+//   productId: number;
 // };
+
+type Product = {
+  id?: number;
+  productBrand?: string;
+  productBrandLogo?: string;
+  productID?: string;
+  productName?: string;
+  price?: number;
+  colors?: string[];
+  sizes?: number[];
+};
 
 // type ProductImage = {
 //   [key: string]: string; // any key like img1, img2
 // };
 
-const ProductInfo = ({ productId }: Props) => {
+const ProductInfo = ({
+  id,
+  productBrand,
+  productBrandLogo,
+  productName,
+  productID,
+  price,
+}: Product) => {
   // const { id } = useParams();
   // const productId = Number(id);
-  const productData = Products.find((item) => item.id === productId);
+  // const productData = Products.find((item) => item.id === productId);
   // const { productBrand, productBrandLogo, productID, productName, price } =
   //   productData;
-  const { addToCart } = useCart();
+
+  const { addToCart } = useCart(); // Context api for using cart
 
   //////////////////////////SNACKBAR//////////////////
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-    addToCart(productId);
+    addToCart(id);
 
     if (open) {
       setOpen(false); // close first
@@ -74,13 +81,13 @@ const ProductInfo = ({ productId }: Props) => {
       <Container>
         <BrandingContainer>
           <Brand>
-            <img src={productData?.productBrandLogo} alt="logo" width={30} />
-            <span>{productData?.productBrand}</span>
+            <img src={productBrandLogo} alt="logo" width={30} />
+            <span>{productBrand}</span>
           </Brand>
-          <p>{productData?.productID}</p>
+          <p>{productID}</p>
         </BrandingContainer>
-        <h4>{productData?.productName}</h4>
-        <H3>{formatPrice(productData?.price)}</H3>
+        <h4>{productName}</h4>
+        <H3>{formatPrice(price)}</H3>
         <div>
           <span>
             <span>color</span>

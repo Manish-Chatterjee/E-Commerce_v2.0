@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import Products from "../../../shared/sampleData/shopPage.json";
 
+// type ProductImage = {
+//   [key: string]: string;
+// };
+
 type Props = {
-  productId: number;
+  id?: number;
+  productImages?: string[];
 };
 
-const ProductImages = ({ productId }: Props) => {
+const ProductImages = ({ id, productImages }: Props) => {
 
-  const productData = Products.find((item) => item.id === productId);
+  // console.log(productImages,'productImages')
+
+  // const productData = Products.find((item) => item.id === productId);
 
   return (
     <Container>
       <MainImg>
-        {productData?.productImages.map((item) => (
+        {productImages?.map((item) => (
         <Img
           src={item}
           alt="img"

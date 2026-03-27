@@ -1,3 +1,3 @@
-export const formatPrice = (price: number) => {
-  return `₹${price.toLocaleString()}`
+export const formatPrice = (price: number | undefined) => {
+  return `₹${price?.toLocaleString()}`
 }

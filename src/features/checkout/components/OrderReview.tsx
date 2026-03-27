@@ -1,11 +1,14 @@
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
 
 const OrderReview = () => {
-  return (
-    <div style={{border:"2px dashed black"}}>
-    <h4>Final Check</h4>
+  const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
+  // console.log(selectedData, "cart ");
 
-    <ProductPreviewCard/>
+  return (
+    <div style={{ border: "2px dashed black" }}>
+      <h4>Final Check</h4>
+
+      <ProductPreviewCard selectedData={selectedData}/>
     </div>
   );
 };

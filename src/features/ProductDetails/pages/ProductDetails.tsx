@@ -9,15 +9,24 @@ import Products from "../../../shared/sampleData/shopPage.json";
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
   const { id } = useParams();
-  const productId = Number(id);
-  const productData = Products.find((item) => item.id === productId);
+  const ID = Number(id);
+  const productData = Products.find((item) => item.id === ID);
 
   return (
     <>
       <SecondNavbar logo={productData?.productBrandLogo} />
       <Container>
-        <ProductImages productId={productId}/>
-        <ProductInfo productId={productId}/>
+        <ProductImages
+          id={productData?.id}
+          productImages={productData?.productImages}
+        />
+        <ProductInfo
+          id={productData?.id}
+          productBrandLogo={productData?.productBrandLogo}
+          productBrand={productData?.productBrand}
+          productName={productData?.productName}
+          price={productData?.price}
+        />
       </Container>
     </>
   );
