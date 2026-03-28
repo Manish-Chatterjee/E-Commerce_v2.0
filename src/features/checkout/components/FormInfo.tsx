@@ -20,6 +20,7 @@ const FormInfo = () => {
         }}
         onSubmit={(values) => {
           console.log(values);
+          localStorage.setItem("cart", JSON.stringify([])); // clears the cart when order is placed
           navigate("/orderConfirmed", { replace: true }); // replace: true, removes the last history page stored
         }}
       >

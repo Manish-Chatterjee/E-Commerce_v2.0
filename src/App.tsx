@@ -10,7 +10,7 @@ import "./shared/styles/GlobalStyles.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CheckoutPage from "./features/checkout/pages/CheckoutPage";
-import ErrorPage from "./features/error/pages/ErrorPage";
+import ErrorPage from "./features/error/ErrorPage";
 import { Suspense } from "react";
 import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfirmationPage";
 import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
@@ -81,6 +81,10 @@ const App = () => {
           path: "/wishlist",
           element: <Wishlist />,
         },
+        {
+          path: "/loading",
+          element: <Loading/>,
+        }
       ],
     },
   ]);

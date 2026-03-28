@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import CarousalCard from "../ui/CarousalCard";
 import styled from "styled-components";
 
@@ -24,9 +24,13 @@ type CartItem = {
   img: string; // add this if you want image
 };
 
-type Props = {
+type Prop = {
   selectedData: CartItem[];
 };
+
+// type Props = {
+//   selectedData: CartItem[];
+// };
 
 // const data: Product[] = [
 //   {
@@ -52,7 +56,7 @@ type Props = {
 // const ProductPreviewCard = ({ selectedData }: Props) => {
 //   const [activeIndex, setActiveIndex] = useState(0);
 
-  // console.log(selectedData,"selectedData")
+// console.log(selectedData,"selectedData")
 
 //   return (
 //     <Container>
@@ -91,49 +95,73 @@ type Props = {
 //   );
 // };
 
-const ProductPreviewCard = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+// const ProductPreviewCard = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
 
-  const storedData = localStorage.getItem("cart");
+//   const storedData: CartItem[] = JSON.parse(
+//     localStorage.getItem("cart") || "[]",
+//   );
 
-  const selectedData: CartItem[] = storedData
-    ? JSON.parse(storedData)
-    : [];
+//   // const selectedData: CartItem[] = storedData
+//   //   ? JSON.parse(storedData)
+//   //   : [];
+
+//   console.log(storedData, "storedData");
+//   // console.log("data")
+
+//   return (
+//     <Container>
+//       {/* {selectedData.map((item) => ( */}
+//       {storedData?.map((item) => (
+//         <div key={item.id}>
+//           {/* ✅ Pass correct data */}
+//           <CarousalCard
+//             data={[{ id: item.id, img: item.img }]} // adapt to your carousel structure
+//             onChange={setActiveIndex}
+//           />
+
+//           <Info>
+//             <h2>{item.productName}</h2>
+//             <p>description</p>
+
+//             <div>
+//               <div>Size: XL</div>
+//               <div>Color: Red</div>
+//               <div>₹{item.price}</div>
+//             </div>
+
+//             <Hr />
+
+//             <div>
+//               <div>Subtotal: ₹{item.price * item.quantity}</div>
+//               <div>Discount: ₹0</div>
+//               <div>Shipping: Free</div>
+//             </div>
+
+//             <Hr />
+
+//             <div>Total: ₹{item.price * item.quantity}</div>
+//           </Info>
+//         </div>
+//       ))}
+//     </Container>
+//   );
+// };
+
+const ProductPreviewCard = ({ selectedData }: Prop) => {
+  // const storedData: CartItem[] = JSON.parse(
+  //   localStorage.getItem("cart") || "[]",
+  // );
+
+  const storedData = selectedData;
 
   return (
     <Container>
-      {selectedData.map((item) => (
-        <div key={item.id}>
-          {/* ✅ Pass correct data */}
-          <CarousalCard
-            data={[{ img: item.img }]} // adapt to your carousel structure
-            onChange={setActiveIndex}
-          />
-
-          <Info>
-            <h2>{item.productName}</h2>
-            <p>description</p>
-
-            <div>
-              <div>Size: XL</div>
-              <div>Color: Red</div>
-              <div>₹{item.price}</div>
-            </div>
-
-            <Hr />
-
-            <div>
-              <div>Subtotal: ₹{item.price * item.quantity}</div>
-              <div>Discount: ₹0</div>
-              <div>Shipping: Free</div>
-            </div>
-
-            <Hr />
-
-            <div>Total: ₹{item.price * item.quantity}</div>
-          </Info>
-        </div>
-      ))}
+      {storedData.length === 0 ? (
+        <p>No items in cart</p>
+      ) : (
+        <CarousalCard data={storedData} />
+      )}
     </Container>
   );
 };
@@ -141,16 +169,7 @@ const ProductPreviewCard = () => {
 export default ProductPreviewCard;
 
 const Container = styled.div`
-  /* border: 2px dashed red; */
+  border: none;
   width: fit-content;
   margin: 40px auto;
-`;
-
-const Info = styled.div`
-  text-align: center;
-`;
-
-const Hr = styled.hr`
-  width: 90%;
-  margin: 15px auto;
 `;

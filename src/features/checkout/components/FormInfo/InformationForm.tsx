@@ -6,7 +6,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const InformationForm = () => {
   const { values } = useFormikContext<any>();
-  console.log(values);
+  // console.log(values);
   return (
     <>
       {/* INFORMATION */}

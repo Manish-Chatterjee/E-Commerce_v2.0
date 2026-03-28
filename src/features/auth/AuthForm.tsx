@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Button } from "./components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import AuthBg from "../../assets/AuthBg.jpg";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -15,7 +16,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   const isSignup = mode === "signup";
   return (
     <Container>
-      {isSignup ? <h2>Sign Up</h2> : <h2>Login</h2>}
+      {isSignup ? <H2>Sign Up</H2> : <H2>Login</H2>}
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         // onSubmit={(values) => {
@@ -41,7 +42,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
             }
 
             alert("Login successful");
-            navigate("/");
+            navigate("/products/brands");
           }
         }}
       >
@@ -49,23 +50,34 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           {isSignup && (
             <div>
               <Label>Name</Label>
-              <FieldStyle name="name" type="text" />
+              <FieldStyle name="name" type="text" required/>
             </div>
           )}
           <div>
             <Label>E-mail</Label>
-            <FieldStyle name="email" type="email" />
+            <FieldStyle name="email" type="email" required/>
           </div>
           <div>
             <Label>Password</Label>
-            <FieldStyle name="password" type="password" />
+            <FieldStyle name="password" type="password" required/>
           </div>
 
           <Button type="submit">{isSignup ? "Sign Up" : "Login"}</Button>
+
+          {isSignup ? (
+            <RoutingLink>
+              Have an account already &nbsp;
+              <LinkStyled to="/login">Login</LinkStyled>
+            </RoutingLink>
+          ) : (
+            <RoutingLink>
+              New to ESNTL &nbsp;<LinkStyled to="/signup">Sign Up</LinkStyled>
+            </RoutingLink>
+          )}
         </FormStyle>
       </Formik>
 
-      {isSignup ? (
+      {/* {isSignup ? (
         <RoutingLink>
           Have an account already &nbsp;
           <LinkStyled to="/login">Login</LinkStyled>
@@ -74,7 +86,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         <RoutingLink>
           New to ESNTL &nbsp;<LinkStyled to="/signup">Sign Up</LinkStyled>
         </RoutingLink>
-      )}
+      )} */}
     </Container>
   );
 };
@@ -89,10 +101,23 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
 
-  background: url("https://img.freepik.com/free-vector/mountain-lake-sunset-landscape-realistic-tree-forest-mountain-silhouettes-evening-wood-panorama-illustration-wild-nature-background_1150-39419.jpg?semt=ais_rp_progressive&w=740&q=80");
-  /* background-repeat: no-repeat;
-  object-fit: cover; */
+  background: url(${AuthBg});
+  background-size: cover;
 `;
+
+// const Header = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 400px;
+// `;
+
+const H2 = styled.h2`
+  font-weight: 700;
+  font-family: "Alex Brush", cursive;
+  font-style: normal;
+  font-size: 48px;
+`;
+
 const FormStyle = styled(Form)`
   border: 2px dashed black;
   width: fit-content;
@@ -105,8 +130,8 @@ const FormStyle = styled(Form)`
 
   /* Glassmorphism */
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
@@ -136,12 +161,12 @@ const Label = styled.p`
 `;
 
 const RoutingLink = styled.div`
-  display: flex;
-  margin-top: 10px;
+  font-size: 18px;
+  text-align: center;
 `;
 
 const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
-  font-weight: 600;
+  font-weight: 700;
 `;

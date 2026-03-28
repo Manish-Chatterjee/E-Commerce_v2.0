@@ -25,7 +25,7 @@ export default function Cart() {
   // }, []);
 
   const { cartCount } = useCart();
-  console.log(cartCount,'cartCount')
+  // console.log(cartCount,'cartCount')
 
   return (
     <Link to="/checkout">

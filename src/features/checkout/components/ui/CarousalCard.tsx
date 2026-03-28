@@ -1,3 +1,66 @@
+// import { useState } from "react";
+// import Carousel from "react-bootstrap/Carousel";
+// import Card from "react-bootstrap/Card";
+// import styled from "styled-components";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+// type Product = {
+//   id: number;
+//   img: string;
+// };
+
+// type Props = {
+//   data: Product[];
+//   onChange: (index: number) => void;
+// };
+
+// // type Props = {
+// //   id: number;
+// //   dataImg: string;
+// //   onChange: (index: number) => void;
+// // };
+
+// const CarousalCard = ({ data, onChange }: Props) => {
+//   const [index, setIndex] = useState<number>(0);
+
+//   const handleSelect = (selectedIndex: number) => {
+//     setIndex(selectedIndex);
+//     onChange(selectedIndex); // 🔥 sync with parent
+//   };
+
+//   return (
+//     <Wrapper>
+//       <CarouselStyled
+//         indicators={false}
+//         activeIndex={index}
+//         onSelect={handleSelect}
+//         interval={null}
+//         nextIcon={
+//           <Next>
+//             <ArrowForwardIcon />
+//           </Next>
+//         }
+//         prevIcon={
+//           <Prev>
+//             <ArrowBackIcon />
+//           </Prev>
+//         }
+//       >
+//         {data.map((item) => (
+//         <Carousel.Item key={item.id}>
+//           <Card>
+//             <Card.Img variant="top" src={item.img} />
+//           </Card>
+//         </Carousel.Item>
+//         ))}
+//       </CarouselStyled>
+//     </Wrapper>
+//   );
+// };
+
+// export default CarousalCard;
+
 import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
@@ -5,22 +68,23 @@ import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-type Product = {
+type CartItem = {
   id: number;
+  productName: string;
+  price: number;
+  quantity: number;
   img: string;
 };
 
 type Props = {
-  data: Product[];
-  onChange: (index: number) => void;
+  data: CartItem[];
 };
 
-const CarousalCard = ({ data, onChange }: Props) => {
+const CarousalCard = ({ data }: Props) => {
   const [index, setIndex] = useState<number>(0);
 
   const handleSelect = (selectedIndex: number) => {
     setIndex(selectedIndex);
-    onChange(selectedIndex); // 🔥 sync with parent
   };
 
   return (
@@ -30,13 +94,28 @@ const CarousalCard = ({ data, onChange }: Props) => {
         activeIndex={index}
         onSelect={handleSelect}
         interval={null}
-        nextIcon={<Next><ArrowForwardIcon /></Next>}
-        prevIcon={<Prev><ArrowBackIcon /></Prev>}
+        nextIcon={
+          <Next>
+            <ArrowForwardIcon />
+          </Next>
+        }
+        prevIcon={
+          <Prev>
+            <ArrowBackIcon />
+          </Prev>
+        }
       >
         {data.map((item) => (
           <Carousel.Item key={item.id}>
             <Card>
-              <Card.Img variant="top" src={item.img} />
+              <CardImg variant="top" src={item.img} />
+
+              <Card.Body>
+                <h3>{item.productName}</h3>
+                <p>₹{item.price}</p>
+                <p>Qty: {item.quantity}</p>
+                <p>Total: ₹{item.price * item.quantity}</p>
+              </Card.Body>
             </Card>
           </Carousel.Item>
         ))}
@@ -73,4 +152,9 @@ const Prev = styled.span`
   z-index: 10;
   cursor: pointer;
   color: black;
+`;
+
+const CardImg = styled(Card.Img)`
+  object-fit: cover;
+  aspect-ratio: 1/1;
 `;

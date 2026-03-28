@@ -3,14 +3,13 @@
 
 import Products from "../sampleData/shopPage.json";
 
-export const addToCart = (id: number) => {
+// export
+const addToCart = (id: number) => {
   // 1. Get existing cart
   const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
   // 2. Check if already exists
-  const alreadyExists = existingCart.some(
-    (item: any) => item.id === id
-  );
+  const alreadyExists = existingCart.some((item: any) => item.id === id);
 
   if (alreadyExists) {
     console.log("Item already in cart");

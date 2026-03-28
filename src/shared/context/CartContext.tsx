@@ -6,6 +6,7 @@ type CartItem = {
   productName: string;
   price: number;
   quantity: number;
+  img: string
 };
 
 type CartContextType = {
@@ -56,6 +57,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       productName: product.productName,
       price: product.price,
       quantity: 1,
+      img: product.productImages[0] // img added
     };
 
     setCart([...cart, newItem]);
