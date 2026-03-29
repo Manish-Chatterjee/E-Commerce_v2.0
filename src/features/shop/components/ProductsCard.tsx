@@ -39,7 +39,14 @@ type CardProps = {
 };
 
 const ProductsCard = ({ items, onAddToCart }: CardProps) => {
-  const { productImages, productName, productBrandLogo, price, productBrand, id } = items;
+  const {
+    productImages,
+    productName,
+    productBrandLogo,
+    price,
+    productBrand,
+    id,
+  } = items;
   // const firstImageUrl = productImages.length
   //   ? Object.values(productImages[0])[0]
   //   : "";

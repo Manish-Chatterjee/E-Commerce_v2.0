@@ -1,3 +1,18 @@
-[{
-    "id": 1
-}]
+[
+  {
+    "index": 1,
+    "brand": {
+      "name": "LV",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium doloremque tempora veniam consequatur! Eius dolorum doloremque quam. Aliquid rerum explicabo velit deleniti, aliquam eius dignissimos asperiores, commodi facere sunt quia ipsa eos corporis ducimus esse iusto quod doloremque quo fugit obcaecati harum voluptatem autem natus optio? Odit quod recusandae sapiente",
+      "image": "https://www.louisvuitton.com/images/is/image/lv/W_BC_LG_SLOUCHY_JUL24_01_DII.jpg"
+    }
+  },
+  {
+    "index": 2,
+    "brand": {
+      "name": "D&G",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium doloremque tempora veniam consequatur! Eius dolorum doloremque quam. Aliquid rerum explicabo velit deleniti, aliquam eius dignissimos asperiores, commodi facere sunt quia ipsa eos corporis ducimus esse iusto quod doloremque quo fugit obcaecati harum voluptatem autem natus optio? Odit quod recusandae sapiente",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/9/450522852/IB/DY/SM/192271690/whatsapp-image-2024-09-13-at-09-49-43-2-500x500.jpeg"
+    }
+  }
+]

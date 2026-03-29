@@ -18,8 +18,9 @@ const StatusDisplay = () => {
       {/* <div><StatusBar/></div> */}
 
       <div>
-        <LinkStyled to="/orderHistory" replace>
-            <Button>View your order</Button>
+        {/* <LinkStyled to="/orderHistory" replace> */}
+        <LinkStyled to="/products/brands" replace>
+          <Button>View your order</Button>
         </LinkStyled>
         <span>
           Delivery times are estimated. If you're experiencing difficulty with

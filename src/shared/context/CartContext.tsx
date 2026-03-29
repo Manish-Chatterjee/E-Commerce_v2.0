@@ -6,13 +6,15 @@ type CartItem = {
   productName: string;
   price: number;
   quantity: number;
-  img: string
+  img: string;
 };
 
 type CartContextType = {
   cart: CartItem[];
   cartCount: number;
   addToCart: (id: number | undefined) => void;
+  removeFromCart: (id: number) => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -57,18 +59,43 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       productName: product.productName,
       price: product.price,
       quantity: 1,
-      img: product.productImages[0] // img added
+      img: product.productImages[0], // img added
     };
 
     setCart([...cart, newItem]);
+  };
+
+  // ✅Remove single item from cart
+  const removeFromCart = (id: number) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+  };
+
+  // ✅Clear the whole cart
+  const clearCart = () => {
+    setCart([]);
   };
 
   // ✅ Count
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, cartCount, addToCart }}>
+    <CartContext.Provider
+      value={{ cart, cartCount, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
+
+// 👉🏻 Usage
+// const { cart, addToCart, removeFromCart, clearCart, cartCount } = useCart();
+
+// // Add
+// addToCart(5);
+
+// // Remove a specific item
+// removeFromCart(5);
+
+// // Clear all
+// clearCart();

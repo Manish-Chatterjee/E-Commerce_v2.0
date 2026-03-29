@@ -38,7 +38,7 @@ const ShopPage = () => {
           </span>
         }
       />
-      <Outlet/>
+      <Outlet />
     </div>
   );
 };

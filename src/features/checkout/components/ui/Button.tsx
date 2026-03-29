@@ -3,10 +3,11 @@ import styled from "styled-components";
 type ButtonProps = {
   type?: "submit" | "button";
   children: React.ReactNode;
+  disabled?: boolean; // ✅ add this
 };
 
-const Button = ({ type = "button", children }: ButtonProps) => {
-  return <ButtonContainer type={type}>{children}</ButtonContainer>;
+const Button = ({ type = "button", children, disabled }: ButtonProps) => {
+  return <ButtonContainer type={type} disabled={disabled}>{children}</ButtonContainer>;
 };
 
 export default Button;

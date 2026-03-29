@@ -6,10 +6,11 @@ import styled from "styled-components";
 // };
 type SearchBarProps = {
   isOpen: boolean;
+  setSearchQuery: (value: string) => void;
 };
 
 // const SearchBar = ({ searchText }: SearchBarProps) => {
-const SearchBar = ({ isOpen }: SearchBarProps) => {
+const SearchBar = ({ isOpen, setSearchQuery }: SearchBarProps) => {
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -28,6 +29,7 @@ const SearchBar = ({ isOpen }: SearchBarProps) => {
 
   const handleClick = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      setSearchQuery(search);   // 🔥 THIS WAS MISSING
       setSearchText(search);
       setSearch("");
     }

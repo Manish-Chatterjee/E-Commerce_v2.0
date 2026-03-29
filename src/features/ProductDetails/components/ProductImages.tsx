@@ -11,7 +11,6 @@ type Props = {
 };
 
 const ProductImages = ({ id, productImages }: Props) => {
-
   // console.log(productImages,'productImages')
 
   // const productData = Products.find((item) => item.id === productId);
@@ -20,10 +19,8 @@ const ProductImages = ({ id, productImages }: Props) => {
     <Container>
       <MainImg>
         {productImages?.map((item) => (
-        <Img
-          src={item}
-          alt="img"
-        />))}
+          <Img src={item} alt="img" width={"100%"} height={"100%"} />
+        ))}
       </MainImg>
       {/* <SubImg>
         <Img
@@ -70,7 +67,7 @@ const ProductImages = ({ id, productImages }: Props) => {
 export default ProductImages;
 
 const Container = styled.div`
-  border: 2px dashed black;
+  /* border: 4px dashed black; */
   /* flex: 1; */
   width: 50%;
   margin: 20px;
@@ -78,18 +75,21 @@ const Container = styled.div`
   flex-direction: column;
   gap: 20px;
   /* width: fit-content; */
+  height: 400px;
 `;
 
 const MainImg = styled.div`
-  border: 2px solid red;
+  /* border: 5px solid red; */
   /* flex: 3; */
-  width: fit-content;
-  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
+  /* aspect-ratio: 1/1; */
   margin: auto;
+  /* object-fit: contain; */
 `;
 
 const SubImg = styled.div`
-  border: 2px dashed red;
+  /* border: 2px dashed red; */
   /* flex: 1; */
   height: 150px;
   overflow: scroll;
@@ -98,5 +98,6 @@ const SubImg = styled.div`
 `;
 
 const Img = styled.img`
-  height: 100%;
+  /* height: 100%; */
+  object-fit: cover;
 `;

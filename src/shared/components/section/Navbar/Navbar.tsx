@@ -13,8 +13,12 @@ import Profile from "./ui/Profile";
 //   sectionName: string;
 // };
 
+type Props = {
+  setSearchQuery: (value: string) => void;
+};
+
 // const Navbar = ({ sectionName }: SectionName) => {
-const Navbar = () => {
+const Navbar = ({ setSearchQuery }: Props) => {
   // const [sectionName, setSectionName] = useState("Brands");
   const [searchBarDisplay, setSearchBarDisplay] = useState(false);
 
@@ -70,7 +74,7 @@ const Navbar = () => {
             src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
             alt="profile-logo"
           /> */}
-          <Profile/>
+          <Profile />
         </Section>
       </NavbarContainer>
 
@@ -79,7 +83,9 @@ const Navbar = () => {
       </SectionName>
 
       {/* <div>Give All You Need</div> */}
-      {searchBarDisplay ? <SearchBar isOpen={searchBarDisplay} /> : null}
+      {searchBarDisplay ? (
+        <SearchBar isOpen={searchBarDisplay} setSearchQuery={setSearchQuery} />
+      ) : null}
     </Container>
   );
 };
