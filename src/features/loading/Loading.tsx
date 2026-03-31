@@ -25,6 +25,7 @@ const Loading = ({ onSuccess }: LoadingProps) => {
         }
       } catch (error) {
         // Any unexpected error
+        console.log(error)
         navigate("/error", {
           state: { message: "Unexpected error occurred", status: 500 },
         });

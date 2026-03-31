@@ -29,9 +29,7 @@ const Card = styled.div<{ $reverse: boolean }>`
   gap: 40px;
   margin: 60px 40px;
 
-  /* border: 2px solid gray; */
   height: 250px;
-  /* width: 90%; */
 
   flex-direction: ${({ $reverse }) => ($reverse ? "row-reverse" : "row")};
 
@@ -52,7 +50,6 @@ const Content = styled.div`
   background-color: #fef0d1;
   border-radius: 10px;
   height: 100%;
-  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,8 +59,6 @@ const Content = styled.div`
   h2 {
     font-size: 28px;
     margin-bottom: 12px;
-    /* text-align: start; */
-    /* border: 2px solid black; */
     width: 100%;
   }
 

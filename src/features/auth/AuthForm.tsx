@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik";
 import styled from "styled-components";
 import { Button } from "./components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./hooks/useAuth";
 import AuthBg from "../../assets/AuthBg.jpg";
 
 type AuthFormProps = {
@@ -50,16 +50,16 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           {isSignup && (
             <div>
               <Label>Name</Label>
-              <FieldStyle name="name" type="text" required/>
+              <FieldStyle name="name" type="text" required />
             </div>
           )}
           <div>
             <Label>E-mail</Label>
-            <FieldStyle name="email" type="email" required/>
+            <FieldStyle name="email" type="email" required />
           </div>
           <div>
             <Label>Password</Label>
-            <FieldStyle name="password" type="password" required/>
+            <FieldStyle name="password" type="password" required />
           </div>
 
           <Button type="submit">{isSignup ? "Sign Up" : "Login"}</Button>
@@ -76,17 +76,6 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           )}
         </FormStyle>
       </Formik>
-
-      {/* {isSignup ? (
-        <RoutingLink>
-          Have an account already &nbsp;
-          <LinkStyled to="/login">Login</LinkStyled>
-        </RoutingLink>
-      ) : (
-        <RoutingLink>
-          New to ESNTL &nbsp;<LinkStyled to="/signup">Sign Up</LinkStyled>
-        </RoutingLink>
-      )} */}
     </Container>
   );
 };
@@ -104,12 +93,6 @@ const Container = styled.div`
   background: url(${AuthBg});
   background-size: cover;
 `;
-
-// const Header = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 400px;
-// `;
 
 const H2 = styled.h2`
   font-weight: 700;
@@ -156,7 +139,6 @@ const FieldStyle = styled(Field)`
 
 const Label = styled.p`
   margin: 5px 0;
-  /* font-weight: 600; */
   font-size: 16px;
 `;
 

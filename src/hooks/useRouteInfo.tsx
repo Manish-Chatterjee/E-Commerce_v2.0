@@ -1,18 +1,23 @@
 import { useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const useRouteInfo = () => {
   const location = useLocation();
-
-  const prevRef = useRef<string | null>(null);
   const currentPath = location.pathname;
 
+  const prevRef = useRef<string>(""); // holds previous path
+  const [prevPath, setPrevPath] = useState<string>("");
+
   useEffect(() => {
-    prevRef.current = currentPath;
+    // Only update prevPath if currentPath actually changed
+    if (prevRef.current !== currentPath) {
+      setPrevPath(prevRef.current);
+      prevRef.current = currentPath;
+    }
   }, [currentPath]);
 
   return {
     pathname: currentPath,
-    prevPath: prevRef.current,
+    prevPath,
   };
 };

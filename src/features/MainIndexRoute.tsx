@@ -16,8 +16,8 @@ const MainIndexRoute = () => {
       <Link to="/cart">cart</Link>
       <br />
       <Link to="/checkout">checkout</Link>
-      <hr/>
-      <Outlet/>
+      <hr />
+      <Outlet />
     </>
   );
 };

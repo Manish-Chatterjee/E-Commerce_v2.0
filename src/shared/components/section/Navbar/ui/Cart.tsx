@@ -4,9 +4,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import { getCartCount } from "../../../../utils/getCartCount";
-import { useEffect, useState } from "react";
-import { useCart } from "../../../../context/CartContext";
+import { useCart } from "../../../../context/useCart";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -18,14 +16,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 export default function Cart() {
-  // const [cartCount, setCartCount] = useState(0);
-
-  // useEffect(() => {
-  //   setCartCount(getCartCount());
-  // }, []);
-
   const { cartCount } = useCart();
-  // console.log(cartCount,'cartCount')
 
   return (
     <Link to="/checkout">

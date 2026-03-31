@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Profile = () => {
@@ -16,11 +15,9 @@ export default Profile;
 
 const Img = styled.img`
   height: 40px;
-  /* width: 40px; */
   border-radius: 100px;
   margin-inline: 5px;
 `;
-
 
 // for dropdown menu authentication, show profile picture if logged in else show 2 options for logout and signout
 

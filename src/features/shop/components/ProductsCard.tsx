@@ -5,20 +5,9 @@ import { truncateText } from "../../../shared/utils/truncateText";
 import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import { Link } from "react-router-dom";
 
-// import product from '../../../shared/sampleData/products.json'
-
-// type Product = {
-//   productImage: string;
-//   productImageHover: string;
-//   productName: string;
-//   productPrice: number;
-//   ratings: number[];
-//   productBrand: string;
+// type ProductImage = {
+//   [key: string]: string; // any key like img1, img2
 // };
-
-type ProductImage = {
-  [key: string]: string; // any key like img1, img2
-};
 
 type Product = {
   id: number;
@@ -38,7 +27,8 @@ type CardProps = {
   onAddToCart: () => void;
 };
 
-const ProductsCard = ({ items, onAddToCart }: CardProps) => {
+// const ProductsCard = ({ items, onAddToCart }: CardProps) => {
+const ProductsCard = ({ items }: CardProps) => {
   const {
     productImages,
     productName,
@@ -47,9 +37,7 @@ const ProductsCard = ({ items, onAddToCart }: CardProps) => {
     productBrand,
     id,
   } = items;
-  // const firstImageUrl = productImages.length
-  //   ? Object.values(productImages[0])[0]
-  //   : "";
+
 
   return (
     <CardContainer>

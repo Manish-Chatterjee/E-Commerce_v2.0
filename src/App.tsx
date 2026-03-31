@@ -1,13 +1,10 @@
-// import React from 'react'
 import AuthForm from "./features/auth/AuthForm";
 import BlogPage from "./features/blogs/pages/BlogPage";
 import BrandsPage from "./features/brands/pages/BrandsPage";
-import CartPage from "./features/orderHistory/OrderHistory";
 import MainIndexRoute from "./features/MainIndexRoute";
 import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
 import "./shared/styles/GlobalStyles.css";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CheckoutPage from "./features/checkout/pages/CheckoutPage";
 import ErrorPage from "./features/error/ErrorPage";
@@ -83,8 +80,8 @@ const App = () => {
         },
         {
           path: "/loading",
-          element: <Loading/>,
-        }
+          element: <Loading />,
+        },
       ],
     },
   ]);

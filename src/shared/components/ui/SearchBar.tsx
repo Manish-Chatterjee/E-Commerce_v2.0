@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-// type SearchBarProps = {
-//   searchText: string;
-// };
 type SearchBarProps = {
   isOpen: boolean;
   setSearchQuery: (value: string) => void;
 };
 
-// const SearchBar = ({ searchText }: SearchBarProps) => {
 const SearchBar = ({ isOpen, setSearchQuery }: SearchBarProps) => {
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -29,7 +25,7 @@ const SearchBar = ({ isOpen, setSearchQuery }: SearchBarProps) => {
 
   const handleClick = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setSearchQuery(search);   // 🔥 THIS WAS MISSING
+      setSearchQuery(search); // 🔥 THIS WAS MISSING
       setSearchText(search);
       setSearch("");
     }

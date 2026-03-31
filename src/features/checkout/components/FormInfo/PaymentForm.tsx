@@ -5,8 +5,18 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
+type FormProp = {
+  agree: boolean;
+  appleId: string;
+  cardNumber: string;
+  deliveryType: string;
+  paymentMethod: string;
+  paypalEmail: string;
+}
+
 const PaymentForm = () => {
-  const { values } = useFormikContext<any>();
+  const { values } = useFormikContext<FormProp>();
+  console.log(values,'values')
   return (
     <>
       {/* Payment Options */}

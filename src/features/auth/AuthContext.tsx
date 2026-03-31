@@ -1,31 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
-type User = {
-  name?: string;
-  email: string;
-  password: string;
-};
-
-type AuthContextType = {
-  user: User | null;
-  login: (values: User) => boolean;
-  signup: (values: User) => boolean;
-  logout: () => void;
-  isAuthenticated: boolean;
-};
-
-const AuthContext = createContext<AuthContextType | null>(null);
+import { useState } from "react";
+import { AuthContext, type User } from "./authContext";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  // 🔄 Persist login on refresh
-  useEffect(() => {
+  // const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   // 🔐 SIGNUP
   const signup = (values: User) => {
@@ -47,8 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     const validUser = users.find(
-      (u: User) =>
-        u.email === values.email && u.password === values.password
+      (u: User) => u.email === values.email && u.password === values.password,
     );
 
     if (!validUser) return false;
@@ -77,11 +57,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-// 🔥 Custom Hook (clean usage)
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
-  return context;
 };

@@ -4,7 +4,7 @@ import DeliveryForm from "./FormInfo/DeliveryForm";
 import PaymentForm from "./FormInfo/PaymentForm";
 import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../../shared/context/CartContext";
+import { useCart } from "../../../shared/context/useCart";
 
 const FormInfo = () => {
   const navigate = useNavigate();

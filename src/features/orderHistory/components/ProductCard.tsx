@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import styled from "styled-components";
 import { GoDotFill } from "react-icons/go";
 import { LuDot, LuTruck } from "react-icons/lu";
@@ -43,18 +41,17 @@ const ProductCard = () => {
             Bangalore, India
           </Location>
         </LocationInfo>
-      
 
-      <ProductItem />
-      <ProductItem />
+        <ProductItem />
+        <ProductItem />
 
-      <PricingDetails>
-        <span>
-          <span>{`Total: ${formatPrice(849000)}`}</span>
-          <span>(2 items)</span>
-        </span>
-        <Button>Details</Button>
-      </PricingDetails>
+        <PricingDetails>
+          <span>
+            <span>{`Total: ${formatPrice(849000)}`}</span>
+            <span>(2 items)</span>
+          </span>
+          <Button>Details</Button>
+        </PricingDetails>
       </Container>
     </>
   );

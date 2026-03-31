@@ -13,17 +13,6 @@ const OrderReview = () => {
       <ProductPreviewCard selectedData={selectedData} />
 
       <Info>
-        {/* <h2>item.productName</h2>
-        <p>description</p>
-
-        <div>
-          <div>Size: XL</div>
-          <div>Color: Red</div>
-          <div>₹item.price</div>
-        </div> */}
-
-        {/* <Hr /> */}
-
         <div>
           <div>Subtotal: ₹ 500</div>
           <div>Discount: ₹ 50</div>
@@ -51,4 +40,4 @@ const Hr = styled.hr`
 
 const H4 = styled.h4`
   margin-left: 12%;
-`
+`;

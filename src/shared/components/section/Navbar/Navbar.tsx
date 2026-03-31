@@ -1,7 +1,5 @@
-// import React from 'react'
-// import { IoIosSearch } from "react-icons/io";
 import SearchIcon from "@mui/icons-material/Search";
-// import { AiOutlineShoppingCart } from "react-icons/ai";
+
 import styled from "styled-components";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -9,17 +7,11 @@ import Cart from "./ui/Cart";
 import SearchBar from "../../ui/SearchBar";
 import Profile from "./ui/Profile";
 
-// type SectionName = {
-//   sectionName: string;
-// };
-
 type Props = {
   setSearchQuery: (value: string) => void;
 };
 
-// const Navbar = ({ sectionName }: SectionName) => {
 const Navbar = ({ setSearchQuery }: Props) => {
-  // const [sectionName, setSectionName] = useState("Brands");
   const [searchBarDisplay, setSearchBarDisplay] = useState(false);
 
   const location = useLocation();
@@ -33,7 +25,6 @@ const Navbar = ({ setSearchQuery }: Props) => {
   // get the last segment of the path
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const sectionNameSpec = pathSegments[pathSegments.length - 1]; // "brands" or "shop" etc.
-  // console.log(sectionNameSpec)
 
   const displayName = sectionMap[sectionNameSpec] || "";
 
@@ -64,16 +55,9 @@ const Navbar = ({ setSearchQuery }: Props) => {
           </SearchBtnContainer>
 
           <Link to="/checkout">
-            {/* <span>
-              <AiOutlineShoppingCartStyled />
-            </span> */}
-
             <Cart />
           </Link>
-          {/* <Img
-            src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
-            alt="profile-logo"
-          /> */}
+
           <Profile />
         </Section>
       </NavbarContainer>
@@ -155,13 +139,6 @@ const Mid = styled.p`
 const LogoName = styled.p`
   font-weight: 600;
   font-size: 24px;
-`;
-
-const Img = styled.img`
-  height: 40px;
-  /* width: 40px; */
-  border-radius: 100px;
-  margin-inline: 5px;
 `;
 
 const SectionName = styled.div`

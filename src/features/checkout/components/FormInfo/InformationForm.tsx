@@ -1,11 +1,9 @@
-import { Field, useFormikContext } from "formik";
+import { Field } from "formik";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const InformationForm = () => {
-  const { values } = useFormikContext<any>();
+  // const { values } = useFormikContext<any>();
   // console.log(values);
   return (
     <>
@@ -54,9 +52,9 @@ const InformationForm = () => {
       </InputContainer>
 
       {/* <CheckBtn> */}
-        {/* {values.agree ? <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/>} */}
-        {/* <HiddenCheckbox type="checkbox" name="agree" />I agree to data processing */}
-        {/* <Field type="chec" /> */}
+      {/* {values.agree ? <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/>} */}
+      {/* <HiddenCheckbox type="checkbox" name="agree" />I agree to data processing */}
+      {/* <Field type="chec" /> */}
       {/* </CheckBtn> */}
     </>
   );
@@ -76,15 +74,6 @@ const InputContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-`;
-
-const HiddenCheckbox = styled(Field)`
-  display: none;
-`;
-
-const CheckBtn = styled.label`
-  display: flex;
-  align-items: center;
 `;
 
 // const Checkbox = styled.div<{ checked: boolean }>`

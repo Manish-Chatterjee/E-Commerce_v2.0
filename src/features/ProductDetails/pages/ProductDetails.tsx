@@ -1,4 +1,3 @@
-// import Container from '@mui/material/Container'
 import styled from "styled-components";
 import ProductImages from "../components/ProductImages";
 import ProductInfo from "../components/ProductInfo";

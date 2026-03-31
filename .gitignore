@@ -24,6 +24,8 @@ dist-ssr
 *.sw?
 
 # Docs
+txtFiles
 Project-Structure.txt
 Guide.txt
 tools_used.txt
+FrontendProjectStructure.txt

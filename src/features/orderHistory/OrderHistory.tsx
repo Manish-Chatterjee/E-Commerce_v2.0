@@ -1,4 +1,3 @@
-// import React from 'react'
 import styled from "styled-components";
 import ProductCard from "./components/ProductCard";
 import Button from "../../shared/components/ui/Button";
@@ -7,7 +6,7 @@ import SecondNavbar from "../../shared/components/section/SecondNavbar";
 const OrderHistory = () => {
   return (
     <>
-    <SecondNavbar logo=""/>
+      <SecondNavbar logo="" />
       <CartHeader>
         <Greetings>
           <Greet>Good Morning</Greet>
@@ -53,17 +52,6 @@ const CartHeader = styled.div`
 
 const Greetings = styled.span``;
 
-// const Options = styled.span`
-//   border: 1px solid gray;
-//   border-radius: 100px;
-//   padding: 5px 10px;
-
-//   &:hover {
-//     background-color: black;
-//     color: aliceblue;
-//   }
-// `;
-
 const Greet = styled.p`
   color: gray;
   font-size: 14px;
@@ -85,26 +73,6 @@ const StatusContainer = styled.div`
   gap: 10px;
   flex: 1;
 `;
-
-// const Status = styled.div`
-//   border: 1px solid black;
-//   /* width: fit-content; */
-//   margin: auto;
-//   border-radius: 100px;
-//   padding: 5px 20px;
-
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   gap: 10px;
-
-//   &:hover {
-//     background-color: black;
-//     color: white;
-//   }
-
-//   width: 150px;
-// `;
 
 const Number = styled.div`
   background-color: #e0e0e0;

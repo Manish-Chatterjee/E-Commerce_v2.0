@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 

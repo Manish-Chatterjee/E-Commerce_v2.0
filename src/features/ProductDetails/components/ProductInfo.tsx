@@ -1,4 +1,3 @@
-// import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import AddToCartBtn from "./ui/AddToCartBtn";
@@ -6,21 +5,15 @@ import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-// import { useParams } from "react-router-dom";
 
-// import Products from "../../../shared/sampleData/shopPage.json";
 import { formatPrice } from "../../../shared/utils/formatPrice";
-// import { addToCart } from "../../../shared/utils/addToCart";
-import { useCart } from "../../../shared/context/CartContext";
+
+import { useCart } from "../../../shared/context/useCart";
 
 type ButtonProps = {
   image: string;
   selected: boolean;
 };
-
-// type Props = {
-//   productId: number;
-// };
 
 type Product = {
   id?: number;
@@ -33,10 +26,6 @@ type Product = {
   sizes?: number[];
 };
 
-// type ProductImage = {
-//   [key: string]: string; // any key like img1, img2
-// };
-
 const ProductInfo = ({
   id,
   productBrand,
@@ -45,12 +34,6 @@ const ProductInfo = ({
   productID,
   price,
 }: Product) => {
-  // const { id } = useParams();
-  // const productId = Number(id);
-  // const productData = Products.find((item) => item.id === productId);
-  // const { productBrand, productBrandLogo, productID, productName, price } =
-  //   productData;
-
   const { addToCart } = useCart(); // Context api for using cart
 
   //////////////////////////SNACKBAR//////////////////
@@ -70,7 +53,6 @@ const ProductInfo = ({
   const handleClose = () => {
     setOpen(false);
   };
-
   /////////////////////////////////////////////
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -155,8 +137,6 @@ const ProductInfo = ({
 export default ProductInfo;
 
 const Container = styled.div`
-  /* border: 2px dashed black; */
-  /* flex: 1; */
   width: 50%;
   margin: 20px;
   padding: 40px 60px;
@@ -169,7 +149,6 @@ const Brand = styled.span`
   width: fit-content;
   height: fit-content;
   gap: 10px;
-  /* border: 2px solid black; */
 `;
 
 const BrandingContainer = styled.div`
@@ -181,11 +160,6 @@ const H3 = styled.h3`
   font-weight: 700;
 `;
 
-// const Image = styled.img`
-//   height: 50px;
-//   /* width: 30px; */
-// `;
-
 const ProductSelection = styled.div`
   display: flex;
   gap: 10px;
@@ -194,7 +168,7 @@ const ProductSelection = styled.div`
 const Button = styled.button<ButtonProps>`
   width: 50px;
   aspect-ratio: 1/1.5;
-  /* height: 60px; */
+
   background: ${({ image }) => `url(${image}) center/cover no-repeat`};
   border: ${({ selected }) => (selected ? "3px solid #000" : "1px solid #ccc")};
   background-size: contain;
