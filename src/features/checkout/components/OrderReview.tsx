@@ -1,9 +1,35 @@
 import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
+import { calculateDiscount } from "../../../shared/utils/calculateDiscount";
 
-const OrderReview = () => {
+type CartItem = {
+  id: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  img: string;
+};
+
+type DeliveryTypeProps = {
+  deliveryType: number;
+};
+
+const OrderReview = ({ deliveryType }: DeliveryTypeProps) => {
+  // console.log(deliveryType, "dt");
   const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
   // console.log(selectedData, "selectedData");
+
+  const subtotal = selectedData.reduce((accu: number, item: CartItem) => {
+    return accu + item.price * item.quantity;
+  }, 0);
+
+  const discount = (subtotal: number, priceOff: number) =>
+    calculateDiscount(subtotal, priceOff);
+
+  const priceOff = 20;
+  const shipping = deliveryType;
+
+  const discountedPrice: number = discount(subtotal, priceOff);
 
   return (
     <div>
@@ -14,14 +40,18 @@ const OrderReview = () => {
 
       <Info>
         <div>
-          <div>Subtotal: ₹ 500</div>
-          <div>Discount: ₹ 50</div>
-          <div>Shipping: Free</div>
+          <div>Subtotal: ₹{subtotal.toFixed(1)}</div>
+          <div>Discount: ₹{`${discountedPrice.toFixed(1)} (${priceOff}%)`}</div>
+          <div>
+            Shipping: {shipping === 0 ? `free` : `₹${shipping.toFixed(1)}`}
+          </div>
         </div>
 
         <Hr />
 
-        <div>Total: ₹ 450</div>
+        <div>
+          Grand Total: ₹{(subtotal - discountedPrice + shipping).toFixed(1)}
+        </div>
       </Info>
     </div>
   );

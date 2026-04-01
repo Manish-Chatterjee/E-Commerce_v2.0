@@ -37,5 +37,5 @@ const MainImg = styled.div`
 `;
 
 const Img = styled.img`
-  object-fit: cover;
+  object-fit: contain;
 `;

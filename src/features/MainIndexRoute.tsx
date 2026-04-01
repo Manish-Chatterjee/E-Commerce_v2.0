@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 const MainIndexRoute = () => {
   return (
     <>
-      <Link to="/login">Login</Link>
+      <Link to="/">Login</Link>
       <br />
       <Link to="/signup">Signup</Link>
       <br />

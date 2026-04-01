@@ -6,7 +6,11 @@ import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../shared/context/useCart";
 
-const FormInfo = () => {
+type FormInfoProps = {
+  setDeliveryState: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const FormInfo = ({setDeliveryState}:FormInfoProps) => {
   const navigate = useNavigate();
 
   const { clearCart } = useCart();
@@ -35,7 +39,7 @@ const FormInfo = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <InformationForm />
-            <DeliveryForm />
+            <DeliveryForm setDeliveryState={setDeliveryState}/>
             <PaymentForm />
 
             <Button type="submit" disabled={cart.length === 0}>

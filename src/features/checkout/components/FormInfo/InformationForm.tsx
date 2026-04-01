@@ -17,7 +17,7 @@ const InformationForm = () => {
       >
         <h2>Information</h2>
         <p style={{ fontSize: "12px", color: "gray" }}>
-          Already have an account? <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/">Log in</Link>
         </p>
       </div>
       <h4>Personal Information</h4>

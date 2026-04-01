@@ -4,8 +4,28 @@ import styled from "styled-components";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
-const DeliveryForm = () => {
-  const { values } = useFormikContext<any>();
+type ChildProps = {
+  setDeliveryState: React.Dispatch<React.SetStateAction<number>>;
+};
+
+type ValueProp = {
+  agree: boolean;
+  appleId: string;
+  cardNumber: string;
+  deliveryType: string;
+  paymentMethod: string;
+  paypalEmail: string;
+};
+
+const DeliveryForm = ({ setDeliveryState }: ChildProps) => {
+  const { values } = useFormikContext<ValueProp>();
+  console.log(values, "VALUES");
+  const { setFieldValue } = useFormikContext<{ deliveryType: number }>();
+
+  const handleClick = (value: number) => {
+    setFieldValue("deliveryType", value); // Formik
+    setDeliveryState(value); // parent state
+  };
   return (
     <>
       <h2>Delivery</h2>
@@ -17,7 +37,12 @@ const DeliveryForm = () => {
           ) : (
             <RadioButtonUncheckedIcon />
           )}
-          <HiddenCheckbox type="radio" name="deliveryType" value="pickup" />
+          <HiddenCheckbox
+            type="radio"
+            name="deliveryType"
+            value="pickup"
+            onClick={() => handleClick(0)}
+          />
           <DeliveryInfo>
             <DeliveryType>Pick up</DeliveryType>
             <div>free</div>
@@ -32,7 +57,12 @@ const DeliveryForm = () => {
           ) : (
             <RadioButtonUncheckedIcon />
           )}
-          <HiddenCheckbox type="radio" name="deliveryType" value="standard" />
+          <HiddenCheckbox
+            type="radio"
+            name="deliveryType"
+            value="standard"
+            onClick={() => handleClick(10)}
+          />
 
           <DeliveryInfo>
             <div>
@@ -51,7 +81,12 @@ const DeliveryForm = () => {
           ) : (
             <RadioButtonUncheckedIcon />
           )}
-          <HiddenCheckbox type="radio" name="deliveryType" value="express" />
+          <HiddenCheckbox
+            type="radio"
+            name="deliveryType"
+            value="express"
+            onClick={() => handleClick(50)}
+          />
           <DeliveryInfo>
             <div>
               <DeliveryType>Express Shipping</DeliveryType>

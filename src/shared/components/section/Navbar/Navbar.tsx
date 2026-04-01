@@ -32,7 +32,7 @@ const Navbar = ({ setSearchQuery }: Props) => {
     <Container>
       <NavbarContainer>
         <Section>
-          <img src="" alt="logo" />
+          {/* <img src="" alt="logo" /> */}
           <LogoName>ESNTL</LogoName>
         </Section>
         <Section>
@@ -91,7 +91,7 @@ const NavbarContainer = styled.div`
   border-radius: 0 0 10px 10px;
   width: 85%;
   /* margin: 0px auto; */
-  padding: 0 15px;
+  padding: 5px 15px;
   box-sizing: border-box;
 
   position: absolute;
@@ -137,8 +137,9 @@ const Mid = styled.p`
 `;
 
 const LogoName = styled.p`
-  font-weight: 600;
+  font-weight: 800;
   font-size: 24px;
+  font-style: italic;
 `;
 
 const SectionName = styled.div`

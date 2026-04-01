@@ -1,7 +1,6 @@
 import AuthForm from "./features/auth/AuthForm";
 import BlogPage from "./features/blogs/pages/BlogPage";
 import BrandsPage from "./features/brands/pages/BrandsPage";
-import MainIndexRoute from "./features/MainIndexRoute";
 import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
 import "./shared/styles/GlobalStyles.css";
@@ -13,7 +12,7 @@ import OrderConfirmationPage from "./features/orderConfirmation/pages/OrderConfi
 import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
 import OrderHistory from "./features/orderHistory/OrderHistory";
 import Wishlist from "./features/wishlist/pages/Wishlist";
-import { AuthProvider } from "./features/auth/AuthContext";
+import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/CartContext";
 import Loading from "./features/loading/Loading";
 
@@ -24,12 +23,13 @@ const App = () => {
       // element: <MainIndexRoute />,
       errorElement: <ErrorPage />,
       children: [
+        // {
+        //   index: true,
+        //   element: <MainIndexRoute />,
+        // },
         {
+          // path: "/login",
           index: true,
-          element: <MainIndexRoute />,
-        },
-        {
-          path: "/login",
           element: <AuthForm mode="login" />,
         },
         {

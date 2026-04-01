@@ -32,7 +32,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
             }
 
             alert("Signup successful");
-            navigate("/login");
+            navigate("/");
           } else {
             const success = login(values);
 
@@ -67,7 +67,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           {isSignup ? (
             <RoutingLink>
               Have an account already &nbsp;
-              <LinkStyled to="/login">Login</LinkStyled>
+              <LinkStyled to="/">Login</LinkStyled>
             </RoutingLink>
           ) : (
             <RoutingLink>

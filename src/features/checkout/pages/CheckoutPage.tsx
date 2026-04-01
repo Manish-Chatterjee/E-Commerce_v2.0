@@ -2,16 +2,19 @@ import FormInfo from "../components/FormInfo";
 import OrderReview from "../components/OrderReview";
 import styled from "styled-components";
 import SecondNavbar from "../../../shared/components/section/SecondNavbar";
+import { useState } from "react";
 
 const CheckoutPage = () => {
+  const [deliveryType, setDeliveryState] = useState<number>(0);
+  console.log(deliveryType, "deliveryType");
   return (
     <>
       <SecondNavbar logo={""} />
       <PageContainer>
         <Header>Checkout</Header>
         <Checkout>
-          <FormInfo />
-          <OrderReview />
+          <FormInfo setDeliveryState={setDeliveryState}/>
+          <OrderReview deliveryType={deliveryType}/>
         </Checkout>
 
         {/* <Footer/> */}

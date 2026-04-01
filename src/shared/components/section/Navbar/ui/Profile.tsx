@@ -30,7 +30,7 @@ const Img = styled.img`
 //   </>
 // ) : (
 //   <>
-//     <Link to="/login">Login</Link>
+//     <Link to="/">Login</Link>
 //     <Link to="/signup">Signup</Link>
 //   </>
 // )}
