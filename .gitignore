@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # Docs
-txtFiles
+txtFiles/
 Project-Structure.txt
 Guide.txt
 tools_used.txt
