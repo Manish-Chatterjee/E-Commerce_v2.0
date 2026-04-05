@@ -18,6 +18,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // ✅ Add To Cart
   const addToCart = (id?: number) => {
     const existingItem = cart.find((item) => item.id === id);
     if (existingItem) {
@@ -43,10 +44,36 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart([...cart, newItem]);
   };
 
+  // ✅ Remove From Cart
   const removeFromCart = (id: number) =>
     setCart(cart.filter((item) => item.id !== id));
+
+  // ✅ Clear Cart
   const clearCart = () => setCart([]);
+
+  // ✅ Cart Item Count
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  // ✅ Increment Quantity
+  const incrementQuantity = (id: number) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
+  };
+
+  // ✅ Decrement Quantity
+  const decrementQuantity = (id: number) => {
+    setCart(
+      (prev) =>
+        prev
+          .map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+          )
+          .filter((item) => item.quantity > 0), // remove if 0
+    );
+  };
 
   const value: CartContextType = {
     cart,
@@ -54,6 +81,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     addToCart,
     removeFromCart,
     clearCart,
+    incrementQuantity,
+    decrementQuantity
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
