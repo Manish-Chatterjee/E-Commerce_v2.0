@@ -1,13 +1,14 @@
+import type { CartItem } from "../../../../shared/context/CartTypes";
 import CarousalCard from "../ui/CarousalCard";
 import styled from "styled-components";
 
-type CartItem = {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  img: string; // add this if you want image
-};
+// type CartItem = {
+//   id: number;
+//   productName: string;
+//   price: number;
+//   quantity: number;
+//   img: string; // add this if you want image
+// };
 
 type Prop = {
   selectedData: CartItem[];
@@ -15,13 +16,16 @@ type Prop = {
 
 const ProductPreviewCard = ({ selectedData }: Prop) => {
   const storedData = selectedData;
+  console.log(storedData, "storedData");
 
   return (
     <Container>
       {storedData.length === 0 ? (
         <p>No items in cart</p>
       ) : (
-        <CarousalCard data={storedData} />
+        <>
+          <CarousalCard data={storedData} />
+        </>
       )}
     </Container>
   );

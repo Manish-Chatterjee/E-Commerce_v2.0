@@ -1,25 +1,28 @@
 import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
 import { calculateDiscount } from "../../../shared/utils/calculateDiscount";
+import { useCart } from "../../../shared/context/useCart";
 
-type CartItem = {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  img: string;
-};
+// type CartItem = {
+//   id: number;
+//   productName: string;
+//   price: number;
+//   quantity: number;
+//   img: string;
+// };
 
 type DeliveryTypeProps = {
   deliveryType: number;
 };
 
 const OrderReview = ({ deliveryType }: DeliveryTypeProps) => {
-  // console.log(deliveryType, "dt");
-  const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
-  // console.log(selectedData, "selectedData");
+  // const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
+  // Data from localStorage is changed and it's taking data from Context "cart"
 
-  const subtotal = selectedData.reduce((accu: number, item: CartItem) => {
+  const { cart: selectedData } = useCart(); // destructuring with alias or renaming
+  // const selectedData = cart
+
+  const subtotal = selectedData.reduce((accu, item) => {
     return accu + item.price * item.quantity;
   }, 0);
 

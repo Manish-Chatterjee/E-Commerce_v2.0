@@ -4,14 +4,19 @@ import Card from "react-bootstrap/Card";
 import styled from "styled-components";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CtrlButton from "./CtrlButton";
 
-type CartItem = {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  img: string;
-};
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useCart } from "../../../../shared/context/useCart";
+import type { CartItem } from "../../../../shared/context/CartTypes";
+
+// type CartItem = {
+//   id: number;
+//   productName: string;
+//   price: number;
+//   quantity: number;
+//   img: string;
+// };
 
 type Props = {
   data: CartItem[];
@@ -23,6 +28,10 @@ const CarousalCard = ({ data }: Props) => {
   const handleSelect = (selectedIndex: number) => {
     setIndex(selectedIndex);
   };
+
+  const { removeFromCart, incrementQuantity, decrementQuantity } = useCart();
+
+  // console.log(cart,'cart from carousal')
 
   return (
     <Wrapper>
@@ -42,7 +51,7 @@ const CarousalCard = ({ data }: Props) => {
           </Prev>
         }
       >
-        {data.map((item) => (
+        {data?.map((item) => (
           <Carousel.Item key={item.id}>
             <Card>
               <CardImg variant="top" src={item.img} />
@@ -52,6 +61,21 @@ const CarousalCard = ({ data }: Props) => {
                 <p>₹{item.price}</p>
                 <p>Qty: {item.quantity}</p>
                 <p>Total: ₹{item.price * item.quantity}</p>
+
+                {/* ///////////////////////////////////////////// */}
+                <BtnGrp>
+                  <CtrlButton onClick={() => removeFromCart(item.id)}>
+                    <DeleteForeverIcon />
+                  </CtrlButton>
+                  <CtrlButton onClick={() => decrementQuantity(item.id)}>
+                    -
+                  </CtrlButton>
+                  <p>{item.quantity}</p>
+                  <CtrlButton onClick={() => incrementQuantity(item.id)}>
+                    +
+                  </CtrlButton>
+                </BtnGrp>
+                {/* /////////////////////////////////////////// */}
               </Card.Body>
             </Card>
           </Carousel.Item>
@@ -94,4 +118,11 @@ const Prev = styled.span`
 const CardImg = styled(Card.Img)`
   object-fit: cover;
   aspect-ratio: 1/1;
+`;
+
+const BtnGrp = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px;
 `;

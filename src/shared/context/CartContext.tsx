@@ -45,7 +45,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ✅ Remove From Cart
-  const removeFromCart = (id: number) =>
+  const removeFromCart = (id: number | undefined) =>
     setCart(cart.filter((item) => item.id !== id));
 
   // ✅ Clear Cart
@@ -55,7 +55,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   // ✅ Increment Quantity
-  const incrementQuantity = (id: number) => {
+  const incrementQuantity = (id: number | undefined) => {
     setCart((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ✅ Decrement Quantity
-  const decrementQuantity = (id: number) => {
+  const decrementQuantity = (id: number | undefined) => {
     setCart(
       (prev) =>
         prev
@@ -82,7 +82,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     removeFromCart,
     clearCart,
     incrementQuantity,
-    decrementQuantity
+    decrementQuantity,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
