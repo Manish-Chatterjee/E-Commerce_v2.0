@@ -174,6 +174,11 @@ const SectionName = styled.div`
     backdrop-filter: blur(2px);
     border-radius: 15px;
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 80px;
+    font-weight: 700;
+  }
 `;
 
 const SearchBtnContainer = styled.button`

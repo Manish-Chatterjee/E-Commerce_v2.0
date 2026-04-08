@@ -41,4 +41,8 @@ const Container = styled.div`
   width: 70%;
   max-width: 1200px;
   margin: auto;
+
+  @media screen and (max-width: 480px) {
+    width: 95vw;
+  }
 `;

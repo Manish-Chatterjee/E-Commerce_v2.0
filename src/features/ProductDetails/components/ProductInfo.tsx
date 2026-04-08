@@ -141,6 +141,11 @@ const Container = styled.div`
   margin: 20px;
   padding: 40px 60px;
   box-sizing: border-box;
+
+  @media (max-width: 840px) {
+    width: 80%;
+    padding: 10px;
+  }
 `;
 
 const Brand = styled.span`

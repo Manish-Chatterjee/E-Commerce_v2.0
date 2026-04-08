@@ -27,6 +27,10 @@ const Container = styled.div`
   gap: 20px;
 
   height: 400px;
+
+  @media (max-width: 840px) {
+    width: 80%;
+  }
 `;
 
 const MainImg = styled.div`

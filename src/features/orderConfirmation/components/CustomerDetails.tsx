@@ -46,6 +46,11 @@ const InfoContainer = styled.div`
   display: flex;
   /* justify-content: space-between; */
   gap: 100px;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 840px) {
+    gap: 30px;
+  }
 `;
 
 const CardDetails = styled.span`

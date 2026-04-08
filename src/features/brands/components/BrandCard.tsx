@@ -28,13 +28,12 @@ const Card = styled.div<{ $reverse: boolean }>`
   align-items: center;
   gap: 40px;
   margin: 60px 40px;
-
   height: 250px;
-
   flex-direction: ${({ $reverse }) => ($reverse ? "row-reverse" : "row")};
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: 840px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -43,6 +42,11 @@ const Image = styled.img`
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
+
+  @media (max-width: 840px) {
+    width: 100%; // full width on mobile
+    height: auto; // maintain aspect ratio
+  }
 `;
 
 const Content = styled.div`
@@ -51,10 +55,12 @@ const Content = styled.div`
   border-radius: 10px;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   flex-direction: column;
   padding: 40px;
+  box-sizing: border-box; // ✅ include padding in height
+  overflow-y: auto; // scroll if content overflows
 
   h2 {
     font-size: 28px;
@@ -65,5 +71,12 @@ const Content = styled.div`
   p {
     color: #555;
     line-height: 1.6;
+  }
+
+  @media screen and (max-width: 840px) {
+    width: 100%;
+    height: 200px; // fixed height for scrolling
+    padding: 20px;
+    /* scroll-padding-top: 0; // ensure scroll starts from top */
   }
 `;

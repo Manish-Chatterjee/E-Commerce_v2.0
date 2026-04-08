@@ -35,4 +35,9 @@ export default ProductDetails;
 
 const Container = styled.div`
   display: flex;
+
+  @media screen and (max-width: 840px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;

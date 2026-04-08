@@ -13,8 +13,8 @@ const CheckoutPage = () => {
       <PageContainer>
         <Header>Checkout</Header>
         <Checkout>
-          <FormInfo setDeliveryState={setDeliveryState}/>
-          <OrderReview deliveryType={deliveryType}/>
+          <FormInfoStyled setDeliveryState={setDeliveryState} />
+          <OrderReviewStyled deliveryType={deliveryType} />
         </Checkout>
 
         {/* <Footer/> */}
@@ -38,7 +38,25 @@ const Header = styled.p`
 
 const Checkout = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 60px;
+  /* border: 2px solid black; */
+
+  /* @media screen and (max-width: 840px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "orderReview" "formInfo";
+  } */
+`;
+
+const FormInfoStyled = styled(FormInfo)`
+  @media screen and (max-width: 840px) {
+    order: 2;
+  }
+`;
+
+const OrderReviewStyled = styled(OrderReview)`
+  @media screen and (max-width: 840px) {
+    order: 1;
+  }
 `;

@@ -13,9 +13,10 @@ import { useCart } from "../../../shared/context/useCart";
 
 type DeliveryTypeProps = {
   deliveryType: number;
+  className?: string;
 };
 
-const OrderReview = ({ deliveryType }: DeliveryTypeProps) => {
+const OrderReview = ({ deliveryType, className }: DeliveryTypeProps) => {
   // const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
   // Data from localStorage is changed and it's taking data from Context "cart"
 
@@ -35,7 +36,7 @@ const OrderReview = ({ deliveryType }: DeliveryTypeProps) => {
   const discountedPrice: number = discount(subtotal, priceOff);
 
   return (
-    <div>
+    <div className={className}>
       <H4>Final Check</H4>
 
       {/* <ProductPreviewCard selectedData={selectedData}/> */}

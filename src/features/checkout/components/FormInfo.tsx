@@ -5,12 +5,14 @@ import PaymentForm from "./FormInfo/PaymentForm";
 import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../shared/context/useCart";
+import React from "react";
 
 type FormInfoProps = {
   setDeliveryState: React.Dispatch<React.SetStateAction<number>>;
+  className?: string;
 };
 
-const FormInfo = ({setDeliveryState}:FormInfoProps) => {
+const FormInfo = ({setDeliveryState, className}:FormInfoProps) => {
   const navigate = useNavigate();
 
   const { clearCart } = useCart();
@@ -19,7 +21,7 @@ const FormInfo = ({setDeliveryState}:FormInfoProps) => {
   console.log(cart); // [] if empty
   console.log(cart.length); // 0 if empty
   return (
-    <>
+    <div className={className}>
       <Formik
         initialValues={{
           agree: false,
@@ -48,7 +50,7 @@ const FormInfo = ({setDeliveryState}:FormInfoProps) => {
           </form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 
