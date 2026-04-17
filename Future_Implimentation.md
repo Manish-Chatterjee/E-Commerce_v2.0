@@ -1,5 +1,10 @@
 ## Future enhancements
 
-<input type="checkbox">Adding different types of currency function</input>
+- [ ] Adding different types of currency function
 
-<input type="checkbox">Fix the navbar responsiveness</input>
+- [ ] Fix the navbar responsiveness
+
+<hr/>
+
+- [x] Demo checked 
+- [ ] Demo unchecked 
