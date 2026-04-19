@@ -1,6 +1,7 @@
 ## Future enhancements
 
-- [ ] Adding different types of currency function
+- [x] Adding different types of currency function
+- [ ] Tested and verified check
 
 - [ ] Fix the navbar responsiveness
 

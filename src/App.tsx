@@ -15,6 +15,7 @@ import Wishlist from "./features/wishlist/pages/Wishlist";
 import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/CartContext";
 import Loading from "./features/loading/Loading";
+import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyContext";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -90,11 +91,13 @@ const App = () => {
     <>
       <div className="App">
         <AuthProvider>
-          <CartProvider>
-            <Suspense fallback={<Loading />}>
-              <RouterProvider router={router} />
-            </Suspense>
-          </CartProvider>
+          <CurrencyProvider>
+            <CartProvider>
+              <Suspense fallback={<Loading />}>
+                <RouterProvider router={router} />
+              </Suspense>
+            </CartProvider>
+          </CurrencyProvider>
         </AuthProvider>
       </div>
     </>
