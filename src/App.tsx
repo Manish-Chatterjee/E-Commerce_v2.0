@@ -13,7 +13,7 @@ import ProductDetails from "./features/ProductDetails/pages/ProductDetails";
 import OrderHistory from "./features/orderHistory/OrderHistory";
 import Wishlist from "./features/wishlist/pages/Wishlist";
 import { AuthProvider } from "./features/auth/AuthProvider";
-import { CartProvider } from "./shared/context/CartContext";
+import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
 import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyContext";
 
