@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
 import { calculateDiscount } from "../../../shared/utils/calculateDiscount";
-import { useCart } from "../../../shared/context/useCart";
+import { useCart } from "../../../shared/context/Cart_Context/useCart";
 
 // type CartItem = {
 //   id: number;

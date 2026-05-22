@@ -1,17 +1,25 @@
 import styled from "styled-components";
+import {generateId as id} from "../../../shared/utils/randomID";
 
 const OrderDetails = () => {
+
+  const date = new Date().toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+
   return (
     <div>
       <h3>Order details</h3>
       <DetailsContainer>
         <span>
           <p>Order number:</p>
-          <p>86</p>
+          <p>{id()}</p>
         </span>
         <span>
           <p>Date:</p>
-          <p>May 6, 2026</p>
+          <p>{date}</p>
         </span>
         <span>
           <p>Payment method:</p>
