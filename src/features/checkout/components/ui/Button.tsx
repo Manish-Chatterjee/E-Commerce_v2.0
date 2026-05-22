@@ -19,4 +19,10 @@ const ButtonContainer = styled.button`
   width: 100%;
   cursor: pointer;
   padding: 10px;
+
+  &:disabled {
+    background-color: gray;
+    border: none;
+    cursor: default;
+  }
 `;

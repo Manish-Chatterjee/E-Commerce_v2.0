@@ -3,11 +3,23 @@ import ShopInfo from "../components/ShopInfo";
 import OrderDetails from "../components/OrderDetails";
 import CustomerDetails from "../components/CustomerDetails";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+type OrderConfirmation = {
+  subtotal: number;
+  priceOff: number;
+  discountedPrice: number;
+  deliveryType: number;
+  orderId: string;
+};
 
 const OrderConfirmationPage = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { subtotal, priceOff, discountedPrice, deliveryType, orderId } =
+    location.state as OrderConfirmation;
 
   useEffect(() => {
     const handleBack = () => {
@@ -23,7 +35,13 @@ const OrderConfirmationPage = () => {
     <>
       <Container>
         <StatusDisplay />
-        <OrderDetails />
+        <OrderDetails
+          subtotal={subtotal}
+          priceOff={priceOff}
+          discountedPrice={discountedPrice}
+          deliveryType={deliveryType}
+          orderId={orderId}
+        />
         <CustomerDetails />
         <ShopInfo />
       </Container>
