@@ -4,7 +4,7 @@ import AddToCartBtn from "./ui/AddToCartBtn";
 import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+// import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { formatPrice } from "../../../shared/utils/formatPrice";
 
@@ -116,18 +116,7 @@ const ProductInfo = ({
         <SnackBarAlert
           open={open}
           handleClose={handleClose}
-          message={
-            <span
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              Item added to cart
-              <CheckCircleIcon fontSize="small" sx={{ color: "green" }} />
-            </span>
-          }
+          message="Item added to cart"
         />
       </Container>
     </>

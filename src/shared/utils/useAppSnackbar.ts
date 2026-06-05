@@ -15,3 +15,5 @@ export function useAppSnackbar() {
     default: (msg: string) => show(msg),
   };
 }
+
+// not using and can be used later in the future for snackbar alert, replacing SnackBar UI.

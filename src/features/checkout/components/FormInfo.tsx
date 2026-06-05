@@ -12,7 +12,7 @@ type FormInfoProps = {
   className?: string;
 };
 
-const FormInfo = ({setDeliveryState, className}:FormInfoProps) => {
+const FormInfo = ({ setDeliveryState, className }: FormInfoProps) => {
   const navigate = useNavigate();
 
   const { clearCart } = useCart();
@@ -41,7 +41,7 @@ const FormInfo = ({setDeliveryState, className}:FormInfoProps) => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <InformationForm />
-            <DeliveryForm setDeliveryState={setDeliveryState}/>
+            <DeliveryForm setDeliveryState={setDeliveryState} />
             <PaymentForm />
 
             <Button type="submit" disabled={cart.length === 0}>
