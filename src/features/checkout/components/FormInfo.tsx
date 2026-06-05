@@ -4,7 +4,7 @@ import DeliveryForm from "./FormInfo/DeliveryForm";
 import PaymentForm from "./FormInfo/PaymentForm";
 import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../../shared/context/useCart";
+import { useCart } from "../../../shared/context/Cart_Context/useCart";
 import React from "react";
 import { generateId } from "../../../shared/utils/randomID";
 

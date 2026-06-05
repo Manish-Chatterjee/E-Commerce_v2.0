@@ -8,7 +8,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { formatPrice } from "../../../shared/utils/formatPrice";
 
-import { useCart } from "../../../shared/context/useCart";
+import { useCart } from "../../../shared/context/Cart_Context/useCart";
 
 type ButtonProps = {
   image: string;

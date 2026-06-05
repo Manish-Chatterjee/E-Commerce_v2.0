@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-<<<<<<< Updated upstream
-const OrderDetails = () => {
-=======
 
 type OrderDetails = {
   subtotal: number;
@@ -41,18 +38,13 @@ const OrderDetails = ({
 
   //     const discountedPrice: number = discount(subtotal, priceOff);
 
->>>>>>> Stashed changes
   return (
     <div>
       <h3>Order details</h3>
       <DetailsContainer>
         <span>
           <p>Order number:</p>
-<<<<<<< Updated upstream
-          <p>86</p>
-=======
           <p>{orderId}</p>
->>>>>>> Stashed changes
         </span>
         <span>
           <p>Date:</p>
