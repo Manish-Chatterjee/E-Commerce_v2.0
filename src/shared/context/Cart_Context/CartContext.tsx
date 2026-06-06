@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import Products from "../sampleData/shopPage.json";
+import Products from "../../sampleData/shopPage.json";
 import { CartContext } from "./Cart_Context";
 import type { CartContextType, CartItem } from "./CartTypes"; // type-only import
 

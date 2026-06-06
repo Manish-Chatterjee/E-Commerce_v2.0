@@ -48,7 +48,7 @@ const OrderDetails = ({
         </span>
         <span>
           <p>Date:</p>
-          <p>May 6, 2026</p>
+          <p>{date}</p>
         </span>
         <span>
           <p>Payment method:</p>
@@ -59,16 +59,16 @@ const OrderDetails = ({
       <DetailsContainer>
         <span>
           <p>Subtotal:</p>
-          <BoldPara>₹{subtotal.toFixed(1)}</BoldPara>
+          <p>₹{subtotal.toFixed(1)}</p>
         </span>
         <span>
-          <p>Taxes VAT({priceOff}%):</p>
-          <BoldPara>₹{discountedPrice.toFixed(1)}</BoldPara>
+          <p>Discount ({priceOff}%):</p>
+          <p>₹{discountedPrice.toFixed(1)}</p>
         </span>
         {deliveryType !== 0 &&
         <span>
           <p>Delivery Charges:</p>
-          <BoldPara>₹{deliveryType}</BoldPara>
+          <p>₹{deliveryType}</p>
         </span>}
         <span>
           <p>Total:</p>
