@@ -16,6 +16,7 @@ import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
 import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyContext";
+import { Analytics } from '@vercel/analytics/react';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -100,6 +101,7 @@ const App = () => {
           </CurrencyProvider>
         </AuthProvider>
       </div>
+      <Analytics />
     </>
   );
 };
