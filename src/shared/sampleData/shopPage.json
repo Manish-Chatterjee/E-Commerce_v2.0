@@ -10,7 +10,8 @@
     "sizes": [6, 7, 8, 9, 10],
     "productImages": [
       "https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
-    ]
+    ],
+    "stockAvailability": "in stock"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "sizes": [6, 7, 9, 10],
     "productImages": [
       "https://assets.myntassets.com/w_360,q_50,,dpr_2,fl_progressive,f_webp/assets/images/2025/NOVEMBER/21/QpaCiihn_e70e29f55f5f401dbaa4498b1ccabb83.jpg"
-    ]
+    ],
+    "stockAvailability": "out of stock"
   },
   {
     "id": 3,
@@ -36,6 +38,7 @@
     "sizes": [6, 7, 8, 9, 10],
     "productImages": [
       "https://crepdogcrew.com/cdn/shop/products/ADIDASYEEZYBOOST350V2BELUGAREFLECTIVE.jpg?v=1755097263&width=1500"
-    ]
+    ],
+    "stockAvailability": "in stock"
   }
 ]

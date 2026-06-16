@@ -26,6 +26,7 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
             key={items.id}
             items={items}
             onAddToCart={onAddToCart}
+            disabled={items.stockAvailability === "out of stock"}
           />
         ))}
     </ProductCardsContainer>
