@@ -15,6 +15,13 @@ type ButtonProps = {
   selected: boolean;
 };
 
+type ProductSize = {
+  size: number;
+  available: boolean;
+  stock?: number;
+  sku?: string;
+};
+
 type Product = {
   id?: number;
   productBrand?: string;
@@ -23,7 +30,7 @@ type Product = {
   productName?: string;
   price?: number;
   colors?: string[];
-  sizes?: number[];
+  sizes?: ProductSize[];
 };
 
 const ProductInfo = ({
@@ -55,9 +62,17 @@ const ProductInfo = ({
   };
   /////////////////////////////////////////////
 
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedColorId, setSelectedColorId] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
-  const sizes = [6, 7, 8, 9, 10, 11];
+  // const sizes = [6, 7, 8, 9, 10, 11];
+  const sizes = [
+    { size: 6, available: true },
+    { size: 7, available: true },
+    { size: 8, available: false },
+    { size: 9, available: true },
+    { size: 10, available: false },
+  ];
   return (
     <>
       <Container>
@@ -81,8 +96,8 @@ const ProductInfo = ({
                 <Button
                   image="https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
                   key={item.id}
-                  selected={selectedId === item.id}
-                  onClick={() => setSelectedId(item.id)}
+                  selected={selectedColorId === item.id}
+                  onClick={() => setSelectedColorId(item.id)}
                 ></Button>
               </>
             ))}
@@ -96,7 +111,15 @@ const ProductInfo = ({
 
           <SizeContainer>
             {sizes.map((size) => (
-              <button>{size}</button>
+              <SizeButton
+                key={size.size}
+                $available={size.available}
+                disabled={!size.available}
+                $selected={selectedSize === size.size}
+                onClick={() => size.available && setSelectedSize(size.size)}
+              >
+                {size.size}
+              </SizeButton>
             ))}
           </SizeContainer>
 
@@ -215,5 +238,51 @@ const DeliveryMsg = styled.div`
     margin: 0;
     padding: 0;
     font-weight: 600;
+  }
+`;
+
+const SizeButton = styled.button<{ $available: boolean; $selected: boolean }>`
+  background-color: ${({ $available }) => ($available ? "#fff" : "#f5f5f5")};
+
+  color: ${({ $available }) => ($available ? "#000" : "#999")};
+
+  cursor: ${({ $available }) => ($available ? "pointer" : "not-allowed")};
+
+  opacity: ${({ $available }) => ($available ? 1 : 0.5)};
+
+  position: relative;
+  overflow: hidden;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: white;
+
+  &::after {
+    content: "";
+    display: ${({ $available }) => ($available ? "none" : "block")};
+
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    width: 0.5px;
+    height: 42px;
+
+    background: #4c4c4c;
+
+    transform: rotate(45deg);
+    transform-origin: top center;
+  }
+
+  border: 1px solid ${({ $selected }) => ($selected ? "#000" : "#d9d9d9")};
+
+  &:hover {
+    border-color: ${({ $available }) => ($available ? "#000" : "#d9d9d9")};
+  }
+
+    &:disabled {
+    cursor: not-allowed;
   }
 `;
