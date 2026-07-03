@@ -17,7 +17,14 @@ type FormInfoProps = {
   deliveryType: number;
 };
 
-const FormInfo = ({setDeliveryState, className}:FormInfoProps) => {
+const FormInfo = ({
+  setDeliveryState,
+  className,
+  subtotal,
+  priceOff,
+  discountedPrice,
+  deliveryType
+}: FormInfoProps) => {
   const navigate = useNavigate();
 
   const { clearCart } = useCart();
