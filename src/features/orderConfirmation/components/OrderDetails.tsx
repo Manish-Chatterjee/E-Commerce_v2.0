@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import {generateId as id} from "../../../shared/utils/randomID";
+// import {generateId as id} from "../../../shared/utils/randomID";
 
-<<<<<<< Updated upstream
-const OrderDetails = () => {
-=======
 
 type OrderDetails = {
   subtotal: number;
@@ -42,14 +39,13 @@ const OrderDetails = ({
 
   //     const discountedPrice: number = discount(subtotal, priceOff);
 
->>>>>>> Stashed changes
   return (
     <div>
       <h3>Order details</h3>
       <DetailsContainer>
         <span>
           <p>Order number:</p>
-          <p>86</p>
+          <p>{orderId}</p>
         </span>
         <span>
           <p>Date:</p>
@@ -64,16 +60,16 @@ const OrderDetails = ({
       <DetailsContainer>
         <span>
           <p>Subtotal:</p>
-          <BoldPara>₹{subtotal.toFixed(1)}</BoldPara>
+          <p>₹{subtotal.toFixed(1)}</p>
         </span>
         <span>
-          <p>Taxes VAT({priceOff}%):</p>
-          <BoldPara>₹{discountedPrice.toFixed(1)}</BoldPara>
+          <p>Discount ({priceOff}%):</p>
+          <p>₹{discountedPrice.toFixed(1)}</p>
         </span>
         {deliveryType !== 0 &&
         <span>
           <p>Delivery Charges:</p>
-          <BoldPara>₹{deliveryType}</BoldPara>
+          <p>₹{deliveryType}</p>
         </span>}
         <span>
           <p>Total:</p>
