@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
 <<<<<<< Updated upstream
 import { calculateDiscount } from "../../../shared/utils/calculateDiscount";
-import { useCart } from "../../../shared/context/useCart";
+import { useCart } from "../../../shared/context/Cart_Context/useCart";
 =======
 import { useCart } from "../../../shared/context/Cart_Context/useCart";
 >>>>>>> Stashed changes

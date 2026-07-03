@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {generateId as id} from "../../../shared/utils/randomID";
 
 <<<<<<< Updated upstream
 const OrderDetails = () => {
@@ -48,15 +49,11 @@ const OrderDetails = ({
       <DetailsContainer>
         <span>
           <p>Order number:</p>
-<<<<<<< Updated upstream
           <p>86</p>
-=======
-          <p>{orderId}</p>
->>>>>>> Stashed changes
         </span>
         <span>
           <p>Date:</p>
-          <p>May 6, 2026</p>
+          <p>{date}</p>
         </span>
         <span>
           <p>Payment method:</p>

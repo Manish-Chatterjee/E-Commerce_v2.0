@@ -7,8 +7,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CtrlButton from "./CtrlButton";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useCart } from "../../../../shared/context/useCart";
-import type { CartItem } from "../../../../shared/context/CartTypes";
+import { useCart } from "../../../../shared/context/Cart_Context/useCart";
+import type { CartItem } from "../../../../shared/context/Cart_Context/CartTypes";
 
 // type CartItem = {
 //   id: number;
