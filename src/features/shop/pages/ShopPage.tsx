@@ -18,6 +18,7 @@ const ShopPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <ProductsGrid onAddToCart={handleAddToCart} />
