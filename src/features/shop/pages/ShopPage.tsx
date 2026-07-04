@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ProductsGrid from "../components/ProductsGrid";
 import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Outlet } from "react-router-dom";
 
 const ShopPage = () => {
@@ -19,25 +18,16 @@ const ShopPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <ProductsGrid onAddToCart={handleAddToCart} />
       <SnackBarAlert
         open={open}
         handleClose={handleClose}
-        message={
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-            }}
-          >
-            Item added to cart
-            <CheckCircleIcon fontSize="small" sx={{ color: "green" }} />
-          </span>
-        }
+        message="Item added to cart"
       />
+
       <Outlet />
     </div>
   );

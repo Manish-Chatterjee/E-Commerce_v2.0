@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
-import { calculateDiscount } from "../../../shared/utils/calculateDiscount";
-import { useCart } from "../../../shared/context/useCart";
+import { useCart } from "../../../shared/context/Cart_Context/useCart";
 
 // type CartItem = {
 //   id: number;
@@ -14,26 +13,35 @@ import { useCart } from "../../../shared/context/useCart";
 type DeliveryTypeProps = {
   deliveryType: number;
   className?: string;
+  subtotal: number;
+  priceOff: number;
+  discountedPrice: number;
 };
 
-const OrderReview = ({ deliveryType, className }: DeliveryTypeProps) => {
+const OrderReview = ({
+  deliveryType,
+  className,
+  subtotal,
+  priceOff,
+  discountedPrice,
+}: DeliveryTypeProps) => {
   // const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
   // Data from localStorage is changed and it's taking data from Context "cart"
 
   const { cart: selectedData } = useCart(); // destructuring with alias or renaming
   // const selectedData = cart
 
-  const subtotal = selectedData.reduce((accu, item) => {
-    return accu + item.price * item.quantity;
-  }, 0);
+  // const subtotal = selectedData.reduce((accu, item) => {
+  //   return accu + item.price * item.quantity;
+  // }, 0);
 
-  const discount = (subtotal: number, priceOff: number) =>
-    calculateDiscount(subtotal, priceOff);
+  // const discount = (subtotal: number, priceOff: number) =>
+  //   calculateDiscount(subtotal, priceOff);
 
-  const priceOff = 20;
+  // const priceOff = 20;
   const shipping = deliveryType;
 
-  const discountedPrice: number = discount(subtotal, priceOff);
+  // const discountedPrice: number = discount(subtotal, priceOff);
 
   return (
     <div className={className}>
@@ -45,7 +53,9 @@ const OrderReview = ({ deliveryType, className }: DeliveryTypeProps) => {
       <Info>
         <div>
           <div>Subtotal: ₹{subtotal.toFixed(1)}</div>
-          <div>Discount: ₹{`${discountedPrice.toFixed(1)} (${priceOff}%)`}</div>
+          <div>
+            Discount: ₹{discountedPrice.toFixed(1)} ({priceOff}%)
+          </div>
           <div>
             Shipping: {shipping === 0 ? `free` : `₹${shipping.toFixed(1)}`}
           </div>

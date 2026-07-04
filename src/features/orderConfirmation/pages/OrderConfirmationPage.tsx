@@ -3,11 +3,25 @@ import ShopInfo from "../components/ShopInfo";
 import OrderDetails from "../components/OrderDetails";
 import CustomerDetails from "../components/CustomerDetails";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Lottie from "lottie-react";
+import Confirmed from "../../../assets/lottie/Confirmed.json";
+
+type OrderConfirmation = {
+  subtotal: number;
+  priceOff: number;
+  discountedPrice: number;
+  deliveryType: number;
+  orderId: string;
+};
 
 const OrderConfirmationPage = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { subtotal, priceOff, discountedPrice, deliveryType, orderId } =
+    location.state as OrderConfirmation;
 
   useEffect(() => {
     const handleBack = () => {
@@ -22,8 +36,19 @@ const OrderConfirmationPage = () => {
   return (
     <>
       <Container>
+        <LottieStyled
+          animationData={Confirmed}
+          loop={false}
+          id="confirmedAnimation"
+        />
         <StatusDisplay />
-        <OrderDetails />
+        <OrderDetails
+          subtotal={subtotal}
+          priceOff={priceOff}
+          discountedPrice={discountedPrice}
+          deliveryType={deliveryType}
+          orderId={orderId}
+        />
         <CustomerDetails />
         <ShopInfo />
       </Container>
@@ -45,4 +70,11 @@ const Container = styled.div`
   @media screen and (max-width: 480px) {
     width: 95vw;
   }
+`;
+
+const LottieStyled = styled(Lottie)`
+  height: 150px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 `;

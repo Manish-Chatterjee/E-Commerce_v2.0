@@ -4,6 +4,8 @@ import { Button } from "./components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 import AuthBg from "../../assets/AuthBg.jpg";
+import SnackBarAlert from "../../shared/components/ui/SnackBarAlert";
+import { useState } from "react";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -12,6 +14,15 @@ type AuthFormProps = {
 const AuthForm = ({ mode }: AuthFormProps) => {
   const { login, signup } = useAuth();
   const navigate = useNavigate();
+
+  // SnackBar Alert
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [variant, setVariant] = useState<"success" | "error">("success");
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // SnackBar Alert
 
   const isSignup = mode === "signup";
   return (
@@ -27,21 +38,33 @@ const AuthForm = ({ mode }: AuthFormProps) => {
             const success = signup(values);
 
             if (!success) {
-              alert("User already exists");
+              // alert("User already exists");
+              setOpen(true);
+              setMessage("User already exists");
+              setVariant("error");
               return;
             }
 
-            alert("Signup successful");
+            // alert("Signup successful");
+            setOpen(true);
+            setMessage("Signup successful");
+            setVariant("success");
             navigate("/");
           } else {
+            // Login ////////////////////////////////////////////////////////////////////
             const success = login(values);
 
             if (!success) {
-              alert("Invalid credentials");
+              // alert("Invalid credentials");
+              setOpen(true);
+              setMessage("Invalid credentials");
+              setVariant("error");
               return;
             }
 
-            alert("Login successful");
+            // alert("Login successful");
+            setOpen(true);
+            setMessage("Login successful");
             navigate("/products/brands");
           }
         }}
@@ -76,6 +99,12 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           )}
         </FormStyle>
       </Formik>
+      <SnackBarAlert
+        open={open}
+        handleClose={handleClose}
+        message={message}
+        variant={variant}
+      />
     </Container>
   );
 };

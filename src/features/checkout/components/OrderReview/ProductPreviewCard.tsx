@@ -1,4 +1,4 @@
-import type { CartItem } from "../../../../shared/context/CartTypes";
+import type { CartItem } from "../../../../shared/context/Cart_Context/CartTypes";
 import CarousalCard from "../ui/CarousalCard";
 import styled from "styled-components";
 
