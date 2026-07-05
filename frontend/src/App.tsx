@@ -15,7 +15,7 @@ import Wishlist from "./features/wishlist/pages/Wishlist";
 import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
-import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyContext";
+import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyProvider";
 
 const App = () => {
   const router = createBrowserRouter([
