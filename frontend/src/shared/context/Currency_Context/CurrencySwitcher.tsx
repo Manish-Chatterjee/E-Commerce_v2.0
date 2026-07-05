@@ -1,5 +1,6 @@
 // CurrencySwitcher.tsx
-import { useCurrency } from "./CurrencyContext";
+
+import { useCurrency } from "./useCurrency";
 
 const CurrencySwitcher = () => {
   const { currency, setCurrency } = useCurrency();
