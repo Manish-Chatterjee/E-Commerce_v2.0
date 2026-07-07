@@ -1,4 +1,4 @@
-package com.example.ecom.entity;
+package com.example.ecom.products.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +26,13 @@ public class Product {
 	private float price;
 	@Column
 	private Boolean stockAvailability;
+	@Column
+	private String productImage;
+	@Column(nullable = false)
+	private boolean wishlist = false;
+
+//	boolean → defaults to false, cannot be null.
+//	Boolean → can be true, false, or null.
 
 	public Long getId() {
 		return id;
@@ -79,16 +86,34 @@ public class Product {
 		this.stockAvailability = stockAvailability;
 	}
 
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
+
+	public Boolean getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(Boolean wishlist) {
+		this.wishlist = wishlist;
+	}
+
 	public Product() {
 	}
 
 	public Product(String productBrand, String productBrandLogo, String productName, float price,
-			Boolean stockAvailability) {
+			Boolean stockAvailability, String productImage, Boolean wishlist) {
 		this.productBrand = productBrand;
 		this.productBrandLogo = productBrandLogo;
 		this.productName = productName;
 		this.price = price;
 		this.stockAvailability = stockAvailability;
+		this.productImage = productImage;
+		this.wishlist = wishlist;
 	}
 
 }

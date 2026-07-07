@@ -1,8 +1,8 @@
-package com.example.ecom.DAL;
+package com.example.ecom.products.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.ecom.entity.Product;
+import com.example.ecom.products.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	

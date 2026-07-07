@@ -4,24 +4,11 @@ import Button from "../../../shared/components/ui/Button";
 import { truncateText } from "../../../shared/utils/truncateText";
 import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import { Link } from "react-router-dom";
+import type { Product } from "../types/product";
 
 // type ProductImage = {
 //   [key: string]: string; // any key like img1, img2
 // };
-
-type Product = {
-  id: number;
-  productBrand: string;
-  productBrandLogo: string;
-  productID: string;
-  productName: string;
-  price: number;
-  colors: string[];
-  sizes: number[];
-  // productImages: ProductImage[];
-  productImages: string[];
-  // stockAvailability: "in stock" | "out of stock"
-};
 
 type CardProps = {
   items: Product;
@@ -32,12 +19,14 @@ type CardProps = {
 // const ProductsCard = ({ items, onAddToCart }: CardProps) => {
 const ProductsCard = ({ items, disabled }: CardProps) => {
   const {
-    productImages,
+    // productImages,
     productName,
     productBrandLogo,
     price,
     productBrand,
     id,
+    productImage,
+    wishlist
   } = items;
 
   return (
@@ -50,7 +39,7 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
           height={50}
         />
         <ProductImg
-          src={productImages[0]}
+          src={productImage}
           alt="image"
           width={100}
           height={100}
@@ -73,7 +62,7 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
         )}
 
         {/* <Button>Buy Now</Button> */}
-        <WishlistBtn />
+        <WishlistBtn wishlist={wishlist} id={id}/>
       </BtnContainer>
     </CardContainer>
   );

@@ -1,4 +1,4 @@
-package com.example.ecom.service;
+package com.example.ecom.products.service;
 
 import java.util.List;
 import java.util.Random;
@@ -6,8 +6,8 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.ecom.DAL.ProductRepository;
-import com.example.ecom.entity.Product;
+import com.example.ecom.products.repository.ProductRepository;
+import com.example.ecom.products.entity.Product;
 
 @Service
 public class ProductService {
@@ -50,6 +50,26 @@ public class ProductService {
 	public void saveItem(Product product) {
 		product.setProductId(generateUniqueProductId());
 		productRepository.save(product);
+	}
+	
+	public Product updateWishlist(Long id, Boolean wishlist) {
+
+	    Product product = productRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Product not found"));
+
+	    product.setWishlist(wishlist);
+
+	    return productRepository.save(product);
+	}
+
+	public Product updateStockAvailability(Long id, Boolean stockAvailability) {
+		
+	    Product product = productRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Product not found"));
+
+	    product.setStockAvailability(stockAvailability);
+
+	    return productRepository.save(product);
 	}
 
 }
