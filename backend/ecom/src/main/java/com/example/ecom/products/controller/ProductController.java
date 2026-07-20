@@ -49,4 +49,6 @@ public class ProductController {
 		return productService.updateStockAvailability(id, request.get("stockAvailability"));
 	}
 
+	// Needed proper api structure for backend related to every feature present in frontend
+
 }
