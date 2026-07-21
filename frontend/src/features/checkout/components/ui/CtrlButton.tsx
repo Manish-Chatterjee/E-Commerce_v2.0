@@ -5,10 +5,11 @@ type Props = {
   type?: "button";
   children: React.ReactNode;
   onClick: () => void
+  disabled?: boolean
 };
 
-const CtrlButton = ({ type, children, onClick }: Props) => {
-  return <ButtonContainer type={type} onClick={onClick}>{children}</ButtonContainer>;
+const CtrlButton = ({ type, children, onClick, disabled }: Props) => {
+  return <ButtonContainer type={type} onClick={onClick} disabled={disabled}>{children}</ButtonContainer>;
 };
 
 export default CtrlButton;

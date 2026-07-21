@@ -30,8 +30,9 @@ const FormInfo = ({
   const { clearCart } = useCart();
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  console.log(cart); // [] if empty
-  console.log(cart.length); // 0 if empty
+  // console.log(cart); // [] if empty
+  console.log(cart.length, 'cart length'); // 0 if empty
+
   return (
     <div className={className}>
       <Formik
