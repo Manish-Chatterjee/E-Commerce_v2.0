@@ -10,13 +10,32 @@ const DropDown = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate("/");
+  // };
 
   const toggleDropdown = () => {
     setOpen((prev) => !prev);
+  };
+
+  const Admin = true;
+
+  const handleClick = (linkTo: string) => {
+    switch (linkTo) {
+      case "profile":
+        console.log("profile");
+        break;
+      case "logout":
+        logout();
+        navigate("/", {replace: true});
+        break;
+      case "history":
+        return console.log("history");
+        break;
+      case "admin":
+        navigate("/adminDashboard");
+    }
   };
 
   return (
@@ -31,9 +50,17 @@ const DropDown = () => {
 
       {open && (
         <DropDownContainer>
-          <button>Profile</button>
-          <button onClick={handleLogout}>Log out</button>
-          <button>Sign out</button>
+          <button onClick={() => handleClick("profile")}>Profile</button>
+          {/* <button onClick={handleLogout}>Log out</button> */}
+          <button onClick={() => handleClick("logout")}>Log out</button>
+          <button onClick={() => handleClick("history")}>History</button>
+          {Admin && (
+            <button onClick={() => handleClick("admin")}>
+              {/* <Link to="/adminDashboard"> */}
+              Admin Board
+              {/* </Link> */}
+            </button>
+          )}
         </DropDownContainer>
       )}
     </Container>

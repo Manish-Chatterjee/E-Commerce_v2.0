@@ -126,7 +126,7 @@ const ProductInfo = ({
           <p>Size guide</p>
         </div>
         <BtnContainer>
-          <AddToCartBtn onAddToCart={handleAddToCart} />
+          <AddToCartBtn onAddToCart={handleAddToCart} disabled={selectedColorId == null || selectedSize == null}/>
           <WishlistBtn />
         </BtnContainer>
 
