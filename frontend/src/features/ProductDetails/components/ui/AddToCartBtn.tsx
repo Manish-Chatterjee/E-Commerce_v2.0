@@ -3,11 +3,12 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 type ProductsGridProps = {
   onAddToCart: () => void;
+  disabled?: boolean;
 };
 
-const AddToCartBtn = ({ onAddToCart }: ProductsGridProps) => {
+const AddToCartBtn = ({ onAddToCart, disabled }: ProductsGridProps) => {
   return (
-    <Button onClick={onAddToCart}>
+    <Button onClick={onAddToCart} disabled={disabled}>
       <LocalMallIcon />
       Add to cart
     </Button>
@@ -27,4 +28,10 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  border: none;
+
+  &:disabled {
+    background-color: gray;
+    cursor: default;
+  }
 `;

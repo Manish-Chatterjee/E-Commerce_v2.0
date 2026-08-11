@@ -34,21 +34,25 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
     fetchProducts();
   }, []);
   /////////////////////////
+  
+  const filteredData = products.filter((item) =>
+    item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
     <ProductCardsContainer>
-      {products
-        .filter((item) =>
-          item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
-        .map((items) => (
+      {filteredData.length > 0 ? (
+        filteredData.map((items) => (
           <ProductsCard
             key={items.id}
             items={items}
             onAddToCart={onAddToCart}
             disabled={!items.stockAvailability}
           />
-        ))}
+        ))
+      ) : (
+        <p>No item match found</p>
+      )}
     </ProductCardsContainer>
   );
 };

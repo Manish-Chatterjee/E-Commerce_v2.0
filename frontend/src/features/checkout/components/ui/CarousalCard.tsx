@@ -67,7 +67,10 @@ const CarousalCard = ({ data }: Props) => {
                   <CtrlButton onClick={() => removeFromCart(item.id)}>
                     <DeleteForeverIcon />
                   </CtrlButton>
-                  <CtrlButton onClick={() => decrementQuantity(item.id)}>
+                  <CtrlButton
+                    onClick={() => decrementQuantity(item.id)}
+                    disabled={item.quantity === 1}
+                  >
                     -
                   </CtrlButton>
                   <p>{item.quantity}</p>

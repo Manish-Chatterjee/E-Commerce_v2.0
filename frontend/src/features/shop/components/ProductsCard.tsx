@@ -56,9 +56,9 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
         {disabled ? (
           <Text>Out of Stock</Text>
         ) : (
-          <Link to={`/productDetails/${id}`}>
+          <LinkStyled to={`/productDetails/${id}`}>
             <Button>Customise</Button>
-          </Link>
+          </LinkStyled>
         )}
 
         {/* <Button>Buy Now</Button> */}
@@ -137,5 +137,11 @@ const BtnContainer = styled.div`
 const Text = styled.p`
   color: red;
   margin-block: auto;
+  font-weight: 600;
+`;
+
+const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: #333333;
   font-weight: 600;
 `;

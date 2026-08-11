@@ -27,11 +27,12 @@ const FormInfo = ({
 }: FormInfoProps) => {
   const navigate = useNavigate();
 
-  const { clearCart } = useCart();
+  const { clearCart, cart } = useCart();
 
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  console.log(cart); // [] if empty
-  console.log(cart.length); // 0 if empty
+  // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  // console.log(cart); // [] if empty
+  console.log(cart.length, 'cart length'); // 0 if empty
+
   return (
     <div className={className}>
       <Formik
