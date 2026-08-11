@@ -19,6 +19,7 @@ const ButtonContainer = styled.button`
   width: 100%;
   cursor: pointer;
   padding: 10px;
+  border-radius: 7px;
 
   &:disabled {
     background-color: gray;

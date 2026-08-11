@@ -1,5 +1,4 @@
 import ProductsCard from "./ProductsCard";
-
 import products from "../../../shared/sampleData/shopPage.json";
 import styled from "styled-components";
 import { useOutletContext } from "react-router-dom";
@@ -15,20 +14,24 @@ type ContextType = {
 const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
   const { searchQuery } = useOutletContext<ContextType>();
 
+  const filteredData = products.filter((item) =>
+    item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
     <ProductCardsContainer>
-      {products
-        .filter((item) =>
-          item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
-        .map((items) => (
+      {filteredData.length > 0 ? (
+        filteredData.map((items) => (
           <ProductsCard
             key={items.id}
             items={items}
             onAddToCart={onAddToCart}
             disabled={items.stockAvailability === "out of stock"}
           />
-        ))}
+        ))
+      ) : (
+        <p>No item match found</p>
+      )}
     </ProductCardsContainer>
   );
 };
