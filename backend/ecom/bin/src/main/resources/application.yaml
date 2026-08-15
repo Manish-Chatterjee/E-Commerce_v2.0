@@ -30,8 +30,3 @@ spring:
 
 server:
  port: 8080
- 
- 
-jwt:
- secret: YOUR_LONG_RANDOM_SECRET_KEY_HERE
- expiration: 86400000 # 24hrs
