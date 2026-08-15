@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 type Props = {
   id?: number;
-  productImages?: string[];
+  // productImages?: string[];
+  productImage?: string;
 };
 
-const ProductImages = ({ productImages }: Props) => {
+const ProductImages = ({ productImage }: Props) => {
   return (
     <Container>
       <MainImg>
-        {productImages?.map((item) => (
-          <Img src={item} alt="img" width={"100%"} height={"100%"} />
-        ))}
+        {/* {productImages?.map((item) => (  // to add multiple images of the product as an array in the backend.
+        ))} */}
+        <Img src={productImage} alt="img" width={"100%"} height={"100%"} />
       </MainImg>
     </Container>
   );

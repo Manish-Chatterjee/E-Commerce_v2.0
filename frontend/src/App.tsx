@@ -17,6 +17,7 @@ import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
 import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyProvider";
+import AdminRoute from "./AdminRoute";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -85,9 +86,13 @@ const App = () => {
           element: <Loading />,
         },
         {
-          path: "/adminDashboard",
-          element: <AdminDashboard/>
-        }
+          path: "/api/admin/dashboard",
+          element: (
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          ),
+        },
       ],
     },
   ]);

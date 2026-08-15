@@ -29,13 +29,18 @@ const AuthForm = ({ mode }: AuthFormProps) => {
     <Container>
       {isSignup ? <H2>Sign Up</H2> : <H2>Login</H2>}
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ username: "", email: "", password: "" }}
         // onSubmit={(values) => {
         //   console.log(values);
         // }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           if (isSignup) {
-            const success = signup(values);
+            // const success = signup(values);
+            const success = await signup({
+              username: values.username,
+              email: values.email,
+              password: values.password,
+            });
 
             if (!success) {
               // alert("User already exists");
@@ -52,7 +57,11 @@ const AuthForm = ({ mode }: AuthFormProps) => {
             navigate("/");
           } else {
             // Login ////////////////////////////////////////////////////////////////////
-            const success = login(values);
+            // const success = login(values);
+            const success = await login({
+              username: values.username,
+              password: values.password,
+            });
 
             if (!success) {
               // alert("Invalid credentials");
@@ -70,16 +79,24 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         }}
       >
         <FormStyle>
-          {isSignup && (
+          {/* {isSignup && (
             <div>
               <Label>Name</Label>
               <FieldStyle name="name" type="text" required />
             </div>
-          )}
+          )} */}
+          
+            <div>
+              <Label>Username</Label>
+              <FieldStyle name="username" type="text" required />
+            </div>
+          
+          {isSignup && (
           <div>
             <Label>E-mail</Label>
             <FieldStyle name="email" type="email" required />
           </div>
+          )}
           <div>
             <Label>Password</Label>
             <FieldStyle name="password" type="password" required />

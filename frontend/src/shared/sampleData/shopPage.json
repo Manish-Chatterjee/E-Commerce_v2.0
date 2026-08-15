@@ -14,7 +14,7 @@
     "stockAvailability": "in stock"
   },
   {
-    "id": 2,
+    "id": 3,
     "productBrand": "Nike",
     "productBrandLogo": "https://1000logos.net/wp-content/uploads/2017/03/Nike-Logo-1971-now.png",
     "productID": "HR1325ROO8",
@@ -28,7 +28,7 @@
     "stockAvailability": "out of stock"
   },
   {
-    "id": 3,
+    "id": 2,
     "productBrand": "Adidas",
     "productBrandLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/960px-Adidas_Logo.svg.png",
     "productID": "AK1376HO10",
