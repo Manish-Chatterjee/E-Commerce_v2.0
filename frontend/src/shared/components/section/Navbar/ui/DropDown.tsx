@@ -7,7 +7,7 @@ const DropDown = () => {
   const [open, setOpen] = useState(false);
 
   // Logout✅
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   // const handleLogout = () => {
@@ -19,22 +19,21 @@ const DropDown = () => {
     setOpen((prev) => !prev);
   };
 
-  const Admin = true;
-
   const handleClick = (linkTo: string) => {
     switch (linkTo) {
       case "profile":
-        console.log("profile");
+        alert(user?.username);
+        console.log(user,'user')
         break;
       case "logout":
         logout();
-        navigate("/", {replace: true});
+        navigate("/", { replace: true });
         break;
       case "history":
         return console.log("history");
         break;
       case "admin":
-        navigate("/adminDashboard");
+        navigate("/api/admin/dashboard");
     }
   };
 
@@ -50,11 +49,12 @@ const DropDown = () => {
 
       {open && (
         <DropDownContainer>
+          <h5>Hey {user?.username}</h5>
           <button onClick={() => handleClick("profile")}>Profile</button>
           {/* <button onClick={handleLogout}>Log out</button> */}
           <button onClick={() => handleClick("logout")}>Log out</button>
           <button onClick={() => handleClick("history")}>History</button>
-          {Admin && (
+          {user?.role === "ADMIN" && (
             <button onClick={() => handleClick("admin")}>
               {/* <Link to="/adminDashboard"> */}
               Admin Board
@@ -89,6 +89,14 @@ const DropDownContainer = styled.div`
   flex-direction: column;
   margin-top: 10px;
   /* border-radius: 10px; */
+
+  h5 {
+    background-color: white;
+    padding: 2px 0 5px 0;
+    margin: 0;
+    border-bottom: 1px solid rgb(158, 158, 158);
+    text-align: center;
+  }
 
   button {
     border: none;

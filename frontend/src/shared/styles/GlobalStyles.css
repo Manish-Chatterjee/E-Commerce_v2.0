@@ -3,9 +3,9 @@
   padding: 0;
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
-} */
+}
 
 body {
   margin: 0;

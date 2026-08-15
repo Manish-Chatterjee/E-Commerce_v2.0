@@ -23,7 +23,7 @@ type ProductSize = {
 };
 
 type Product = {
-  id?: number;
+  id: number;
   productBrand?: string;
   productBrandLogo?: string;
   productID?: string;
@@ -31,6 +31,7 @@ type Product = {
   price?: number;
   colors?: string[];
   sizes?: ProductSize[];
+  wishlist: boolean;
 };
 
 const ProductInfo = ({
@@ -40,6 +41,7 @@ const ProductInfo = ({
   productName,
   productID,
   price,
+  wishlist
 }: Product) => {
   const { addToCart } = useCart(); // Context api for using cart
 
@@ -73,6 +75,7 @@ const ProductInfo = ({
     { size: 9, available: true },
     { size: 10, available: false },
   ];
+
   return (
     <>
       <Container>
@@ -127,7 +130,8 @@ const ProductInfo = ({
         </div>
         <BtnContainer>
           <AddToCartBtn onAddToCart={handleAddToCart} disabled={selectedColorId == null || selectedSize == null}/>
-          <WishlistBtn />
+          <WishlistBtn wishlist={wishlist} id={id}/>
+          {/* <WishlistBtn/> */}
         </BtnContainer>
 
         <DeliveryMsg>
