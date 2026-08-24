@@ -28,15 +28,24 @@ public class ProductController {
 	public Product getItemById(@PathVariable long id) {
 		return productService.getItemById(id);
 	}
+	
+	@GetMapping("/{productId}")
+	public Product getItemByProductId(@PathVariable String productId) {
+		return productService.getItemByProductId(productId);
+	}
 
 	@GetMapping("/allProducts")
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
 	}
 
+//	@PostMapping("/save")
+//	public void saveItem(@RequestBody Product product) {
+//		productService.saveItem(product);
+//	}
 	@PostMapping("/save")
-	public void saveItem(@RequestBody Product product) {
-		productService.saveItem(product);
+	public Product saveProduct(@RequestBody Product product) {
+	    return productService.saveItem(product);
 	}
 
 	@PatchMapping("/{id}/wishlist")

@@ -4,13 +4,10 @@ import ProductInfo from "../components/ProductInfo";
 import SecondNavbar from "../../../shared/components/section/SecondNavbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import Products from "../../../shared/sampleData/shopPage.json";
 
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
-  const { id } = useParams();
-  const ID = Number(id);
-  // const productData = Products.find((item) => item.id === ID);
+  const { id, productId } = useParams();
 
   const [product, setProduct] = useState(null);
 
@@ -18,7 +15,8 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/products/id/${id}`,
+          // `http://localhost:8080/api/products/id/${id}`,
+          `http://localhost:8080/api/products/${productId}`,
         );
 
         if (!response.ok) {
@@ -34,7 +32,9 @@ const ProductDetails = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [productId]);
+
+  console.log(product,'product')
 
   if (!product) {
     return <p>Loading...</p>;
@@ -55,6 +55,7 @@ const ProductDetails = () => {
           productName={product?.productName}
           price={product?.price}
           wishlist={product?.wishlist}
+          variants={product?.variants}
         />
       </Container>
     </>

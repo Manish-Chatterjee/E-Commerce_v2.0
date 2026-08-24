@@ -22,16 +22,32 @@ type ProductSize = {
   sku?: string;
 };
 
+type VariantImage = {
+  id?: number;
+  imageUrl: string;
+};
+
+type ProductVariant = {
+  id?: number;
+  variantId: string;
+  color: string;
+  size: string;
+  availability: boolean;
+  images: VariantImage[];
+};
+
 type Product = {
   id: number;
   productBrand?: string;
   productBrandLogo?: string;
-  productID?: string;
+  productId?: string;
   productName?: string;
   price?: number;
-  colors?: string[];
-  sizes?: ProductSize[];
+  stockAvailability?: boolean;
+  productImage?: string;
   wishlist: boolean;
+
+  variants: ProductVariant[];
 };
 
 const ProductInfo = ({
@@ -39,9 +55,10 @@ const ProductInfo = ({
   productBrand,
   productBrandLogo,
   productName,
-  productID,
+  productId,
   price,
-  wishlist
+  wishlist,
+  variants,
 }: Product) => {
   const { addToCart } = useCart(); // Context api for using cart
 
@@ -49,6 +66,7 @@ const ProductInfo = ({
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
+    console.log(id,'handleAddToCart')
     addToCart(id);
 
     if (open) {
@@ -64,9 +82,11 @@ const ProductInfo = ({
   };
   /////////////////////////////////////////////
 
-  const [selectedColorId, setSelectedColorId] = useState<number | null>(null);
-  const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
+  // const [selectedColorId, setSelectedColorId] = useState<number | null>(null);
+  // const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  // const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
   // const sizes = [6, 7, 8, 9, 10, 11];
   const sizes = [
     { size: 6, available: true },
@@ -84,18 +104,22 @@ const ProductInfo = ({
             <img src={productBrandLogo} alt="logo" width={30} />
             <span>{productBrand}</span>
           </Brand>
-          <p>{productID}</p>
+          <p>{productId}</p>
         </BrandingContainer>
         <h4>{productName}</h4>
         <H3>{formatPrice(price)}</H3>
         <div>
-          <span>
-            <span>color</span>
-            <span>white</span>
-          </span>
-          <ProductSelection>
-            {products.map((item) => (
+          {selectedColor != "" && (
+            <span>
+              <span>color: </span>
+              <span>{selectedColor}</span>
+            </span>
+          )}
+
+          {/* <ProductSelection>
+            {variants.map((item) => (
               <>
+              {console.log(item.size,'item')}
                 <Button
                   image="https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
                   key={item.id}
@@ -104,15 +128,32 @@ const ProductInfo = ({
                 ></Button>
               </>
             ))}
+          </ProductSelection> */}
+          <ProductSelection>
+            {[...new Set(variants.map((variant) => variant.color))].map(
+              (color) => (
+                <Button
+                  key={color}
+                  image={
+                    variants.find((variant) => variant.color === color)
+                      ?.images[0]?.imageUrl ?? `${productBrandLogo}`
+                  }
+                  selected={selectedColor === color}
+                  onClick={() => setSelectedColor(color)}
+                />
+              ),
+            )}
           </ProductSelection>
         </div>
         <div>
-          <span>
-            <span>Size</span>
-            <span>EU Men</span>
-          </span>
+          {selectedColor != "" && (
+            <span>
+              <span>Size</span>
+              <span>EU Men</span>
+            </span>
+          )}
 
-          <SizeContainer>
+          {/* <SizeContainer>
             {sizes.map((size) => (
               <SizeButton
                 key={size.size}
@@ -124,13 +165,31 @@ const ProductInfo = ({
                 {size.size}
               </SizeButton>
             ))}
+          </SizeContainer> */}
+          <SizeContainer>
+            {variants
+              .filter((variant) => variant.color === selectedColor)
+              .map((variant) => (
+                <SizeButton
+                  key={variant.variantId}
+                  $available={variant.availability}
+                  disabled={!variant.availability}
+                  $selected={selectedSize === variant.size}
+                  onClick={() => setSelectedSize(variant.size)}
+                >
+                  {variant.size}
+                </SizeButton>
+              ))}
           </SizeContainer>
 
-          <p>Size guide</p>
+          {selectedColor != "" && <p>Size guide</p>}
         </div>
         <BtnContainer>
-          <AddToCartBtn onAddToCart={handleAddToCart} disabled={selectedColorId == null || selectedSize == null}/>
-          <WishlistBtn wishlist={wishlist} id={id}/>
+          <AddToCartBtn
+            onAddToCart={handleAddToCart}
+            disabled={selectedColor == "" || selectedSize == ""}
+          />
+          <WishlistBtn wishlist={wishlist} id={id} />
           {/* <WishlistBtn/> */}
         </BtnContainer>
 
@@ -275,7 +334,7 @@ const SizeButton = styled.button<{ $available: boolean; $selected: boolean }>`
     border-color: ${({ $available }) => ($available ? "#000" : "#d9d9d9")};
   }
 
-    &:disabled {
+  &:disabled {
     cursor: not-allowed;
   }
 `;

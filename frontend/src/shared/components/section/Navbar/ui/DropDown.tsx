@@ -37,6 +37,9 @@ const DropDown = () => {
     }
   };
 
+  const str = user?.username ?? "Guest";
+  const newUsername = str.charAt(0).toUpperCase() + str.slice(1);
+
   return (
     <Container>
       {/* <button onClick={toggleDropdown}> */}
@@ -49,7 +52,7 @@ const DropDown = () => {
 
       {open && (
         <DropDownContainer>
-          <h5>Hey {user?.username}</h5>
+          <h5>Hey {newUsername}</h5>
           <button onClick={() => handleClick("profile")}>Profile</button>
           {/* <button onClick={handleLogout}>Log out</button> */}
           <button onClick={() => handleClick("logout")}>Log out</button>

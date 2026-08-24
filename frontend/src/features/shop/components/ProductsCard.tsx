@@ -26,7 +26,8 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
     productBrand,
     id,
     productImage,
-    wishlist
+    wishlist,
+    productId
   } = items;
 
   return (
@@ -56,7 +57,7 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
         {disabled ? (
           <Text>Out of Stock</Text>
         ) : (
-          <LinkStyled to={`/productDetails/${id}`}>
+          <LinkStyled to={`/productDetails/${productId}`}>
             <Button>Customise</Button>
           </LinkStyled>
         )}

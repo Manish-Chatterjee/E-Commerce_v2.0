@@ -74,7 +74,7 @@ const App = () => {
           element: <OrderConfirmationPage />,
         },
         {
-          path: "/productDetails/:id",
+          path: "/productDetails/:productId",
           element: <ProductDetails />,
         },
         {
