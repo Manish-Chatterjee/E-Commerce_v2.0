@@ -9,46 +9,7 @@ import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 
 import { useCart } from "../../../shared/context/Cart_Context/useCart";
-
-type ButtonProps = {
-  image: string;
-  selected: boolean;
-};
-
-type ProductSize = {
-  size: number;
-  available: boolean;
-  stock?: number;
-  sku?: string;
-};
-
-type VariantImage = {
-  id?: number;
-  imageUrl: string;
-};
-
-type ProductVariant = {
-  id?: number;
-  variantId: string;
-  color: string;
-  size: string;
-  availability: boolean;
-  images: VariantImage[];
-};
-
-type Product = {
-  id: number;
-  productBrand?: string;
-  productBrandLogo?: string;
-  productId?: string;
-  productName?: string;
-  price?: number;
-  stockAvailability?: boolean;
-  productImage?: string;
-  wishlist: boolean;
-
-  variants: ProductVariant[];
-};
+import type { Product, ButtonProps } from "../types/ProductInfoTypes";
 
 const ProductInfo = ({
   id,
@@ -66,8 +27,12 @@ const ProductInfo = ({
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-    console.log(id,'handleAddToCart')
-    addToCart(id);
+    console.log(variants[0].variantId, "handleAddToCart");
+    if (!selectedVariant) {
+      console.log("Please select a valid variant");
+      return;
+    }
+    addToCart(selectedVariant.variantId);
 
     if (open) {
       setOpen(false); // close first
@@ -88,13 +53,20 @@ const ProductInfo = ({
   const [selectedSize, setSelectedSize] = useState("");
   // const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
   // const sizes = [6, 7, 8, 9, 10, 11];
-  const sizes = [
-    { size: 6, available: true },
-    { size: 7, available: true },
-    { size: 8, available: false },
-    { size: 9, available: true },
-    { size: 10, available: false },
-  ];
+  // const sizes = [
+  //   { size: 6, available: true },
+  //   { size: 7, available: true },
+  //   { size: 8, available: false },
+  //   { size: 9, available: true },
+  //   { size: 10, available: false },
+  // ];
+
+  const selectedVariant = variants.find(
+    (variant) =>
+      variant.color === selectedColor && variant.size === selectedSize,
+  );
+
+  console.log(selectedVariant?.variantId, "selected variant");
 
   return (
     <>

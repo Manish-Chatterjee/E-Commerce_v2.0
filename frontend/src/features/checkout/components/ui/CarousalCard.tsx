@@ -8,7 +8,7 @@ import CtrlButton from "./CtrlButton";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCart } from "../../../../shared/context/Cart_Context/useCart";
-import type { CartItem } from "../../../../shared/context/Cart_Context/CartTypes";
+// import type { CartItem } from "../../../../shared/context/Cart_Context/CartTypes";
 
 // type CartItem = {
 //   id: number;
@@ -18,20 +18,31 @@ import type { CartItem } from "../../../../shared/context/Cart_Context/CartTypes
 //   img: string;
 // };
 
+
 type Props = {
   data: CartItem[];
 };
 
-const CarousalCard = ({ data }: Props) => {
+// const CarousalCard = ({ data }: Props) => {
+const CarousalCard = () => {
   const [index, setIndex] = useState<number>(0);
 
   const handleSelect = (selectedIndex: number) => {
     setIndex(selectedIndex);
   };
 
-  const { removeFromCart, incrementQuantity, decrementQuantity } = useCart();
+  // const { removeFromCart, incrementQuantity, decrementQuantity } = useCart();
+  const {
+    cart,
+    cartCount,
+    removeFromCart,
+    clearCart,
+    incrementQuantity,
+    decrementQuantity,
+    placeOrder,
+  } = useCart();
 
-  // console.log(cart,'cart from carousal')
+  console.log(cart,'cart from carousal')
 
   return (
     <Wrapper>
@@ -51,30 +62,31 @@ const CarousalCard = ({ data }: Props) => {
           </Prev>
         }
       >
-        {data?.map((item) => (
+        {/* {data?.map((item) => ( */}
+        {cart?.map((item) => (
           <Carousel.Item key={item.id}>
             <Card>
-              <CardImg variant="top" src={item.img} />
+              <CardImg variant="top" src={item.variant.images[0]?.imageUrl} />
 
               <Card.Body>
-                <h3>{item.productName}</h3>
-                <p>₹{item.price}</p>
+                <h3>{item.product.productName}</h3>
+                <p>₹{item.product.price}</p>
                 <p>Qty: {item.quantity}</p>
-                <p>Total: ₹{item.price * item.quantity}</p>
+                <p>Total: ₹{item.product.price ?? 0 * item.quantity}</p>
 
                 {/* ///////////////////////////////////////////// */}
                 <BtnGrp>
-                  <CtrlButton onClick={() => removeFromCart(item.id)}>
+                  <CtrlButton onClick={() => removeFromCart(item.variant.variantId)}>
                     <DeleteForeverIcon />
                   </CtrlButton>
                   <CtrlButton
-                    onClick={() => decrementQuantity(item.id)}
+                    onClick={() => decrementQuantity(item.variant.variantId)}
                     disabled={item.quantity === 1}
                   >
                     -
                   </CtrlButton>
                   <p>{item.quantity}</p>
-                  <CtrlButton onClick={() => incrementQuantity(item.id)}>
+                  <CtrlButton onClick={() => incrementQuantity(item.variant.variantId)}>
                     +
                   </CtrlButton>
                 </BtnGrp>

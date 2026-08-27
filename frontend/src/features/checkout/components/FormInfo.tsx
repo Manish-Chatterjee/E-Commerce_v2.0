@@ -27,7 +27,7 @@ const FormInfo = ({
 }: FormInfoProps) => {
   const navigate = useNavigate();
 
-  const { clearCart, cart } = useCart();
+  const { clearCart, cart, placeOrder } = useCart();
 
   // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   // console.log(cart); // [] if empty
@@ -47,6 +47,7 @@ const FormInfo = ({
         onSubmit={(values) => {
           console.log(values);
           // localStorage.setItem("cart", JSON.stringify([])); // clears the cart when order is placed
+          placeOrder();
           clearCart();
           navigate("/orderConfirmed", { replace: true , state: {subtotal, priceOff, discountedPrice, deliveryType, orderId: generateId()}}); // replace: true, removes the last history page stored
         }}

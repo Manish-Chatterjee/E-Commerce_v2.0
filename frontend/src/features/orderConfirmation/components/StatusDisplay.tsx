@@ -18,8 +18,8 @@ const StatusDisplay = () => {
       {/* <div><StatusBar/></div> */}
 
       <div>
-        {/* <LinkStyled to="/orderHistory" replace> */}
-        <LinkStyled to="/products/brands" replace>
+        <LinkStyled to="/orderHistory" replace>
+        {/* <LinkStyled to="/products/brands" replace> */}
           <Button>View your order</Button>
         </LinkStyled>
         <span>

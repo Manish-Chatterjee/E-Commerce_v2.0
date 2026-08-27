@@ -2,8 +2,34 @@ import styled from "styled-components";
 import ProductCard from "./components/ProductCard";
 import Button from "../../shared/components/ui/Button";
 import SecondNavbar from "../../shared/components/section/SecondNavbar";
+import { useEffect, useState } from "react";
+import type { Order } from "./types/OrderTypes";
 
 const OrderHistory = () => {
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/orders", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+
+        const data = await response.json();
+
+        setOrders(data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   return (
     <>
       <SecondNavbar logo="" />
@@ -23,19 +49,21 @@ const OrderHistory = () => {
       <hr />
 
       <ProductContainer>
-        <StatusContainer>
-          <ButtonSidebar>
-            On Shipping <Number>2</Number>
-          </ButtonSidebar>
-          <ButtonSidebar>
-            Arrival <Number>10</Number>
-          </ButtonSidebar>
-          <ButtonSidebar>
-            Cancelled <Number>5</Number>
-          </ButtonSidebar>
-        </StatusContainer>
+        {orders.length !== 0 && (
+          <StatusContainer>
+            <ButtonSidebar>
+              On the way <Number>2</Number>
+            </ButtonSidebar>
+            <ButtonSidebar>
+              Returned <Number>10</Number>
+            </ButtonSidebar>
+            <ButtonSidebar>
+              Cancelled <Number>5</Number>
+            </ButtonSidebar>
+          </StatusContainer>
+        )}
 
-        <ProductCard />
+        <ProductCard orders={orders}/>
       </ProductContainer>
     </>
   );
@@ -67,11 +95,12 @@ const Name = styled.p`
 `;
 
 const StatusContainer = styled.div`
-  border: 2px dotted gray;
+  /* border: 2px dotted gray; */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   flex: 1;
+  align-items: center;
 `;
 
 const Number = styled.div`
@@ -79,9 +108,9 @@ const Number = styled.div`
   color: black;
   border-radius: 100px;
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  padding: 10px;
+  width: 15px;
+  height: 15px;
+  padding: 15px;
 
   display: flex;
   align-items: center;
@@ -89,10 +118,10 @@ const Number = styled.div`
 `;
 
 const ProductContainer = styled.div`
-  border: 2px dashed red;
+  /* border: 2px dashed red; */
   display: flex;
 `;
 
 const ButtonSidebar = styled(Button)`
-  width: 150px;
+  width: fit-content;
 `;

@@ -30,7 +30,8 @@ const DropDown = () => {
         navigate("/", { replace: true });
         break;
       case "history":
-        return console.log("history");
+        // return console.log("history");
+        navigate('/orderHistory')
         break;
       case "admin":
         navigate("/api/admin/dashboard");
