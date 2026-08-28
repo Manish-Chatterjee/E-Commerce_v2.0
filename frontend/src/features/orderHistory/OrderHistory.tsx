@@ -4,6 +4,8 @@ import Button from "../../shared/components/ui/Button";
 import SecondNavbar from "../../shared/components/section/SecondNavbar";
 import { useEffect, useState } from "react";
 import type { Order } from "./types/OrderTypes";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuth } from "../auth/hooks/useAuth";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -30,20 +32,38 @@ const OrderHistory = () => {
     fetchOrders();
   }, []);
 
+  const getGreeting = () => {
+    const hours = new Date().getHours();
+
+    if (hours < 12) {
+      return "Morning";
+    } else if (hours < 17) {
+      return "Afternoon";
+    } else {
+      return "Evening";
+    }
+  };
+
+  const {user} = useAuth();
+
   return (
     <>
       <SecondNavbar logo="" />
       <CartHeader>
         <Greetings>
-          <Greet>Good Morning</Greet>
-          <Name>Manish</Name>
+          <Greet>Good {getGreeting()}</Greet>
+          <Name>{user?.username ?? "Guest"}</Name>
         </Greetings>
-        <Button>icon Profile</Button>
+        <Header>Order History</Header>
+        <Button title="Logout">
+          <LogoutIcon />
+        </Button>
+        {/* <Button>icon Profile</Button>
         <Button>icon Wishlist</Button>
         <Button>icon My Order</Button>
         <Button>icon Saved Address</Button>
         <Button>icon Change Password</Button>
-        <Button>icon Logout</Button>
+        <Button>icon Logout</Button> */}
       </CartHeader>
 
       <hr />
@@ -63,7 +83,7 @@ const OrderHistory = () => {
           </StatusContainer>
         )}
 
-        <ProductCard orders={orders}/>
+        <ProductCard orders={orders} />
       </ProductContainer>
     </>
   );
@@ -74,8 +94,9 @@ export default OrderHistory;
 const CartHeader = styled.div`
   /* background-color: gray; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 30px;
 `;
 
 const Greetings = styled.span``;
@@ -92,6 +113,10 @@ const Name = styled.p`
   font-weight: 600;
   margin: 0;
   padding: 0;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 const StatusContainer = styled.div`
@@ -124,4 +149,11 @@ const ProductContainer = styled.div`
 
 const ButtonSidebar = styled(Button)`
   width: fit-content;
+`;
+
+const Header = styled.p`
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin: auto;
 `;

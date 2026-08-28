@@ -20,7 +20,7 @@ export default function Cart() {
 
   return (
     <Link to="/checkout">
-      <IconButton aria-label="cart">
+      <IconButton aria-label="cart" title="cart">
         <StyledBadge badgeContent={cartCount} color="secondary">
           <ShoppingCartIcon />
         </StyledBadge>

@@ -5,10 +5,11 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
+  title?: string;
 }
 
-const Button = ({ children, className, onClick, disabled }: ButtonProps) => {
-  return <Status className={className} onClick={onClick} disabled={disabled}>{children}</Status>;
+const Button = ({ children, className, onClick, disabled, title }: ButtonProps) => {
+  return <Status className={className} onClick={onClick} disabled={disabled} title={title}>{children}</Status>;
 };
 
 // className is passed because of the change in className using styled components to reflect the styles.

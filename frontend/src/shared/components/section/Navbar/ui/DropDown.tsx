@@ -7,8 +7,10 @@ const DropDown = () => {
   const [open, setOpen] = useState(false);
 
   // Logout✅
-  const { logout, user } = useAuth();
+  const { logout, user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  console.log(isAuthenticated, "isAuthenticated");
 
   // const handleLogout = () => {
   //   logout();
@@ -23,15 +25,17 @@ const DropDown = () => {
     switch (linkTo) {
       case "profile":
         alert(user?.username);
-        console.log(user,'user')
+        console.log(user, "user");
         break;
       case "logout":
-        logout();
+        if (isAuthenticated) {
+          logout();
+        }
         navigate("/", { replace: true });
         break;
       case "history":
         // return console.log("history");
-        navigate('/orderHistory')
+        navigate("/orderHistory");
         break;
       case "admin":
         navigate("/api/admin/dashboard");
@@ -44,20 +48,35 @@ const DropDown = () => {
   return (
     <Container>
       {/* <button onClick={toggleDropdown}> */}
-      <Img
-        src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
-        alt="profile-logo"
-        onClick={toggleDropdown}
-      />
+      {isAuthenticated ? (
+        <Img
+          src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
+          alt="profile-logo"
+          onClick={toggleDropdown}
+        />
+      ) : (
+        <Img
+          src="https://cdn-icons-png.flaticon.com/256/6522/6522516.png"
+          alt="logo"
+          onClick={toggleDropdown}
+        />
+      )}
       {/* </button> */}
 
       {open && (
         <DropDownContainer>
           <h5>Hey {newUsername}</h5>
-          <button onClick={() => handleClick("profile")}>Profile</button>
+          {isAuthenticated && (
+            <>
+              <button onClick={() => handleClick("profile")}>Profile</button>
+              <button onClick={() => handleClick("history")}>History</button>
+            </>
+          )}
           {/* <button onClick={handleLogout}>Log out</button> */}
-          <button onClick={() => handleClick("logout")}>Log out</button>
-          <button onClick={() => handleClick("history")}>History</button>
+          <button onClick={() => handleClick("logout")}>
+            {isAuthenticated ? "Log Out" : "Log In"}
+          </button>
+
           {user?.role === "ADMIN" && (
             <button onClick={() => handleClick("admin")}>
               {/* <Link to="/adminDashboard"> */}
@@ -83,6 +102,7 @@ const Img = styled.img`
   height: 40px;
   border-radius: 100px;
   margin-inline: 5px;
+  cursor: pointer;
 `;
 
 const DropDownContainer = styled.div`
