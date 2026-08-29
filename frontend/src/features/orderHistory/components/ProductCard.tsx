@@ -12,6 +12,7 @@ import No_Order_Yet from "@/assets/no-orders-yet.webp";
 
 type ProductCardProps = {
   orders: Order[];
+  filteredOpt: string;
 };
 
 type OrderStatus =
@@ -44,7 +45,7 @@ const statusColors: Record<OrderStatus, { bg: string; color: string }> = {
   },
 };
 
-const ProductCard = ({ orders }: ProductCardProps) => {
+const ProductCard = ({ orders, filteredOpt }: ProductCardProps) => {
   // const [orders, setOrders] = useState<Order[]>([]);
 
   // useEffect(() => {
@@ -69,6 +70,14 @@ const ProductCard = ({ orders }: ProductCardProps) => {
   //   fetchOrders();
   // }, []);
 
+const filteredItems = orders.filter((item) => {
+  if (filteredOpt === "") {
+    return true;
+  } else {
+    return item.status === filteredOpt.toUpperCase()
+  }
+});
+
   return (
     <>
       <Container>
@@ -82,7 +91,7 @@ const ProductCard = ({ orders }: ProductCardProps) => {
             <h4>No orders yet</h4>
           </NoOrders>
         ) : (
-          orders.map((order) => (
+          filteredItems.map((order) => (
             <CardContainer>
               {/* <p>Order ID</p> */}
               <IDandStatus>
@@ -122,7 +131,7 @@ const ProductCard = ({ orders }: ProductCardProps) => {
                   Size={item.variant.size}
                   Quantity={item.quantity}
                   Price={item.price}
-                  Image={item.product.productImage}
+                  Image={item.variant.images}
                 />
               ))}
 
@@ -157,6 +166,7 @@ const Container = styled.div`
   /* display: flex; */
   border-radius: 5px;
   flex: 4;
+  margin-right: 20px;
 `;
 
 const CardContainer = styled.div`

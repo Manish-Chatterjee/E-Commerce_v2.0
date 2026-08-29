@@ -9,6 +9,7 @@ import { useAuth } from "../auth/hooks/useAuth";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [filteredOpt, setFilteredOpt] = useState<string>("");
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -44,7 +45,7 @@ const OrderHistory = () => {
     }
   };
 
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   return (
     <>
@@ -69,21 +70,40 @@ const OrderHistory = () => {
       <hr />
 
       <ProductContainer>
+        {/* {orders.length !== 0 && (
+          <StatusContainer>
+            <ButtonSidebar onClick={() => setFilteredOpt("")}>
+              All <Number>3</Number>
+            </ButtonSidebar>
+            {orders?.map((items) => {
+              return (<ButtonSidebar onClick={() => setFilteredOpt(items.status)}>
+                 {items.status}<Number>2</Number>
+              </ButtonSidebar>
+              )
+            })}
+          </StatusContainer>
+        )} */}
         {orders.length !== 0 && (
           <StatusContainer>
-            <ButtonSidebar>
-              On the way <Number>2</Number>
+            <ButtonSidebar onClick={() => setFilteredOpt("")}>
+              All <Number>{orders.length}</Number>
             </ButtonSidebar>
-            <ButtonSidebar>
-              Returned <Number>10</Number>
-            </ButtonSidebar>
-            <ButtonSidebar>
-              Cancelled <Number>5</Number>
-            </ButtonSidebar>
+
+            {[...new Set(orders.map((item) => item.status))].map((status) => (
+              <ButtonSidebar
+                key={status}
+                onClick={() => setFilteredOpt(status)}
+              >
+                {status}
+                <Number>
+                  {orders.filter((item) => item.status === status).length}
+                </Number>
+              </ButtonSidebar>
+            ))}
           </StatusContainer>
         )}
 
-        <ProductCard orders={orders} />
+        <ProductCard orders={orders} filteredOpt={filteredOpt} />
       </ProductContainer>
     </>
   );

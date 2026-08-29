@@ -37,6 +37,9 @@ const DropDown = () => {
         // return console.log("history");
         navigate("/orderHistory");
         break;
+      case "wishlist":
+        navigate("/wishlist");
+        break;
       case "admin":
         navigate("/api/admin/dashboard");
     }
@@ -70,6 +73,7 @@ const DropDown = () => {
             <>
               <button onClick={() => handleClick("profile")}>Profile</button>
               <button onClick={() => handleClick("history")}>History</button>
+              <button onClick={() => handleClick("wishlist")}>Wishlist</button>
             </>
           )}
           {/* <button onClick={handleLogout}>Log out</button> */}

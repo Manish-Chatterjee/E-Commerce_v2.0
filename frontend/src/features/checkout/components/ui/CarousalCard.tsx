@@ -66,7 +66,7 @@ const CarousalCard = () => {
         {cart?.map((item) => (
           <Carousel.Item key={item.id}>
             <Card>
-              <CardImg variant="top" src={item.variant.images[0]?.imageUrl} />
+              <CardImg variant="top" src={item.variant.images[0]?.imageUrl}/>
 
               <Card.Body>
                 <h3>{item.product.productName}</h3>
@@ -131,7 +131,7 @@ const Prev = styled.span`
 `;
 
 const CardImg = styled(Card.Img)`
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 1/1;
 `;
 

@@ -1,3 +1,4 @@
+import type { VariantImage } from "@/features/ProductDetails/types/ProductInfoTypes";
 import { formatPrice } from "@/shared/utils/formatPrice";
 import styled from "styled-components";
 
@@ -7,7 +8,7 @@ type ProductItemProps = {
   Size?: string;
   Quantity?: number;
   Price?: number;
-  Image?: string;
+  Image?: VariantImage[];
 };
 
 const ProductItem = ({
@@ -21,7 +22,9 @@ const ProductItem = ({
   return (
     <Container>
       <ProductContainer>
-        <Img src={Image} alt="img1" />
+        <ImgContainer>
+        <Img src={Image?.[0]?.imageUrl} alt="img1" />
+        </ImgContainer>
         <Details>
           <DetailsText>
             Product: {ProductName} ({Color})
@@ -49,10 +52,24 @@ const Details = styled.div`
   margin-left: 50px;
 `;
 
-const Img = styled.img`
-  /* width: 100px; */
+const ImgContainer = styled.div`
+  width: 200px;
   height: 100%;
+  overflow: hidden;
   border-radius: 14px 0 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: -1;
+`
+
+const Img = styled.img`
+  width: 100%;
+  height: fit-content;
+  object-fit: cover;
+  display: block;
 `;
 
 const ProductContainer = styled.div`
