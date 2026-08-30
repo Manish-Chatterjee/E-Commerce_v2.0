@@ -64,6 +64,7 @@ const App = () => {
         {
           path: "/orderHistory",
           element: <OrderHistory />,
+          // element: <OrderHistoryGPTVersion />,
         },
         {
           path: "/checkout",
@@ -74,7 +75,7 @@ const App = () => {
           element: <OrderConfirmationPage />,
         },
         {
-          path: "/productDetails/:id",
+          path: "/productDetails/:productId",
           element: <ProductDetails />,
         },
         {

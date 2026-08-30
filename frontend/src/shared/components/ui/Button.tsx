@@ -4,17 +4,20 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
+  disabled?: boolean;
+  title?: string;
 }
 
-const Button = ({ children, className, onClick }: ButtonProps) => {
-  return <Status className={className} onClick={onClick}>{children}</Status>;
+const Button = ({ children, className, onClick, disabled, title }: ButtonProps) => {
+  return <Status className={className} onClick={onClick} disabled={disabled} title={title}>{children}</Status>;
 };
 
 // className is passed because of the change in className using styled components to reflect the styles.
 
 export default Button;
 
-const Status = styled.div`
+// const Status = styled.div`
+const Status = styled.button`
   border: 1px solid black;
   width: fit-content;
   /* margin: auto; */
@@ -28,7 +31,7 @@ const Status = styled.div`
 
   cursor: pointer;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: black;
     color: white;
   }

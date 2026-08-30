@@ -216,7 +216,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         signup,
         logout,
-        isAuthenticated: !!user,
+        isAuthenticated: !!user, // If user contains data, !!user evaluates to true. If user is empty, it evaluates to false.
         loading,
       }}
     >

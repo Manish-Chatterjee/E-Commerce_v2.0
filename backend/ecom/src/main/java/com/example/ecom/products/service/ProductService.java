@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.ecom.products.repository.ProductRepository;
 import com.example.ecom.products.entity.Product;
+import com.example.ecom.products.entity.ProductVariant;
+import com.example.ecom.products.entity.VariantImage;
 
 @Service
 public class ProductService {
@@ -16,7 +18,7 @@ public class ProductService {
 	private ProductRepository productRepository;
 
 //	To generate random id for product_id
-	private String randomId() {
+	private String generateUniqueProductId() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		StringBuilder id = new StringBuilder();
 		Random random = new Random();
@@ -28,11 +30,12 @@ public class ProductService {
 		return id.toString();
 	}
 
-	private String generateUniqueProductId() {
+//	Generate unique variantId
+	private String generateUniqueVariantId() {
 		String id;
 
 		do {
-			id = randomId();
+			id = generateUniqueProductId();
 		} while (productRepository.existsByProductId(id));
 
 		return id;
@@ -47,29 +50,49 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public void saveItem(Product product) {
-		product.setProductId(generateUniqueProductId());
-		productRepository.save(product);
-	}
+//	public void saveItem(Product product) {
+//		product.setProductId(generateUniqueProductId());
+//		productRepository.save(product);
+//	}
 	
-	public Product updateWishlist(Long id, Boolean wishlist) {
+	public Product saveItem(Product product) {
 
-	    Product product = productRepository.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Product not found"));
+	    product.setProductId(generateUniqueProductId());
 
-	    product.setWishlist(wishlist);
+	    for (ProductVariant variant : product.getVariants()) {
+
+	        variant.setVariantId(generateUniqueVariantId());
+	        variant.setProduct(product);
+
+	        for (VariantImage image : variant.getImages()) {
+	            image.setVariant(variant);
+	        }
+	    }
 
 	    return productRepository.save(product);
+	}
+
+	public Product updateWishlist(Long id, Boolean wishlist) {
+
+		Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+
+		product.setWishlist(wishlist);
+
+		return productRepository.save(product);
 	}
 
 	public Product updateStockAvailability(Long id, Boolean stockAvailability) {
-		
-	    Product product = productRepository.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Product not found"));
 
-	    product.setStockAvailability(stockAvailability);
+		Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
 
-	    return productRepository.save(product);
+		product.setStockAvailability(stockAvailability);
+
+		return productRepository.save(product);
+	}
+
+	public Product getItemByProductId(String productId) {
+		return productRepository.findByProductId(productId)
+				.orElseThrow(() -> new RuntimeException("Product not found"));
 	}
 
 }

@@ -4,7 +4,7 @@ export type Product = {
   id: number;
   productBrand: string;
   productBrandLogo: string;
-  productID: string;
+  productId: string;
   productName: string;
   price: number;
   // colors: string[];

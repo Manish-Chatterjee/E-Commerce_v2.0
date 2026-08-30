@@ -1,10 +1,18 @@
 package com.example.ecom.products.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +41,11 @@ public class Product {
 
 //	boolean → defaults to false, cannot be null.
 //	Boolean → can be true, false, or null.
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
+	@JsonManagedReference
+	private List<ProductVariant> variants = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -116,4 +129,11 @@ public class Product {
 		this.wishlist = wishlist;
 	}
 
+	public List<ProductVariant> getVariants() {
+		return variants;
+	}
+
+	public void setVariants(List<ProductVariant> variants) {
+	    this.variants = variants;
+	}
 }

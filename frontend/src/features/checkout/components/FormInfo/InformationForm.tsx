@@ -1,5 +1,4 @@
 import { Field } from "formik";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const InformationForm = () => {
@@ -16,9 +15,9 @@ const InformationForm = () => {
         }}
       >
         <h2>Information</h2>
-        <p style={{ fontSize: "12px", color: "gray" }}>
+        {/* <p style={{ fontSize: "12px", color: "gray" }}>
           Already have an account? <Link to="/">Log in</Link>
-        </p>
+        </p> */}
       </div>
       <h4>Personal Information</h4>
       <InputContainer>

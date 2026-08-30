@@ -24,7 +24,8 @@ const ProductPreviewCard = ({ selectedData }: Prop) => {
         <p>No items in cart</p>
       ) : (
         <>
-          <CarousalCard data={storedData} />
+          {/* <CarousalCard data={storedData} /> */}
+          <CarousalCard />
         </>
       )}
     </Container>
