@@ -20,7 +20,7 @@ const ShopPage = () => {
   };
 
   return (
-    <div>
+    <>
       <ProductsGrid onAddToCart={handleAddToCart} />
       <SnackBarAlert
         open={open}
@@ -29,7 +29,7 @@ const ShopPage = () => {
       />
 
       <Outlet />
-    </div>
+    </>
   );
 };
 

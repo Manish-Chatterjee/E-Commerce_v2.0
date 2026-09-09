@@ -166,7 +166,7 @@ const Container = styled.div`
   /* display: flex; */
   border-radius: 5px;
   flex: 4;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 `;
 
 const CardContainer = styled.div`
@@ -268,6 +268,5 @@ const NoOrders = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 2px dashed red; */
   flex: 1;
 `;

@@ -51,7 +51,7 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
           />
         ))
       ) : (
-        <p>No item match found</p>
+        <p>No item found</p>
       )}
     </ProductCardsContainer>
   );

@@ -6,6 +6,7 @@ import { useAuth } from "./hooks/useAuth";
 import AuthBg from "../../assets/AuthBg.jpg";
 import SnackBarAlert from "../../shared/components/ui/SnackBarAlert";
 import { useState } from "react";
+import { BouncingDots } from "@/components/bouncing-dots";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -14,6 +15,8 @@ type AuthFormProps = {
 const AuthForm = ({ mode }: AuthFormProps) => {
   const { login, signup } = useAuth();
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   // SnackBar Alert
   const [open, setOpen] = useState(false);
@@ -34,47 +37,52 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         //   console.log(values);
         // }}
         onSubmit={async (values) => {
-          if (isSignup) {
-            // const success = signup(values);
-            const success = await signup({
-              username: values.username,
-              email: values.email,
-              password: values.password,
-            });
+          setLoading(true);
+          try {
+            if (isSignup) {
+              // const success = signup(values);
+              const success = await signup({
+                username: values.username,
+                email: values.email,
+                password: values.password,
+              });
 
-            if (!success) {
-              // alert("User already exists");
+              if (!success) {
+                // alert("User already exists");
+                setOpen(true);
+                setMessage("User already exists");
+                setVariant("error");
+                return;
+              }
+
+              // alert("Signup successful");
               setOpen(true);
-              setMessage("User already exists");
-              setVariant("error");
-              return;
-            }
+              setMessage("Signup successful");
+              setVariant("success");
+              navigate("/");
+            } else {
+              // Login ////////////////////////////////////////////////////////////////////
+              // const success = login(values);
+              const success = await login({
+                username: values.username,
+                password: values.password,
+              });
 
-            // alert("Signup successful");
-            setOpen(true);
-            setMessage("Signup successful");
-            setVariant("success");
-            navigate("/");
-          } else {
-            // Login ////////////////////////////////////////////////////////////////////
-            // const success = login(values);
-            const success = await login({
-              username: values.username,
-              password: values.password,
-            });
+              if (!success) {
+                // alert("Invalid credentials");
+                setOpen(true);
+                setMessage("Invalid credentials");
+                setVariant("error");
+                return;
+              }
 
-            if (!success) {
-              // alert("Invalid credentials");
+              // alert("Login successful");
               setOpen(true);
-              setMessage("Invalid credentials");
-              setVariant("error");
-              return;
+              setMessage("Login successful");
+              navigate("/products/brands");
             }
-
-            // alert("Login successful");
-            setOpen(true);
-            setMessage("Login successful");
-            navigate("/products/brands");
+          } finally {
+            setLoading(false);
           }
         }}
       >
@@ -85,24 +93,26 @@ const AuthForm = ({ mode }: AuthFormProps) => {
               <FieldStyle name="name" type="text" required />
             </div>
           )} */}
-          
-            <div>
-              <Label>Username</Label>
-              <FieldStyle name="username" type="text" required />
-            </div>
-          
-          {isSignup && (
+
           <div>
-            <Label>E-mail</Label>
-            <FieldStyle name="email" type="email" required />
+            <Label>Username</Label>
+            <FieldStyle name="username" type="text" required />
           </div>
+
+          {isSignup && (
+            <div>
+              <Label>E-mail</Label>
+              <FieldStyle name="email" type="email" required />
+            </div>
           )}
           <div>
             <Label>Password</Label>
             <FieldStyle name="password" type="password" required />
           </div>
 
-          <Button type="submit">{isSignup ? "Sign Up" : "Login"}</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? <BouncingDots className="w-12 [--duration:2s] text-[#474747]"/> : isSignup ? "Sign Up" : "Login"}
+          </Button>
 
           {isSignup ? (
             <RoutingLink>
