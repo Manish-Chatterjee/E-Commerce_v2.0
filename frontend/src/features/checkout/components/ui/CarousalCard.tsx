@@ -18,10 +18,6 @@ import { useCart } from "../../../../shared/context/Cart_Context/useCart";
 //   img: string;
 // };
 
-type Props = {
-  data: CartItem[];
-};
-
 // const CarousalCard = ({ data }: Props) => {
 const CarousalCard = () => {
   const [index, setIndex] = useState<number>(0);
@@ -35,10 +31,8 @@ const CarousalCard = () => {
     cart,
     cartCount,
     removeFromCart,
-    clearCart,
     incrementQuantity,
     decrementQuantity,
-    placeOrder,
   } = useCart();
 
   console.log(cartCount, "cart from carousal");

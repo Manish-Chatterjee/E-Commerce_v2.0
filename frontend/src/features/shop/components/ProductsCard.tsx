@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 import Button from "../../../shared/components/ui/Button";
-import { truncateText } from "../../../shared/utils/truncateText";
 import WishlistBtn from "../../../shared/components/ui/WishlistBtn";
 import { Link } from "react-router-dom";
 import type { Product } from "../types/product";

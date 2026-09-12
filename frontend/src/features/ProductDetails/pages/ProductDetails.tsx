@@ -5,12 +5,13 @@ import SecondNavbar from "../../../shared/components/section/SecondNavbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "@/features/loading/Loading";
+import type { Product } from "../types/ProductInfoTypes";
 
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
-  const { id, productId } = useParams();
+  const { productId } = useParams();
 
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<Product>();
 
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     product?.productImage,
@@ -42,16 +43,17 @@ const ProductDetails = () => {
   console.log(product, "product");
 
   if (!product) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <>
       <SecondNavbar logo={product?.productBrandLogo} />
       <Container>
-        <ProductImages id={product?.id} 
-        // productImage={product?.productImage} 
-        productImage={selectedImage ? selectedImage : product?.productImage}
+        <ProductImages
+          id={product?.id}
+          // productImage={product?.productImage}
+          productImage={selectedImage ? selectedImage : product?.productImage}
         />
         <ProductInfo
           id={product?.id}

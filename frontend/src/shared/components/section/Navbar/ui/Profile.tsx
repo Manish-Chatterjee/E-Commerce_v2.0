@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import DropDown from "./DropDown";
 
 const Profile = () => {
@@ -8,7 +7,7 @@ const Profile = () => {
         src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
         alt="profile-logo"
       /> */}
-      <DropDown/>
+      <DropDown />
     </>
   );
 };
