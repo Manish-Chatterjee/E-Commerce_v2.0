@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ProductPreviewCard from "./OrderReview/ProductPreviewCard";
 import { useCart } from "../../../shared/context/Cart_Context/useCart";
+import Button from "./ui/Button";
 
 // type CartItem = {
 //   id: number;
@@ -28,7 +29,7 @@ const OrderReview = ({
   // const selectedData = JSON.parse(localStorage.getItem("cart") || "[]");
   // Data from localStorage is changed and it's taking data from Context "cart"
 
-  const { cart: selectedData } = useCart(); // destructuring with alias or renaming
+  const { cart: selectedData, clearCart } = useCart(); // destructuring with alias or renaming
   // const selectedData = cart
 
   // const subtotal = selectedData.reduce((accu, item) => {
@@ -50,16 +51,24 @@ const OrderReview = ({
       {/* <ProductPreviewCard selectedData={selectedData}/> */}
       <ProductPreviewCard selectedData={selectedData} />
 
+      {selectedData.length !== 0 && (
+        <ClearCartBtnContainer>
+          <ClearCartBtn onClick={clearCart}>Clear Cart</ClearCartBtn>
+        </ClearCartBtnContainer>
+      )}
+
       <Info>
-        <div>
-          <div>Subtotal: ₹{subtotal.toFixed(1)}</div>
+        {selectedData.length !== 0 && (
           <div>
-            Discount: ₹{discountedPrice.toFixed(1)} ({priceOff}%)
+            <div>Subtotal: ₹{subtotal.toFixed(1)}</div>
+            <div>
+              Discount: ₹{discountedPrice.toFixed(1)} ({priceOff}%)
+            </div>
+            <div>
+              Shipping: {shipping === 0 ? `free` : `₹${shipping.toFixed(1)}`}
+            </div>
           </div>
-          <div>
-            Shipping: {shipping === 0 ? `free` : `₹${shipping.toFixed(1)}`}
-          </div>
-        </div>
+        )}
 
         <Hr />
 
@@ -84,4 +93,25 @@ const Hr = styled.hr`
 
 const H4 = styled.h4`
   margin-left: 12%;
+`;
+
+const ClearCartBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 0 30px 0;
+`;
+
+const ClearCartBtn = styled(Button)`
+  width: 400px;
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  font-weight: 600;
+  transition: 0.1s linear;
+
+  &:hover {
+    background-color: red;
+    color: white;
+    scale: 1.05;
+  }
 `;

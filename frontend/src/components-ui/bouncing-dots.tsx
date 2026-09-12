@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 function BouncingDots({
   className,
-  dots = 3,
+  dots = 4,
   ...props
 }: React.ComponentProps<"span"> & { dots?: number }) {
   return (

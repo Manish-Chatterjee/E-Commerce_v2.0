@@ -36,4 +36,5 @@ export type Product = {
   wishlist: boolean;
 
   variants: ProductVariant[];
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | undefined>>;
 };

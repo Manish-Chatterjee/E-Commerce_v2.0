@@ -70,6 +70,7 @@ const CarousalCard = () => {
               <Card.Body>
                 <h3>{item.product.productName}</h3>
                 <p>₹{item.product.price}</p>
+                <p>Size: {item.variant.size}</p>
                 <p>Qty: {item.quantity}</p>
                 <p>Total: ₹{item.product.price ?? 0 * item.quantity}</p>
 

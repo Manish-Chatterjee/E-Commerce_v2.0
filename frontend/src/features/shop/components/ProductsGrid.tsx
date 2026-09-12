@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../api/shopApi";
 import type { Product } from "../types/product";
+import Loading from "@/features/loading/Loading";
 
 type ProductsGridProps = {
   onAddToCart: () => void;
@@ -17,7 +18,8 @@ type ContextType = {
 const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
   const { searchQuery } = useOutletContext<ContextType>();
 
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // getting from db through sb
   useEffect(() => {
@@ -28,16 +30,22 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
         setProducts(products);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
   /////////////////////////
-  
+
   const filteredData = products.filter((item) =>
     item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <ProductCardsContainer>

@@ -153,7 +153,7 @@ const StatusContainer = styled.div`
   flex-direction: column;
   gap: 15px;
   flex: 1;
-  align-items: center;
+  align-items: start;
 `;
 
 const Number = styled.div`
@@ -177,6 +177,7 @@ const ProductContainer = styled.div`
 
 const ButtonSidebar = styled(Button)`
   width: fit-content;
+  margin-left: 20px;
 `;
 
 const Header = styled.p`

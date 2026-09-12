@@ -6,7 +6,7 @@ import { useAuth } from "./hooks/useAuth";
 import AuthBg from "../../assets/AuthBg.jpg";
 import SnackBarAlert from "../../shared/components/ui/SnackBarAlert";
 import { useState } from "react";
-import { BouncingDots } from "@/components/bouncing-dots";
+import { BouncingDots } from "@/components-ui/bouncing-dots";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -79,7 +79,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
               // alert("Login successful");
               setOpen(true);
               setMessage("Login successful");
-              navigate("/products/brands");
+              navigate("/products/shop");
             }
           } finally {
             setLoading(false);

@@ -39,24 +39,24 @@ const Navbar = ({ setSearchQuery }: Props) => {
           <LogoName>ESNTL</LogoName>
         </Section>
         <Section>
-          <StyledNavLink
+          {/* <StyledNavLink
             to="brands"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Brands
-          </StyledNavLink>
+          </StyledNavLink> */}
           <StyledNavLink
             to="shop"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Shop
           </StyledNavLink>
-          <StyledNavLink
+          {/* <StyledNavLink
             to="blog"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Blog
-          </StyledNavLink>
+          </StyledNavLink> */}
         </Section>
         <Section>
           {/* <IoIosSearchStyled /> */}
