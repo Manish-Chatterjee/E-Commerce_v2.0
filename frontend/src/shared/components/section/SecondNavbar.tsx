@@ -48,6 +48,7 @@ const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 80%;
+  height: fit-content;
   margin: 0 auto 20px;
   /* border: 1px solid gray; */
   border-radius: 0 0 10px 10px;
@@ -63,5 +64,6 @@ const BackBtn = styled.span`
 `;
 
 const Image = styled.img`
-  height: 50px;
+  height: 30px;
+  margin-block: 10px;
 `;

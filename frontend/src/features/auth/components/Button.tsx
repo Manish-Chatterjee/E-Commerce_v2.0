@@ -3,10 +3,11 @@ import styled from "styled-components";
 type ButtonProps = {
   type?: "button" | "submit" | "reset";
   children: React.ReactNode;
+  disabled?: boolean;
 };
 
-export const Button = ({ type = "button", children }: ButtonProps) => {
-  return <ButtonStyled type={type}>{children}</ButtonStyled>;
+export const Button = ({ type = "button", children, disabled }: ButtonProps) => {
+  return <ButtonStyled type={type} disabled={disabled}>{children}</ButtonStyled>;
 };
 
 const ButtonStyled = styled.button`

@@ -37,5 +37,5 @@ export default ProductPreviewCard;
 const Container = styled.div`
   border: none;
   width: fit-content;
-  margin: 40px auto;
+  margin: 40px auto 10px auto;
 `;
