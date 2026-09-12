@@ -12,11 +12,11 @@ type FormProp = {
   deliveryType: string;
   paymentMethod: string;
   paypalEmail: string;
-}
+};
 
 const PaymentForm = () => {
   const { values } = useFormikContext<FormProp>();
-  console.log(values,'values')
+  console.log(values, "values");
   return (
     <>
       {/* Payment Options */}
@@ -55,23 +55,15 @@ const PaymentForm = () => {
             <FieldStyled
               type="text"
               name="cardNumber"
-              placeholder="Card Number"
+              placeholder="Full Name"
             />
+            <FieldStyled type="text" name="cardNumber" placeholder="CVV" />
             <FieldStyled
               type="text"
               name="cardNumber"
               placeholder="Card Number"
             />
-            <FieldStyled
-              type="text"
-              name="cardNumber"
-              placeholder="Card Number"
-            />
-            <FieldStyled
-              type="text"
-              name="cardNumber"
-              placeholder="Card Number"
-            />
+            <FieldStyled type="text" name="cardNumber" placeholder="Exp Date" />
           </InputContainer>
         )}
 
@@ -86,12 +78,14 @@ const PaymentForm = () => {
             <HiddenCheckbox type="radio" name="paymentMethod" value="paypal" />
             <PaymentType>PayPal</PaymentType>
           </Label>
-          <Img
-            src="https://www.penguininc.com/wp-content/uploads/2025/06/paypal-logo.webp"
-            alt="data"
-            width={20}
-            height={20}
-          />
+          <LogoContainer>
+            <Img
+              src="https://www.penguininc.com/wp-content/uploads/2025/06/paypal-logo.webp"
+              alt="data"
+              width={20}
+              height={20}
+            />
+          </LogoContainer>
         </LabelHeader>
         {/* </PaymentStrips> */}
 
@@ -100,7 +94,7 @@ const PaymentForm = () => {
             <FieldStyled
               type="email"
               name="paypalEmail"
-              placeholder="PayPal Email"
+              placeholder="PayPal ID"
             />
           </div>
         )}
@@ -116,18 +110,24 @@ const PaymentForm = () => {
             <HiddenCheckbox type="radio" name="paymentMethod" value="apple" />
             <PaymentType>Apple Pay</PaymentType>
           </Label>
-          <Img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/1280px-Apple_Pay_logo.svg.png"
-            alt="data"
-            width={20}
-            height={20}
-          />
+          <LogoContainer>
+            <Img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/1280px-Apple_Pay_logo.svg.png"
+              alt="data"
+              width={20}
+              height={20}
+            />
+          </LogoContainer>
         </LabelHeader>
         {/* </PaymentStrips> */}
 
         {values.paymentMethod === "apple" && (
           <div>
-            <FieldStyled type="text" name="appleId" placeholder="Apple ID" />
+            <FieldStyled
+              type="text"
+              name="appleId"
+              placeholder="Apple Pay ID"
+            />
           </div>
         )}
 
@@ -176,6 +176,7 @@ const LabelHeader = styled.div`
   /* align-items: center; */
   margin: 10px 0;
   /* gap: 30px; */
+  max-height: 25px;
 `;
 
 const HiddenCheckbox = styled(Field)`
@@ -192,6 +193,7 @@ const PaymentType = styled.p`
   font-weight: 600;
   font-size: 18px;
   margin: 0 10px;
+  white-space: nowrap;
 `;
 
 // const PaymentStrips = styled.div`
@@ -208,9 +210,14 @@ const Label = styled.label`
 
 const Img = styled.img`
   width: fit-content;
+  /* height: fit-content; */
+  object-fit: contain;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   gap: 15px;
+  width: fit-content;
+  justify-content: end;
+  margin-block: 2px;
 `;

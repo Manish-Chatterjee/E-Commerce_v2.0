@@ -20,6 +20,7 @@ const ProductInfo = ({
   price,
   wishlist,
   variants,
+  setSelectedImage
 }: Product) => {
   const { addToCart } = useCart(); // Context api for using cart
 
@@ -111,7 +112,16 @@ const ProductInfo = ({
                       ?.images[0]?.imageUrl ?? `${productBrandLogo}`
                   }
                   selected={selectedColor === color}
-                  onClick={() => setSelectedColor(color)}
+                  // onClick={() => setSelectedColor(color)}
+                  onClick={() => {
+                    setSelectedColor(color);
+
+                    const selectedVariant = variants.find(
+                      (variant) => variant.color === color,
+                    );
+
+                    setSelectedImage(selectedVariant?.images[0]?.imageUrl);
+                  }}
                 />
               ),
             )}

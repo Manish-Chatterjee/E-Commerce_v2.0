@@ -29,6 +29,8 @@ const Container = styled.div`
 
   height: 400px;
 
+  /* border: 2px dashed green; */
+
   @media (max-width: 840px) {
     width: 80%;
   }
@@ -39,8 +41,14 @@ const MainImg = styled.div`
   height: 100%;
 
   margin: auto;
+
+  display: flex;
+  align-items: center;
 `;
 
 const Img = styled.img`
   object-fit: contain;
+  max-width: 500px;
+  /* border: 2px solid slateblue; */
+  margin: auto;
 `;

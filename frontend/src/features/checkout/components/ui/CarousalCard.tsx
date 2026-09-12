@@ -18,7 +18,6 @@ import { useCart } from "../../../../shared/context/Cart_Context/useCart";
 //   img: string;
 // };
 
-
 type Props = {
   data: CartItem[];
 };
@@ -42,7 +41,7 @@ const CarousalCard = () => {
     placeOrder,
   } = useCart();
 
-  console.log(cart,'cart from carousal')
+  console.log(cartCount, "cart from carousal");
 
   return (
     <Wrapper>
@@ -66,17 +65,20 @@ const CarousalCard = () => {
         {cart?.map((item) => (
           <Carousel.Item key={item.id}>
             <Card>
-              <CardImg variant="top" src={item.variant.images[0]?.imageUrl}/>
+              <CardImg variant="top" src={item.variant.images[0]?.imageUrl} />
 
               <Card.Body>
                 <h3>{item.product.productName}</h3>
                 <p>₹{item.product.price}</p>
+                <p>Size: {item.variant.size}</p>
                 <p>Qty: {item.quantity}</p>
                 <p>Total: ₹{item.product.price ?? 0 * item.quantity}</p>
 
                 {/* ///////////////////////////////////////////// */}
                 <BtnGrp>
-                  <CtrlButton onClick={() => removeFromCart(item.variant.variantId)}>
+                  <CtrlButton
+                    onClick={() => removeFromCart(item.variant.variantId)}
+                  >
                     <DeleteForeverIcon />
                   </CtrlButton>
                   <CtrlButton
@@ -86,7 +88,9 @@ const CarousalCard = () => {
                     -
                   </CtrlButton>
                   <p>{item.quantity}</p>
-                  <CtrlButton onClick={() => incrementQuantity(item.variant.variantId)}>
+                  <CtrlButton
+                    onClick={() => incrementQuantity(item.variant.variantId)}
+                  >
                     +
                   </CtrlButton>
                 </BtnGrp>

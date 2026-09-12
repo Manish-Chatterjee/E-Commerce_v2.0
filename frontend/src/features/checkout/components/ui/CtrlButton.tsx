@@ -32,4 +32,9 @@ const ButtonContainer = styled.button`
     box-shadow: 0px 0px 7px 3px rgb(199, 199, 199);
     transition: all 0.1s linear;
   }
+
+  &:disabled {
+    box-shadow: none;
+    opacity: 0.5;
+  }
 `;

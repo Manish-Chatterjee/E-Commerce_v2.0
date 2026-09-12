@@ -116,7 +116,8 @@ const DropDownContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  /* border-radius: 10px; */
+  border-radius: 10px;
+  background-color: #ffffff;
 
   h5 {
     background-color: white;
@@ -124,6 +125,7 @@ const DropDownContainer = styled.div`
     margin: 0;
     border-bottom: 1px solid rgb(158, 158, 158);
     text-align: center;
+    border-radius: 10px 10px 0 0;
   }
 
   button {
@@ -133,6 +135,7 @@ const DropDownContainer = styled.div`
 
     &:hover {
       box-shadow: inset 1px 1px 5px 1px rgb(180, 180, 180);
+      font-weight: 600;
     }
   }
 `;

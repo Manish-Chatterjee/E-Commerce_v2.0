@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import type { Order } from "./types/OrderTypes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../auth/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -45,7 +46,14 @@ const OrderHistory = () => {
     }
   };
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handlelogout = () => {
+    logout();
+    navigate("/", { replace: true });
+  };
 
   return (
     <>
@@ -56,7 +64,7 @@ const OrderHistory = () => {
           <Name>{user?.username ?? "Guest"}</Name>
         </Greetings>
         <Header>Order History</Header>
-        <Button title="Logout">
+        <Button title="Logout" onClick={handlelogout}>
           <LogoutIcon />
         </Button>
         {/* <Button>icon Profile</Button>
@@ -145,7 +153,7 @@ const StatusContainer = styled.div`
   flex-direction: column;
   gap: 15px;
   flex: 1;
-  align-items: center;
+  align-items: start;
 `;
 
 const Number = styled.div`
@@ -169,6 +177,7 @@ const ProductContainer = styled.div`
 
 const ButtonSidebar = styled(Button)`
   width: fit-content;
+  margin-left: 20px;
 `;
 
 const Header = styled.p`
