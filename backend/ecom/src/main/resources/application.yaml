@@ -3,27 +3,14 @@ spring:
   name: ecom
 
  datasource:
-  #localhost ------------
-  url: jdbc:mysql://localhost:3306/ecommerce_db
-  username: root
-  password: manish
-  
-  #Railway ------------
-  #url: jdbc:mysql://yamabiko.proxy.rlwy.net:14023/railway
-  #username: root
-  #password: XXSruFIvFrlcGHLOJSMRkjQaHMRCQVgp
-  #driver-class-name: com.mysql.cj.jdbc.Driver
-  
-  #Aiven ------------
-  #url: jdbc:mysql://ecommerce-db-ecom-v2.a.aivencloud.com:24263/defaultdb?sslMode=REQUIRED
-  #username: avnadmin
-  #password: AVNS_ZH_gDVimGLtKZ6UthaZ
-  #driver-class-name: com.mysql.cj.jdbc.Driver
+  url: ${DB_URL}
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD} 
 
  jpa:
   hibernate:
    ddl-auto: update
-  show-sql: true
+  show-sql: false
   properties:
    hibernate:
     format_sql: true
@@ -33,5 +20,5 @@ server:
  
  
 jwt:
- secret: YOUR_LONG_RANDOM_SECRET_KEY_HERE
+ secret: ${JWT_SECRET}
  expiration: 86400000 # 24hrs
