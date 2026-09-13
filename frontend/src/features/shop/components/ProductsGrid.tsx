@@ -1,8 +1,11 @@
 import ProductsCard from "./ProductsCard";
-
-import products from "../../../shared/sampleData/shopPage.json";
+// import products from "../../../shared/sampleData/shopPage.json";
 import styled from "styled-components";
 import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../api/shopApi";
+import type { Product } from "../types/product";
+import Loading from "@/features/loading/Loading";
 
 type ProductsGridProps = {
   onAddToCart: () => void;
@@ -15,20 +18,49 @@ type ContextType = {
 const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
   const { searchQuery } = useOutletContext<ContextType>();
 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // getting from db through sb
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await getAllProducts();
+        // console.log(products, "All Products");
+        setProducts(products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+  /////////////////////////
+
+  const filteredData = products.filter((item) =>
+    item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <ProductCardsContainer>
-      {products
-        .filter((item) =>
-          item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
-        .map((items) => (
+      {filteredData.length > 0 ? (
+        filteredData.map((items) => (
           <ProductsCard
             key={items.id}
             items={items}
             onAddToCart={onAddToCart}
-            disabled={items.stockAvailability === "out of stock"}
+            disabled={!items.stockAvailability}
           />
-        ))}
+        ))
+      ) : (
+        <p>No item found</p>
+      )}
     </ProductCardsContainer>
   );
 };

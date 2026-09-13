@@ -2,10 +2,11 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import styled from "styled-components";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Cart from "./ui/Cart";
 import SearchBar from "../../ui/SearchBar";
 import Profile from "./ui/Profile";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 type Props = {
   setSearchQuery: (value: string) => void;
@@ -28,6 +29,8 @@ const Navbar = ({ setSearchQuery }: Props) => {
 
   const displayName = sectionMap[sectionNameSpec] || "";
 
+  const { isAuthenticated } = useAuth();
+
   return (
     <Container>
       <NavbarContainer>
@@ -36,15 +39,24 @@ const Navbar = ({ setSearchQuery }: Props) => {
           <LogoName>ESNTL</LogoName>
         </Section>
         <Section>
-          <Link to="brands">
-            <Mid>Brands</Mid>
-          </Link>
-          <Link to="shop">
-            <Mid>Shop</Mid>
-          </Link>
-          <Link to="blog">
-            <Mid>Blog</Mid>
-          </Link>
+          {/* <StyledNavLink
+            to="brands"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Brands
+          </StyledNavLink> */}
+          <StyledNavLink
+            to="shop"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Shop
+          </StyledNavLink>
+          {/* <StyledNavLink
+            to="blog"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Blog
+          </StyledNavLink> */}
         </Section>
         <Section>
           {/* <IoIosSearchStyled /> */}
@@ -54,9 +66,11 @@ const Navbar = ({ setSearchQuery }: Props) => {
             <SearchIcon />
           </SearchBtnContainer>
 
-          <Link to="/checkout">
-            <Cart />
-          </Link>
+          {isAuthenticated && (
+            <Link to="/checkout">
+              <Cart />
+            </Link>
+          )}
 
           <Profile />
         </Section>
@@ -108,13 +122,15 @@ const Section = styled.div`
   /* border: 1px solid green; */
 `;
 
-const Mid = styled.p`
+const StyledNavLink = styled(NavLink)`
   padding: 5px 10px;
+  margin: 0;
   font-weight: 600;
   color: gray;
   cursor: pointer;
   position: relative;
   display: inline-block;
+  text-decoration: none;
 
   &::after {
     content: "";
@@ -134,12 +150,21 @@ const Mid = styled.p`
   &:hover::after {
     width: 100%;
   }
+
+  &.active {
+    color: #252525;
+  }
+
+  &.active::after {
+    width: 100%;
+  }
 `;
 
 const LogoName = styled.p`
   font-weight: 800;
   font-size: 24px;
   font-style: italic;
+  margin: 0;
 `;
 
 const SectionName = styled.div`
@@ -178,6 +203,7 @@ const SectionName = styled.div`
   @media screen and (max-width: 480px) {
     font-size: 80px;
     font-weight: 700;
+    height: 200px;
   }
 `;
 
@@ -191,3 +217,9 @@ const SearchBtnContainer = styled.button`
   padding: 0;
   cursor: pointer;
 `;
+
+// const StyledNavLink = styled(NavLink)`
+//   &.active {
+//     color: red;
+//   }
+// `

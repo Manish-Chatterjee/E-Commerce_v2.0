@@ -13,7 +13,7 @@ const CheckoutPage = () => {
   const { cart: selectedData } = useCart(); // destructuring with alias or renaming
 
   const subtotal = selectedData.reduce((accu, item) => {
-    return accu + item.price * item.quantity;
+    return accu + item.product.price * item.quantity;
   }, 0);
 
   const discount = (subtotal: number, priceOff: number) =>

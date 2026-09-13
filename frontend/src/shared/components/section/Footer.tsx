@@ -8,7 +8,7 @@ import {
 import Button from "../ui/Button";
 
 const Footer = () => {
-  const date = new Date().getFullYear();
+  const year = new Date().getFullYear();
   return (
     <Container>
       <SubscribeContainer>
@@ -35,21 +35,21 @@ const Footer = () => {
       </SubscribeContainer>
 
       <CustomerReachSection>
-        <div style={{ display: "flex", gap: "60px" }}>
-          <div>
+        <LeftContainer>
+          <span>
             <h3>About</h3>
             <p>Blog</p>
             <p>Meet The Team</p>
             <p>Contact Us</p>
-          </div>
-          <div>
+          </span>
+          <span>
             <h3>Support</h3>
             <p>Contact Us</p>
             <p>Shipping</p>
             <p>Return</p>
             <p>FAQ</p>
-          </div>
-        </div>
+          </span>
+        </LeftContainer>
 
         <SocialContainer>
           <p>Social Media</p>
@@ -65,7 +65,7 @@ const Footer = () => {
       <HR />
 
       <FooterBottom>
-        Copyright &copy; {date} Uangku. All Rights Reserved.
+        Copyright &copy;{year} Uangku. All Rights Reserved.
         <div>
           <p>Teams of Service</p>
           <p>Privacy Policy</p>
@@ -79,12 +79,16 @@ export default Footer;
 
 const Container = styled.div`
   margin-inline: 15px;
+
+  @media screen and (max-width: 840px) {
+    margin: 0;
+  }
 `;
 
 const SubscribeContainer = styled.div`
   background: linear-gradient(#2a2a2a, #111111);
   color: white;
-  margin: 0;
+  margin: 0 0 40px 0;
   padding: 20px;
   border-radius: 15px;
   display: flex;
@@ -121,6 +125,7 @@ const SubscribeBtn = styled.div`
     /* width: 200px; */
     flex: 1;
     min-width: 0; /* prevents overflow issue */
+    color: #525252;
   }
 `;
 
@@ -134,14 +139,14 @@ const ButtonStyled = styled(Button)`
 
 const SocialMediaContainer = styled.div`
   display: flex;
-  gap: 5px;
+  gap: 15px;
 
   & .socials {
     border-radius: 100px;
     background-color: black;
     padding: 5px;
     color: white;
-    font-size: 20px;
+    font-size: 35px;
   }
 
   & .socials:hover {
@@ -167,19 +172,41 @@ const CustomerReachSection = styled.div`
   justify-content: space-between;
 `;
 
+const LeftContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(400px, 1fr));
+
+  & span {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  & p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #5b5b5b;
+  }
+`;
+
 const FooterBottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
+  margin: 0 0 10px 0;
 
-  /* border: 1px solid black; */
+  /* border: 1px solid green; */
 
   & div {
     display: flex;
     gap: 40px;
     margin: 0;
     align-items: center;
+
+    & p {
+      margin: 0;
+    }
   }
 `;
 
@@ -190,7 +217,10 @@ const SocialContainer = styled.div`
 
   & p {
     margin: 10px 0;
-    font-size: 14px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    color: #a2a2a2;
   }
 `;
 

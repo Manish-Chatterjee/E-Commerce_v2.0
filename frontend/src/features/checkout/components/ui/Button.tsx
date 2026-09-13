@@ -4,10 +4,22 @@ type ButtonProps = {
   type?: "submit" | "button";
   children: React.ReactNode;
   disabled?: boolean; // ✅ add this
+  className?: string;
+  onClick?: () => void
 };
 
-const Button = ({ type = "button", children, disabled }: ButtonProps) => {
-  return <ButtonContainer type={type} disabled={disabled}>{children}</ButtonContainer>;
+const Button = ({
+  type = "button",
+  children,
+  disabled,
+  className,
+  onClick
+}: ButtonProps) => {
+  return (
+    <ButtonContainer type={type} disabled={disabled} className={className} onClick={onClick}>
+      {children}
+    </ButtonContainer>
+  );
 };
 
 export default Button;
@@ -19,6 +31,7 @@ const ButtonContainer = styled.button`
   width: 100%;
   cursor: pointer;
   padding: 10px;
+  border-radius: 7px;
 
   &:disabled {
     background-color: gray;

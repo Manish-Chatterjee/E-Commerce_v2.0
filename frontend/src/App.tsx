@@ -3,6 +3,7 @@ import BlogPage from "./features/blogs/pages/BlogPage";
 import BrandsPage from "./features/brands/pages/BrandsPage";
 import Products from "./features/products/Products";
 import ShopPage from "./features/shop/pages/ShopPage";
+import AdminDashboard from "./features/admin/AdminDashboard";
 import "./shared/styles/GlobalStyles.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CheckoutPage from "./features/checkout/pages/CheckoutPage";
@@ -16,6 +17,7 @@ import { AuthProvider } from "./features/auth/AuthProvider";
 import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
 import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyProvider";
+import AdminRoute from "./AdminRoute";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -62,6 +64,7 @@ const App = () => {
         {
           path: "/orderHistory",
           element: <OrderHistory />,
+          // element: <OrderHistoryGPTVersion />,
         },
         {
           path: "/checkout",
@@ -72,7 +75,7 @@ const App = () => {
           element: <OrderConfirmationPage />,
         },
         {
-          path: "/productDetails/:id",
+          path: "/productDetails/:productId",
           element: <ProductDetails />,
         },
         {
@@ -82,6 +85,14 @@ const App = () => {
         {
           path: "/loading",
           element: <Loading />,
+        },
+        {
+          path: "/api/admin/dashboard",
+          element: (
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          ),
         },
       ],
     },

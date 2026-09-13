@@ -3,28 +3,68 @@ import ProductImages from "../components/ProductImages";
 import ProductInfo from "../components/ProductInfo";
 import SecondNavbar from "../../../shared/components/section/SecondNavbar";
 import { useParams } from "react-router-dom";
-import Products from "../../../shared/sampleData/shopPage.json";
+import { useEffect, useState } from "react";
+import Loading from "@/features/loading/Loading";
+import type { Product } from "../types/ProductInfoTypes";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
-  const { id } = useParams();
-  const ID = Number(id);
-  const productData = Products.find((item) => item.id === ID);
+  const { productId } = useParams();
+
+  const [product, setProduct] = useState<Product>();
+
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    product?.productImage,
+  );
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(
+          // `${BASE_URL}/products/id/${id}`,
+          `${BASE_URL}/products/${productId}`,
+        );
+
+        if (!response.ok) {
+          throw new Error("Product not found");
+        }
+
+        const data = await response.json();
+
+        setProduct(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
+
+  console.log(product, "product");
+
+  if (!product) {
+    return <Loading />;
+  }
 
   return (
     <>
-      <SecondNavbar logo={productData?.productBrandLogo} />
+      <SecondNavbar logo={product?.productBrandLogo} />
       <Container>
         <ProductImages
-          id={productData?.id}
-          productImages={productData?.productImages}
+          id={product?.id}
+          // productImage={product?.productImage}
+          productImage={selectedImage ? selectedImage : product?.productImage}
         />
         <ProductInfo
-          id={productData?.id}
-          productBrandLogo={productData?.productBrandLogo}
-          productBrand={productData?.productBrand}
-          productName={productData?.productName}
-          price={productData?.price}
+          id={product?.id}
+          productBrandLogo={product?.productBrandLogo}
+          productBrand={product?.productBrand}
+          productName={product?.productName}
+          price={product?.price}
+          wishlist={product?.wishlist}
+          variants={product?.variants}
+          setSelectedImage={setSelectedImage}
         />
       </Container>
     </>

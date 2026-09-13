@@ -1,23 +1,24 @@
-import styled from "styled-components";
+import DropDown from "./DropDown";
 
 const Profile = () => {
   return (
     <>
-      <Img
+      {/* <Img
         src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
         alt="profile-logo"
-      />
+      /> */}
+      <DropDown />
     </>
   );
 };
 
 export default Profile;
 
-const Img = styled.img`
-  height: 40px;
-  border-radius: 100px;
-  margin-inline: 5px;
-`;
+// const Img = styled.img`
+//   height: 40px;
+//   border-radius: 100px;
+//   margin-inline: 5px;
+// `;
 
 // for dropdown menu authentication, show profile picture if logged in else show 2 options for logout and signout
 

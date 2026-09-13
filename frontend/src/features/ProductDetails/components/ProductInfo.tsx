@@ -9,37 +9,18 @@ import SnackBarAlert from "../../../shared/components/ui/SnackBarAlert";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 
 import { useCart } from "../../../shared/context/Cart_Context/useCart";
-
-type ButtonProps = {
-  image: string;
-  selected: boolean;
-};
-
-type ProductSize = {
-  size: number;
-  available: boolean;
-  stock?: number;
-  sku?: string;
-};
-
-type Product = {
-  id?: number;
-  productBrand?: string;
-  productBrandLogo?: string;
-  productID?: string;
-  productName?: string;
-  price?: number;
-  colors?: string[];
-  sizes?: ProductSize[];
-};
+import type { Product, ButtonProps } from "../types/ProductInfoTypes";
 
 const ProductInfo = ({
   id,
   productBrand,
   productBrandLogo,
   productName,
-  productID,
+  productId,
   price,
+  wishlist,
+  variants,
+  setSelectedImage
 }: Product) => {
   const { addToCart } = useCart(); // Context api for using cart
 
@@ -47,7 +28,12 @@ const ProductInfo = ({
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-    addToCart(id);
+    console.log(variants[0].variantId, "handleAddToCart");
+    if (!selectedVariant) {
+      console.log("Please select a valid variant");
+      return;
+    }
+    addToCart(selectedVariant.variantId);
 
     if (open) {
       setOpen(false); // close first
@@ -62,17 +48,27 @@ const ProductInfo = ({
   };
   /////////////////////////////////////////////
 
-  const [selectedColorId, setSelectedColorId] = useState<number | null>(null);
-  const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
+  // const [selectedColorId, setSelectedColorId] = useState<number | null>(null);
+  // const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  // const products = [{ id: 1 }, { id: 2 }, { id: 3 }];
   // const sizes = [6, 7, 8, 9, 10, 11];
-  const sizes = [
-    { size: 6, available: true },
-    { size: 7, available: true },
-    { size: 8, available: false },
-    { size: 9, available: true },
-    { size: 10, available: false },
-  ];
+  // const sizes = [
+  //   { size: 6, available: true },
+  //   { size: 7, available: true },
+  //   { size: 8, available: false },
+  //   { size: 9, available: true },
+  //   { size: 10, available: false },
+  // ];
+
+  const selectedVariant = variants.find(
+    (variant) =>
+      variant.color === selectedColor && variant.size === selectedSize,
+  );
+
+  console.log(selectedVariant?.variantId, "selected variant");
+
   return (
     <>
       <Container>
@@ -81,18 +77,22 @@ const ProductInfo = ({
             <img src={productBrandLogo} alt="logo" width={30} />
             <span>{productBrand}</span>
           </Brand>
-          <p>{productID}</p>
+          <p>{productId}</p>
         </BrandingContainer>
         <h4>{productName}</h4>
         <H3>{formatPrice(price)}</H3>
         <div>
-          <span>
-            <span>color</span>
-            <span>white</span>
-          </span>
-          <ProductSelection>
-            {products.map((item) => (
+          {selectedColor != "" && (
+            <span>
+              <span>color: </span>
+              <span>{selectedColor}</span>
+            </span>
+          )}
+
+          {/* <ProductSelection>
+            {variants.map((item) => (
               <>
+              {console.log(item.size,'item')}
                 <Button
                   image="https://www.superkicks.in/cdn/shop/files/5-2026-02-09T173219.662.png?v=1770638590&width=533"
                   key={item.id}
@@ -101,15 +101,41 @@ const ProductInfo = ({
                 ></Button>
               </>
             ))}
+          </ProductSelection> */}
+          <ProductSelection>
+            {[...new Set(variants.map((variant) => variant.color))].map(
+              (color) => (
+                <Button
+                  key={color}
+                  image={
+                    variants.find((variant) => variant.color === color)
+                      ?.images[0]?.imageUrl ?? `${productBrandLogo}`
+                  }
+                  selected={selectedColor === color}
+                  // onClick={() => setSelectedColor(color)}
+                  onClick={() => {
+                    setSelectedColor(color);
+
+                    const selectedVariant = variants.find(
+                      (variant) => variant.color === color,
+                    );
+
+                    setSelectedImage(selectedVariant?.images[0]?.imageUrl);
+                  }}
+                />
+              ),
+            )}
           </ProductSelection>
         </div>
         <div>
-          <span>
-            <span>Size</span>
-            <span>EU Men</span>
-          </span>
+          {selectedColor != "" && (
+            <span>
+              <span>Size</span>
+              <span>EU Men</span>
+            </span>
+          )}
 
-          <SizeContainer>
+          {/* <SizeContainer>
             {sizes.map((size) => (
               <SizeButton
                 key={size.size}
@@ -121,13 +147,32 @@ const ProductInfo = ({
                 {size.size}
               </SizeButton>
             ))}
+          </SizeContainer> */}
+          <SizeContainer>
+            {variants
+              .filter((variant) => variant.color === selectedColor)
+              .map((variant) => (
+                <SizeButton
+                  key={variant.variantId}
+                  $available={variant.availability}
+                  disabled={!variant.availability}
+                  $selected={selectedSize === variant.size}
+                  onClick={() => setSelectedSize(variant.size)}
+                >
+                  {variant.size}
+                </SizeButton>
+              ))}
           </SizeContainer>
 
-          <p>Size guide</p>
+          {selectedColor != "" && <p>Size guide</p>}
         </div>
         <BtnContainer>
-          <AddToCartBtn onAddToCart={handleAddToCart} />
-          <WishlistBtn />
+          <AddToCartBtn
+            onAddToCart={handleAddToCart}
+            disabled={selectedColor == "" || selectedSize == ""}
+          />
+          <WishlistBtn wishlist={wishlist} id={id} />
+          {/* <WishlistBtn/> */}
         </BtnContainer>
 
         <DeliveryMsg>
@@ -271,7 +316,7 @@ const SizeButton = styled.button<{ $available: boolean; $selected: boolean }>`
     border-color: ${({ $available }) => ($available ? "#000" : "#d9d9d9")};
   }
 
-    &:disabled {
+  &:disabled {
     cursor: not-allowed;
   }
 `;

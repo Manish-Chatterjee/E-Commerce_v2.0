@@ -1,5 +1,6 @@
 // CurrencySwitcher.tsx
 
+import type { Currency } from "./CurrencyContext";
 import { useCurrency } from "./useCurrency";
 
 const CurrencySwitcher = () => {
@@ -8,7 +9,7 @@ const CurrencySwitcher = () => {
   return (
     <select
       value={currency}
-      onChange={(e) => setCurrency(e.target.value as any)}
+      onChange={(e) => setCurrency(e.target.value as Currency)}
       style={{ padding: "6px", borderRadius: "6px" }}
     >
       <option value="USD">USD ($)</option>

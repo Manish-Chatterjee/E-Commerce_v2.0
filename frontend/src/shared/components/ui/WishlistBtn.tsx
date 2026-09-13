@@ -2,12 +2,27 @@ import { useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styled from "styled-components";
+import { updateWishlist } from "@/features/shop/api/shopApi";
 
-const WishlistBtn = () => {
-  const [wishListed, setWishlisted] = useState(false);
+type WishlistBtnProps = {
+  wishlist: boolean;
+  id: number;
+};
+
+const WishlistBtn = ({ wishlist, id }: WishlistBtnProps) => {
+  const [wishListed, setWishlisted] = useState(wishlist);
+
+  const handleWishlist = async () => {
+  try {
+    await updateWishlist(id, !wishListed);
+    setWishlisted(!wishListed);
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <>
-      <Button onClick={() => setWishlisted(!wishListed)}>
+      <Button onClick={handleWishlist}>
         {wishListed ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </Button>
     </>
