@@ -51,7 +51,7 @@ const ProductCard = ({ orders, filteredOpt }: ProductCardProps) => {
   // useEffect(() => {
   //   const fetchOrders = async () => {
   //     try {
-  //       const response = await fetch("http://localhost:8080/api/orders", {
+  //       const response = await fetch("http://${BASE_URL}/api/orders", {
   //         credentials: "include",
   //       });
 

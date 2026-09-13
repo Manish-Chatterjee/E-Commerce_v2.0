@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "@/features/loading/Loading";
 import type { Product } from "../types/ProductInfoTypes";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
@@ -21,8 +22,8 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          // `http://localhost:8080/api/products/id/${id}`,
-          `http://localhost:8080/api/products/${productId}`,
+          // `${BASE_URL}/products/id/${id}`,
+          `${BASE_URL}/products/${productId}`,
         );
 
         if (!response.ok) {

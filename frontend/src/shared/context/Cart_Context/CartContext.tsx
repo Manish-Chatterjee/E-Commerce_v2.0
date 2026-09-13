@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 // import Products from "../../sampleData/shopPage.json";
 import { CartContext } from "./Cart_Context";
 import type { CartContextType, CartItem } from "./CartTypes"; // type-only import
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   // const [cart, setCart] = useState<CartItem[]>(() => {
@@ -15,7 +16,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // });
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  console.log(cart,'cart')
+  console.log(cart, "cart");
 
   // useEffect(() => {
   //   localStorage.setItem("cart", JSON.stringify(cart));
@@ -23,7 +24,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/cart", {
+        const response = await fetch(`${BASE_URL}/cart`, {
           credentials: "include",
         });
 
@@ -44,7 +45,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   //  ✅ Place Order
   const placeOrder = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/orders", {
+      const response = await fetch(`${BASE_URL}/orders`, {
         method: "POST",
         credentials: "include",
       });
@@ -91,7 +92,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = async (variantId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/cart/items?variantId=${variantId}&quantity=1`,
+        `${BASE_URL}/cart/items?variantId=${variantId}&quantity=1`,
         {
           method: "POST",
           credentials: "include",
@@ -115,13 +116,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   //   setCart(cart.filter((item) => item.id !== id));
   const removeFromCart = async (variantId: string) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/cart/items/${variantId}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        },
-      );
+      const response = await fetch(`${BASE_URL}/cart/items/${variantId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to remove item");
@@ -139,7 +137,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const updateQuantity = async (variantId: string, quantity: number) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/cart/items/${variantId}?quantity=${quantity}`,
+        `${BASE_URL}/cart/items/${variantId}?quantity=${quantity}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -162,7 +160,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // const clearCart = () => setCart([]);
   const clearCart = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${BASE_URL}/cart`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -225,7 +223,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     clearCart,
     incrementQuantity,
     decrementQuantity,
-    placeOrder
+    placeOrder,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

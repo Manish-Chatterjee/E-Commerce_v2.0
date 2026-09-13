@@ -7,6 +7,7 @@ import type { Order } from "./types/OrderTypes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -15,7 +16,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/orders", {
+        const response = await fetch(`${BASE_URL}/orders`, {
           credentials: "include",
         });
 

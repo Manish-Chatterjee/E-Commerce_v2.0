@@ -6,6 +6,8 @@ import {
   type User,
 } from "./AuthContext";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/auth/me", {
+        const response = await fetch(`${BASE_URL}/auth/me`, {
           method: "GET",
           credentials: "include",
         });
@@ -66,7 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // 🔐 SIGNUP
   const signup = async (values: SignupValues) => {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
 
         headers: {
@@ -110,7 +112,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // 🔐 LOGIN
   const login = async (values: LoginValues): Promise<boolean> => {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
 
         headers: {
@@ -131,7 +133,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       // 🔥 Get logged-in user
-      const meResponse = await fetch("http://localhost:8080/api/auth/me", {
+      const meResponse = await fetch(`${BASE_URL}/auth/me`, {
         method: "GET",
         credentials: "include",
       });
@@ -196,7 +198,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // 🚪 LOGOUT
   const logout = async (): Promise<void> => {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/logout", {
+      const response = await fetch(`${BASE_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
