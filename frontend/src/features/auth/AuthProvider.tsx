@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
-
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,13 +114,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
-
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
 
         // 🔥 Important for HttpOnly cookie
-        credentials: "include",
+        // credentials: "include",
 
         body: JSON.stringify({
           username: values.username,
