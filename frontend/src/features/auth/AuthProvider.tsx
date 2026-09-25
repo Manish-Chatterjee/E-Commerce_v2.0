@@ -5,10 +5,13 @@ import {
   type SignupValues,
   type User,
 } from "./AuthContext";
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { getAuthService } from "./services/authService";
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const { mode } = useDataMode();
+  const authService = getAuthService(mode);
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   // const [user, setUser] = useState<User | null>(() => {
@@ -26,17 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/auth/me`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          setUser(null);
-          return;
-        }
-
-        const data: User = await response.json();
+        const data = await authService.getCurrentUser();
 
         setUser(data);
       } catch (error) {
@@ -48,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchCurrentUser();
-  }, []);
+  }, [authService]);
 
   // // 🔐 SIGNUP
   // const signup = (values: User) => {
@@ -67,31 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // 🔐 SIGNUP
   const signup = async (values: SignupValues) => {
-    try {
-      const response = await fetch(`${BASE_URL}/auth/register`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          username: values.username,
-          email: values.email,
-          password: values.password,
-        }),
-      });
-
-      if (!response.ok) {
-        return false;
-      }
-
-      return true;
-    } catch (error) {
-      console.error("Signup error:", error);
-
-      return false;
-    }
+    return authService.signup(values);
   };
 
   // // 🔐 LOGIN
@@ -111,47 +80,62 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // 🔐 LOGIN
   const login = async (values: LoginValues): Promise<boolean> => {
-    try {
-      const response = await fetch(`${BASE_URL}/auth/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const success = await authService.login(values);
 
-        // 🔥 Important for HttpOnly cookie
-        // credentials: "include",
-
-        body: JSON.stringify({
-          username: values.username,
-          password: values.password,
-        }),
-      });
-
-      if (!response.ok) {
-        return false;
-      }
-
-      // 🔥 Get logged-in user
-      const meResponse = await fetch(`${BASE_URL}/auth/me`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (!meResponse.ok) {
-        return false;
-      }
-
-      const loggedInUser: User = await meResponse.json();
-
-      setUser(loggedInUser);
-
-      return true;
-    } catch (error) {
-      console.error("Login error:", error);
-
+    if (!success) {
       return false;
     }
+
+    const user = await authService.getCurrentUser();
+
+    if (!user) {
+      return false;
+    }
+
+    setUser(user);
+
+    return true;
+    // try {
+    //   const response = await fetch(`${BASE_URL}/auth/login`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+
+    //     // 🔥 Important for HttpOnly cookie
+    //     // credentials: "include",
+
+    //     body: JSON.stringify({
+    //       username: values.username,
+    //       password: values.password,
+    //     }),
+    //   });
+
+    //   if (!response.ok) {
+    //     return false;
+    //   }
+
+    //   // 🔥 Get logged-in user
+    //   const meResponse = await fetch(`${BASE_URL}/auth/me`, {
+    //     method: "GET",
+    //     credentials: "include",
+    //   });
+
+    //   if (!meResponse.ok) {
+    //     return false;
+    //   }
+
+    //   const loggedInUser: User = await meResponse.json();
+
+    //   setUser(loggedInUser);
+
+    //   return true;
+    // } catch (error) {
+    //   console.error("Login error:", error);
+
+    //   return false;
+    // }
 
     // const data = await response.json();
 
@@ -197,16 +181,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // 🚪 LOGOUT
   const logout = async (): Promise<void> => {
+    // try {
+    //   const response = await fetch(`${BASE_URL}/auth/logout`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //   });
+    //   console.log("Logout status:", response.status);
+    // } catch (error) {
+    //   console.error("Logout error:", error);
+    // } finally {
+    //   // Remove user from React state
+    //   setUser(null);
+    // }
     try {
-      const response = await fetch(`${BASE_URL}/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      console.log("Logout status:", response.status);
-    } catch (error) {
-      console.error("Logout error:", error);
+      await authService.logout();
     } finally {
-      // Remove user from React state
       setUser(null);
     }
   };

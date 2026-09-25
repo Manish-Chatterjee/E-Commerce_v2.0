@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "@/features/loading/Loading";
 import type { Product } from "../types/ProductInfoTypes";
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
+import { getProductDetailsService } from "../services/productDetailsServices";
 
 //remove the default logo value when data is passed properly, pass img src
 const ProductDetails = () => {
@@ -18,19 +19,14 @@ const ProductDetails = () => {
     product?.productImage,
   );
 
+  const { mode } = useDataMode();
+
   useEffect(() => {
+    if (!productId) return;
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          // `${BASE_URL}/products/id/${id}`,
-          `${BASE_URL}/products/${productId}`,
-        );
-
-        if (!response.ok) {
-          throw new Error("Product not found");
-        }
-
-        const data = await response.json();
+        const productService = getProductDetailsService(mode);
+        const data = await productService.getProductById(productId);
 
         setProduct(data);
       } catch (error) {
@@ -39,7 +35,7 @@ const ProductDetails = () => {
     };
 
     fetchProduct();
-  }, [productId]);
+  }, [productId, mode]);
 
   console.log(product, "product");
 

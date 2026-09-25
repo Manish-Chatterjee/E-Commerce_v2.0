@@ -18,6 +18,7 @@ import { CartProvider } from "./shared/context/Cart_Context/CartContext";
 import Loading from "./features/loading/Loading";
 import { CurrencyProvider } from "./shared/context/Currency_Context/CurrencyProvider";
 import AdminRoute from "./AdminRoute";
+import { DataModeProvider } from "./shared/context/DataMode_Context/DataModeProvider";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -101,15 +102,17 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <AuthProvider>
-          <CurrencyProvider>
-            <CartProvider>
-              <Suspense fallback={<Loading />}>
-                <RouterProvider router={router} />
-              </Suspense>
-            </CartProvider>
-          </CurrencyProvider>
-        </AuthProvider>
+        <DataModeProvider>
+          <AuthProvider>
+            <CurrencyProvider>
+              <CartProvider>
+                <Suspense fallback={<Loading />}>
+                  <RouterProvider router={router} />
+                </Suspense>
+              </CartProvider>
+            </CurrencyProvider>
+          </AuthProvider>
+        </DataModeProvider>
       </div>
     </>
   );

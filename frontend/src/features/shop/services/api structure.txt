@@ -1,0 +1,30 @@
+src/
+├── context/
+│   └── DataModeContext.tsx
+│
+├── shop/
+│   ├── api/
+│   │   ├── shopApi.ts          ← backend
+│   │   └── shopLocalApi.ts     ← JSON/localStorage
+│   │
+│   ├── services/
+│   │   └── shopService.ts      ← decides which API to use
+│   │
+│   ├── components/
+│   └── pages/
+│
+├── auth/
+│   ├── api/
+│   │   ├── authApi.ts
+│   │   └── authLocalApi.ts
+│   │
+│   ├── services/
+│   │   └── authService.ts
+│   │
+│   └── ...
+│
+└── cart/
+    ├── api/
+    │   ├── cartApi.ts
+    │   └── cartLocalApi.ts
+    └── ...

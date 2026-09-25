@@ -1,0 +1,83 @@
+[
+  {
+    "productBrand": "Nike",
+    "productBrandLogo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+    "productId": "xm856c",
+    "productName": "Nike Dunk Low Suede",
+    "price": 56890,
+    "stockAvailability": "true",
+    "productImage": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IO4244-200_1.jpg?rnd=20200526195200&tr=w-1536",
+    "wishlist": "false",
+    "variants": [
+      {
+        "color": "Coffee",
+        "size": "8",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IO4244-200_1.jpg?rnd=20200526195200&tr=w-1536"
+          }
+        ]
+      },
+      {
+        "color": "Coffee",
+        "size": "10",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IO4244-200_1.jpg?rnd=20200526195200&tr=w-1536"
+          }
+        ]
+      },
+      {
+        "color": "Coffee",
+        "size": "11",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IO4244-200_1.jpg?rnd=20200526195200&tr=w-1536"
+          }
+        ]
+      },
+      {
+        "color": "Sea Blue",
+        "size": "8",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IM6572-102_1.jpg?rnd=20200526195200&tr=w-1536"
+          }
+        ]
+      },
+      {
+        "color": "Sea Blue",
+        "size": "9",
+        "availability": false,
+        "images": [
+          {
+            "imageUrl": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IM6572-102_1.jpg?rnd=20200526195200&tr=w-1536"
+          }
+        ]
+      },
+      {
+        "color": "Panda",
+        "size": "10",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://i8.amplience.net/i/jpl/jd_DD1391-100_C_0001_a?qlt=92&w=600&h=425&v=1&fmt=auto"
+          },
+          {
+            "imageUrl": "https://assets.myntassets.com/assets/images/2025/MARCH/4/4y9yTXWV_d460a3f50e534b41888fda0be0202043.jpg"
+          },
+          {
+            "imageUrl": "https://images.moresneakers.com/1699392281513.jpg"
+          },
+          {
+            "imageUrl": "https://i.ytimg.com/vi/1qQSf_lEd-E/maxresdefault.jpg"
+          }
+        ]
+      }
+    ]
+  }
+]
