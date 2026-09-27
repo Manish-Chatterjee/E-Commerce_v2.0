@@ -3,9 +3,11 @@ import ProductsCard from "./ProductsCard";
 import styled from "styled-components";
 import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api/shopApi";
+// import { getAllProducts } from "../api/shopApi";
 import type { Product } from "../types/product";
 import Loading from "@/features/loading/Loading";
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
+import { getShopService } from "../services/shopService";
 
 type ProductsGridProps = {
   onAddToCart: () => void;
@@ -21,12 +23,18 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // getting from db through sb
+  const { mode } = useDataMode();
+  console.log(mode,'shop mode')
+
+  // getting from db through sb (or) local storage
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await getAllProducts();
-        // console.log(products, "All Products");
+        const shopService = getShopService(mode);
+
+        const products = await shopService.getAllProducts();
+
+        // console.log(products,'products LOCAL')
         setProducts(products);
       } catch (error) {
         console.log(error);
@@ -36,7 +44,7 @@ const ProductsGrid = ({ onAddToCart }: ProductsGridProps) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [mode]);
   /////////////////////////
 
   const filteredData = products.filter((item) =>

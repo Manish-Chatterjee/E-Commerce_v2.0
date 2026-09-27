@@ -7,6 +7,7 @@ import AuthBg from "../../assets/AuthBg.jpg";
 import SnackBarAlert from "../../shared/components/ui/SnackBarAlert";
 import { useState } from "react";
 import { BouncingDots } from "@/components-ui/bouncing-dots";
+import DataModeToggle from "@/shared/components/ui/DataModeToggle";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -30,6 +31,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   const isSignup = mode === "signup";
   return (
     <Container>
+      <DataModeToggle />
       {isSignup ? <H2>Sign Up</H2> : <H2>Login</H2>}
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
@@ -111,7 +113,13 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           </div>
 
           <Button type="submit" disabled={loading}>
-            {loading ? <BouncingDots className="w-12 [--duration:2s] text-[#474747]"/> : isSignup ? "Sign Up" : "Login"}
+            {loading ? (
+              <BouncingDots className="w-12 [--duration:2s] text-[#474747]" />
+            ) : isSignup ? (
+              "Sign Up"
+            ) : (
+              "Login"
+            )}
           </Button>
 
           {isSignup ? (

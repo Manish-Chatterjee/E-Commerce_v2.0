@@ -6,7 +6,7 @@ import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../shared/context/Cart_Context/useCart";
 import React from "react";
-import { generateId } from "../../../shared/utils/randomID";
+import { randomID } from "../../../shared/utils/randomID";
 
 type FormInfoProps = {
   setDeliveryState: React.Dispatch<React.SetStateAction<number>>;
@@ -23,7 +23,7 @@ const FormInfo = ({
   subtotal,
   priceOff,
   discountedPrice,
-  deliveryType
+  deliveryType,
 }: FormInfoProps) => {
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const FormInfo = ({
 
   // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   // console.log(cart); // [] if empty
-  console.log(cart.length, 'cart length'); // 0 if empty
+  console.log(cart.length, "cart length"); // 0 if empty
 
   return (
     <div className={className}>
@@ -49,7 +49,16 @@ const FormInfo = ({
           // localStorage.setItem("cart", JSON.stringify([])); // clears the cart when order is placed
           placeOrder();
           clearCart();
-          navigate("/orderConfirmed", { replace: true , state: {subtotal, priceOff, discountedPrice, deliveryType, orderId: generateId()}}); // replace: true, removes the last history page stored
+          navigate("/orderConfirmed", {
+            replace: true,
+            state: {
+              subtotal,
+              priceOff,
+              discountedPrice,
+              deliveryType,
+              orderId: randomID(),
+            },
+          }); // replace: true, removes the last history page stored
         }}
       >
         {(formik) => (

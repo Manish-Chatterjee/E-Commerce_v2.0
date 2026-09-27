@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 // import Products from "../../sampleData/shopPage.json";
-import { CartContext } from "./Cart_Context";
+import { CartContext } from "./CartContext";
 import type { CartContextType, CartItem } from "./CartTypes"; // type-only import
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useDataMode } from "../DataMode_Context/useDataMode";
+import { getCartService } from "@/features/cart/services/cartService";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   // const [cart, setCart] = useState<CartItem[]>(() => {
@@ -18,43 +19,44 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   console.log(cart, "cart");
 
+  const { mode } = useDataMode();
+
   // useEffect(() => {
   //   localStorage.setItem("cart", JSON.stringify(cart));
   // }, [cart]);
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/cart`, {
-          credentials: "include",
-        });
+        const cartService = getCartService(mode);
+        const data = await cartService.getCartItem();
+        // setCart(data.items || []);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch cart");
-        }
+        console.log("DATA FROM SERVICE:", data);
+        console.log("IS ARRAY:", Array.isArray(data));
 
-        const data = await response.json();
-        setCart(data.items || []);
+        setCart(data || []);
       } catch (error) {
         console.error("Error fetching cart:", error);
       }
     };
 
     fetchCart();
-  }, []);
+  }, [mode]);
 
   //  ✅ Place Order
   const placeOrder = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/orders`, {
-        method: "POST",
-        credentials: "include",
-      });
+      // const response = await fetch(`${BASE_URL}/orders`, {
+      //   method: "POST",
+      //   credentials: "include",
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to place order");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to place order");
+      // }
 
-      const order = await response.json();
+      const cartService = getCartService(mode);
+      const order = await cartService.placeOrder();
 
       setCart([]);
 
@@ -91,21 +93,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // };
   const addToCart = async (variantId: string) => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/cart/items?variantId=${variantId}&quantity=1`,
-        {
-          method: "POST",
-          credentials: "include",
-        },
-      );
+      // const response = await fetch(
+      //   `${BASE_URL}/cart/items?variantId=${variantId}&quantity=1`,
+      //   {
+      //     method: "POST",
+      //     credentials: "include",
+      //   },
+      // );
 
-      if (!response.ok) {
-        throw new Error("Failed to add item to cart");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to add item to cart");
+      // }
 
-      const data = await response.json();
+      const cartService = getCartService(mode);
+      const data = await cartService.addToCart(variantId);
 
-      setCart(data.items || []);
+      // setCart(data.items || []);
+      setCart(data || []);
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -116,18 +120,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   //   setCart(cart.filter((item) => item.id !== id));
   const removeFromCart = async (variantId: string) => {
     try {
-      const response = await fetch(`${BASE_URL}/cart/items/${variantId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      // const response = await fetch(`${BASE_URL}/cart/items/${variantId}`, {
+      //   method: "DELETE",
+      //   credentials: "include",
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to remove item");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to remove item");
+      // }
 
-      const data = await response.json();
+      const cartService = getCartService(mode);
+      const data = await cartService.removeFromCart(variantId);
 
-      setCart(data.items || []);
+      setCart(data);
     } catch (error) {
       console.error("Error removing item:", error);
     }
@@ -136,21 +141,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // ✅ Update Cart
   const updateQuantity = async (variantId: string, quantity: number) => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/cart/items/${variantId}?quantity=${quantity}`,
-        {
-          method: "PATCH",
-          credentials: "include",
-        },
-      );
+      // const response = await fetch(
+      //   `${BASE_URL}/cart/items/${variantId}?quantity=${quantity}`,
+      //   {
+      //     method: "PATCH",
+      //     credentials: "include",
+      //   },
+      // );
 
-      if (!response.ok) {
-        throw new Error("Failed to update quantity");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to update quantity");
+      // }
 
-      const data = await response.json();
+      const cartService = getCartService(mode);
+      const data = await cartService.updateQuantity(variantId, quantity);
 
-      setCart(data.items || []);
+      setCart(data);
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
@@ -160,23 +166,27 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // const clearCart = () => setCart([]);
   const clearCart = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/cart`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      // const response = await fetch(`${BASE_URL}/cart`, {
+      //   method: "DELETE",
+      //   credentials: "include",
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to clear cart");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to clear cart");
+      // }
 
-      setCart([]);
+      const cartService = getCartService(mode);
+      const data = await cartService.clearCart();
+
+      setCart(data);
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
   };
 
   // ✅ Cart Item Count
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartCount = cart.reduce((total, item) => total + item?.quantity, 0);
+  console.log(cartCount, "cartCount");
 
   // ✅ Increment Quantity
   // const incrementQuantity = (id: number | undefined) => {
