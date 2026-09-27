@@ -12,7 +12,7 @@ import { useCart } from "../../../shared/context/Cart_Context/useCart";
 import type { Product, ButtonProps } from "../types/ProductInfoTypes";
 
 const ProductInfo = ({
-  id,
+  // id,
   productBrand,
   productBrandLogo,
   productName,
@@ -20,7 +20,7 @@ const ProductInfo = ({
   price,
   wishlist,
   variants,
-  setSelectedImage
+  setSelectedImage,
 }: Product) => {
   const { addToCart } = useCart(); // Context api for using cart
 
@@ -171,7 +171,7 @@ const ProductInfo = ({
             onAddToCart={handleAddToCart}
             disabled={selectedColor == "" || selectedSize == ""}
           />
-          <WishlistBtn wishlist={wishlist} id={id} />
+          <WishlistBtn wishlist={wishlist} productId={productId} />
           {/* <WishlistBtn/> */}
         </BtnContainer>
 

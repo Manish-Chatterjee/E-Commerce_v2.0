@@ -46,7 +46,8 @@ export const login = async (values: LoginValues): Promise<boolean> => {
   if (!user) {
     return false;
   }
-  const { password, ...userWithoutPassword } = user;
+  // const { password, ...userWithoutPassword } = user;
+  const { ...userWithoutPassword } = user;
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(userWithoutPassword));
   return true;
 };

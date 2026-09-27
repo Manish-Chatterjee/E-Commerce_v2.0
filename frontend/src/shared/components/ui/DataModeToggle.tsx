@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Button from "./Button";
 import { useDataMode } from "../../context/DataMode_Context/useDataMode";
 
-
 const Frontend = () => {
   return (
     <SubContainer>
@@ -23,7 +22,7 @@ const FullStack = () => {
 
 const DataModeToggle = () => {
   const { mode, setMode } = useDataMode();
-  console.log(mode,'mode')
+  console.log(mode, "mode");
 
   return (
     <Container>
@@ -32,14 +31,14 @@ const DataModeToggle = () => {
         selected={mode === "frontend"}
         // disabled={mode === "frontend"}
       >
-        <Frontend/>
+        <Frontend />
       </Button>
       <Button
         onClick={() => setMode("fullstack")}
         selected={mode === "fullstack"}
         // disabled={mode === "fullstack"}
       >
-        <FullStack/>
+        <FullStack />
       </Button>
     </Container>
   );
@@ -67,14 +66,14 @@ const SubContainer = styled.div`
   align-items: baseline;
 `;
 
-const Status = styled.span`
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border: 1px solid green;
-  box-shadow: 0 0 10px 5px green;
-  background-color: green;
-  border-radius: 100px;
-  margin: 0;
-  padding: 0;
-`;
+// const Status = styled.span`
+//   display: inline-block;
+//   width: 10px;
+//   height: 10px;
+//   border: 1px solid green;
+//   box-shadow: 0 0 10px 5px green;
+//   background-color: green;
+//   border-radius: 100px;
+//   margin: 0;
+//   padding: 0;
+// `;

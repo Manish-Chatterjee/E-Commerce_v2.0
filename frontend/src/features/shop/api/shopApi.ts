@@ -20,8 +20,8 @@ export const updateProduct = (id: number, product: Product) =>
     body: JSON.stringify(product),
   });
 
-export const updateWishlist = (id: number, wishlist: boolean) =>
-  apiClient<Product>(`/products/${id}/wishlist`, {
+export const updateWishlist = (productId: string, wishlist: boolean) =>
+  apiClient<Product>(`/products/${productId}/wishlist`, {
     method: "PATCH",
     body: JSON.stringify({ wishlist }),
   });

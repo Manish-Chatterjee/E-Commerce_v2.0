@@ -32,7 +32,6 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   return (
     <Container>
       <DataModeToggle />
-      <Link to="/products/shop">shop</Link>
       {isSignup ? <H2>Sign Up</H2> : <H2>Login</H2>}
       <Formik
         initialValues={{ username: "", email: "", password: "" }}

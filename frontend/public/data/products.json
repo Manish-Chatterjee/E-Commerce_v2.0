@@ -10,6 +10,7 @@
     "wishlist": "false",
     "variants": [
       {
+        "variantId": "1",
         "color": "Coffee",
         "size": "8",
         "availability": true,
@@ -20,6 +21,7 @@
         ]
       },
       {
+        "variantId": "2",
         "color": "Coffee",
         "size": "10",
         "availability": true,
@@ -30,6 +32,7 @@
         ]
       },
       {
+        "variantId": "3",
         "color": "Coffee",
         "size": "11",
         "availability": true,
@@ -40,6 +43,7 @@
         ]
       },
       {
+        "variantId": "4",
         "color": "Sea Blue",
         "size": "8",
         "availability": true,
@@ -50,6 +54,7 @@
         ]
       },
       {
+        "variantId": "5",
         "color": "Sea Blue",
         "size": "9",
         "availability": false,
@@ -60,6 +65,7 @@
         ]
       },
       {
+        "variantId": "6",
         "color": "Panda",
         "size": "10",
         "availability": true,

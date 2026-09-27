@@ -6,15 +6,15 @@ import { updateWishlist } from "@/features/shop/api/shopApi";
 
 type WishlistBtnProps = {
   wishlist: boolean;
-  id: number;
+  productId: string;
 };
 
-const WishlistBtn = ({ wishlist, id }: WishlistBtnProps) => {
+const WishlistBtn = ({ wishlist, productId }: WishlistBtnProps) => {
   const [wishListed, setWishlisted] = useState(wishlist);
 
   const handleWishlist = async () => {
   try {
-    await updateWishlist(id, !wishListed);
+    await updateWishlist(productId, !wishListed);
     setWishlisted(!wishListed);
   } catch (error) {
     console.error(error);

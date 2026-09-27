@@ -1,6 +1,7 @@
 import type { LoginValues, SignupValues, User } from "../AuthContext";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+console.log(BASE_URL,'base url auth')
 
 export const getCurrentUser = async (): Promise<User | null> => {
   const response = await fetch(`${BASE_URL}/auth/me`, {

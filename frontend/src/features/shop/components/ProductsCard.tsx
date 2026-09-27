@@ -23,7 +23,7 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
     productBrandLogo,
     price,
     productBrand,
-    id,
+    // id,
     productImage,
     wishlist,
     productId,
@@ -66,7 +66,7 @@ const ProductsCard = ({ items, disabled }: CardProps) => {
         )}
 
         {/* <Button>Buy Now</Button> */}
-        <WishlistBtn wishlist={wishlist} id={id} />
+        <WishlistBtn wishlist={wishlist} productId={productId} />
       </BtnContainer>
     </CardContainer>
   );

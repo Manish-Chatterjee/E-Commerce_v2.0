@@ -54,6 +54,7 @@ const ProductDetails = () => {
         />
         <ProductInfo
           id={product?.id}
+          productId={product?.productId}
           productBrandLogo={product?.productBrandLogo}
           productBrand={product?.productBrand}
           productName={product?.productName}

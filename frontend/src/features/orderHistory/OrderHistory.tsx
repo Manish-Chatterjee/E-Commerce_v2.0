@@ -7,24 +7,20 @@ import type { Order } from "./types/OrderTypes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
+import { getOrderHistoryService } from "./services/orderHistoryServices";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOpt, setFilteredOpt] = useState<string>("");
 
+  const { mode } = useDataMode();
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/orders`, {
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch orders");
-        }
-
-        const data = await response.json();
+        const getService = getOrderHistoryService(mode);
+        const data = await getService.getOrders();
 
         setOrders(data);
       } catch (error) {
@@ -33,7 +29,7 @@ const OrderHistory = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [mode]);
 
   const getGreeting = () => {
     const hours = new Date().getHours();

@@ -49,7 +49,10 @@ const Wishlist = () => {
               <Button onClick={() => productDetails(item.productId)}>
                 Customise
               </Button>
-              <WishlistBtn wishlist={item.wishlist} id={item.id} />
+              <WishlistBtn
+                wishlist={item.wishlist}
+                productId={item.productId}
+              />
             </BtnContainer>
           </Info>
         </Container>
