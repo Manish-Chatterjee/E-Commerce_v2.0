@@ -14,13 +14,13 @@ export const getAllProducts = async (): Promise<Product[]> => {
   // return response.json();
   const products: Product[] = await response.json();
 
-  const wishlistIds: number[] = JSON.parse(
+  const wishlistIds: string[] = JSON.parse(
     localStorage.getItem(WISHLIST_KEY) || "[]",
   );
 
   return products.map((product) => ({
     ...product,
-    wishlist: wishlistIds.includes(product.id),
+    wishlist: wishlistIds.includes(product.productId),
   }));
 };
 

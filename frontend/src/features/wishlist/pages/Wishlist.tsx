@@ -1,4 +1,3 @@
-import { getAllProducts } from "@/features/shop/api/shopApi";
 import type { Product } from "@/features/shop/types/product";
 import Button from "@/shared/components/ui/Button";
 import { useEffect, useState } from "react";
@@ -6,14 +5,20 @@ import styled from "styled-components";
 import SecondNavbar from "@/shared/components/section/SecondNavbar";
 import { useNavigate } from "react-router-dom";
 import WishlistBtn from "@/shared/components/ui/WishlistBtn";
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
+import { getShopService } from "@/features/shop/services/shopService";
 
 const Wishlist = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
+  const { mode } = useDataMode();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productData = await getAllProducts();
+        const shopService = getShopService(mode);
+        const productData = await shopService.getAllProducts();
+        console.log(productData,'PD')
         setProducts(productData);
       } catch (error) {
         console.log(error);
@@ -21,7 +26,7 @@ const Wishlist = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     console.log(products, "All Products");
