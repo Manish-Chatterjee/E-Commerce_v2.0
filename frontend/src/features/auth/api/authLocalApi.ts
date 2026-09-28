@@ -18,7 +18,7 @@ export const signup = async (values: SignupValues): Promise<boolean> => {
     localStorage.getItem(USERS_KEY) || "[]",
   );
   const userExists = users.some(
-    (user) => user.username === values.username || user.email === values.email,
+    (user) => user.username.toLowerCase() === values.username.toLowerCase() || user.email === values.email,
   );
   if (userExists) {
     return false;
@@ -41,7 +41,7 @@ export const login = async (values: LoginValues): Promise<boolean> => {
   );
   const user = users.find(
     (user) =>
-      user.username === values.username && user.password === values.password,
+      user.username.toLowerCase() === values.username.toLowerCase() && user.password === values.password,
   );
   if (!user) {
     return false;

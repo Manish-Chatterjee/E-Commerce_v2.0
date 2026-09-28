@@ -5,9 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 import AuthBg from "../../assets/AuthBg.jpg";
 import SnackBarAlert from "../../shared/components/ui/SnackBarAlert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BouncingDots } from "@/components-ui/bouncing-dots";
 import DataModeToggle from "@/shared/components/ui/DataModeToggle";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -18,6 +19,15 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // SnackBar Alert
   const [open, setOpen] = useState(false);
@@ -102,15 +112,22 @@ const AuthForm = ({ mode }: AuthFormProps) => {
           </div>
 
           {isSignup && (
-            <div>
+            <Input>
               <Label>E-mail</Label>
               <FieldStyle name="email" type="email" required />
-            </div>
+            </Input>
           )}
-          <div>
+          <Input>
             <Label>Password</Label>
-            <FieldStyle name="password" type="password" required />
-          </div>
+            <FieldStyle
+              name="password"
+              type={`${show ? "text" : "password"}`}
+              required
+            />
+            <IconButton onClick={() => setShow(!show)}>
+              {show ? <FaEyeSlash /> : <FaEye />}
+            </IconButton>
+          </Input>
 
           <Button type="submit" disabled={loading}>
             {loading ? (
@@ -215,4 +232,13 @@ const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
   font-weight: 700;
+`;
+
+const Input = styled.div`
+  position: relative;
+`;
+
+const IconButton = styled.button`
+  position: absolute;
+  right: 0;
 `;

@@ -6,7 +6,7 @@
     "productName": "Nike Dunk Low Suede",
     "price": 56890,
     "stockAvailability": "true",
-    "productImage": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/a/d/ad22b92Nike-IO4244-200_1.jpg?rnd=20200526195200&tr=w-1536",
+    "productImage": "https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2025%2F02%2F03%2Fnike-dunk-low-suede-mocha-white-brown-fq8249-104-release-info-002.jpg?q=90&w=800&cbr=1&fit=max",
     "wishlist": "false",
     "variants": [
       {
@@ -81,6 +81,131 @@
           },
           {
             "imageUrl": "https://i.ytimg.com/vi/1qQSf_lEd-E/maxresdefault.jpg"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "productBrand": "Adidas",
+    "productBrandLogo": "https://logos-world.net/wp-content/uploads/2020/06/Adidas-Logo.png",
+    "productId": "bh74x5",
+    "productName": "Adidas X Coca-Cola Samba og",
+    "price": 10990,
+    "stockAvailability": "true",
+    "productImage": "https://d5mag.com/wp-content/uploads/2026/06/adidas-Originals-x-Coca-Cola-On-Foot-1.jpg",
+    "wishlist": "false",
+    "variants": [
+      {
+        "variantId": "7",
+        "color": "Coca-Cola",
+        "size": "8",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://images.vegnonveg.com/resized/1020X1200/15399/adidas-originals-x-coca-cola-samba-og-core-blacknone-gum-6a1d835dd0045.jpg?format=webp"
+          }
+        ]
+      },
+      {
+        "variantId": "8",
+        "color": "Coca-Cola",
+        "size": "9",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://images.vegnonveg.com/resized/1020X1200/15399/adidas-originals-x-coca-cola-samba-og-core-blacknone-gum-6a1d835dd0045.jpg?format=webp"
+          }
+        ]
+      },
+      {
+        "variantId": "9",
+        "color": "Coca-Cola",
+        "size": "10",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://images.vegnonveg.com/resized/1020X1200/15399/adidas-originals-x-coca-cola-samba-og-core-blacknone-gum-6a1d835dd0045.jpg?format=webp"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "productBrand": "Adidas",
+    "productBrandLogo": "https://logos-world.net/wp-content/uploads/2020/06/Adidas-Logo.png",
+    "productId": "bhi84d",
+    "productName": "Adidas Samba og",
+    "price": 12990,
+    "stockAvailability": "true",
+    "productImage": "https://brand.assets.adidas.com/image/upload/f_auto,q_auto:best,fl_lossy/originals_ss25_the_original_launch_pdp_samba_banner_split_d_a130ca6bf1.jpg",
+    "wishlist": "false",
+    "variants": [
+      {
+        "variantId": "10",
+        "color": "Impact Orange",
+        "size": "8",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JR0910_1_4592be5e-b906-4dc2-8b8a-ec765f5af63e.jpg?v=1779713843"
+          }
+        ]
+      },
+      {
+        "variantId": "11",
+        "color": "Impact Orange",
+        "size": "9",
+        "availability": false,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JR0910_1_4592be5e-b906-4dc2-8b8a-ec765f5af63e.jpg?v=1779713843"
+          }
+        ]
+      },
+      {
+        "variantId": "12",
+        "color": "Impact Orange",
+        "size": "10",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JR0910_1_4592be5e-b906-4dc2-8b8a-ec765f5af63e.jpg?v=1779713843"
+          }
+        ]
+      },
+            {
+        "variantId": "13",
+        "color": "Leopard Orange",
+        "size": "8",
+        "availability": false,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JI2734_1_23ccfb5a-6b55-46a4-8342-6e0cf089651b.png?v=1779713609"
+          }
+        ]
+      },
+      {
+        "variantId": "14",
+        "color": "Leopard Orange",
+        "size": "9",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JI2734_1_23ccfb5a-6b55-46a4-8342-6e0cf089651b.png?v=1779713609"
+          }
+        ]
+      },
+      {
+        "variantId": "15",
+        "color": "Leopard Orange",
+        "size": "10",
+        "availability": true,
+        "images": [
+          {
+            "imageUrl": "https://www.superkicks.in/cdn/shop/files/JI2734_1_23ccfb5a-6b55-46a4-8342-6e0cf089651b.png?v=1779713609"
           }
         ]
       }

@@ -2,7 +2,8 @@ import { useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styled from "styled-components";
-import { updateWishlist } from "@/features/shop/api/shopApi";
+import { useDataMode } from "@/shared/context/DataMode_Context/useDataMode";
+import { getShopService } from "@/features/shop/services/shopService";
 
 type WishlistBtnProps = {
   wishlist: boolean;
@@ -12,14 +13,17 @@ type WishlistBtnProps = {
 const WishlistBtn = ({ wishlist, productId }: WishlistBtnProps) => {
   const [wishListed, setWishlisted] = useState(wishlist);
 
+  const { mode } = useDataMode();
+
   const handleWishlist = async () => {
-  try {
-    await updateWishlist(productId, !wishListed);
-    setWishlisted(!wishListed);
-  } catch (error) {
-    console.error(error);
-  }
-};
+    try {
+      const shopService = getShopService(mode);
+      await shopService.updateWishlist(productId, !wishListed);
+      setWishlisted(!wishListed);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <Button onClick={handleWishlist}>
