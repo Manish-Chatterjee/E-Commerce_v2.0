@@ -83,11 +83,16 @@ https://vercel.com/home
 
 <h2 style="border: 0.1px solid white; font-family: Sail; box-shadow: 0 0 10px white; border-radius: 5px; width: fit-content; padding: 5px 7px; margin-block: 20px">
 Screenshots</h2>
+🔐 Authentication (Login and registration experience)
 <img width="1916" height="861" alt="image" src="https://github.com/user-attachments/assets/7d54c131-0293-4a13-83a6-45a6ad34af58" />
+🛍️ Product Browsing (Product listing, product details, and variant selection)
 <img width="1911" height="860" alt="image" src="https://github.com/user-attachments/assets/4a5d0f8f-b452-45ee-abc2-c7ebcde9627d" />
+🎨 Product Customization (Color, size, and variant selection before adding a product to the cart)
 <img width="1917" height="861" alt="image" src="https://github.com/user-attachments/assets/0921f5fe-a033-408d-9ee1-f8d25efd95fc" />
+📦 Orders (Checkout, order confirmation, and order details)
 <img width="1916" height="861" alt="image" src="https://github.com/user-attachments/assets/d5d868e8-724f-46f6-9583-a06bf84cecb7" />
 <img width="1916" height="865" alt="image" src="https://github.com/user-attachments/assets/2d090823-c6c7-4b11-a228-c9ff44ec6d4c" />
+📋 Order History (Previously placed orders and their current status)
 <img width="1916" height="861" alt="image" src="https://github.com/user-attachments/assets/d5e35832-dca6-4caf-84d0-56ca674fe9f5" />
 
 
